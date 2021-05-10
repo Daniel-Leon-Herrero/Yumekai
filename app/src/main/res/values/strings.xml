@@ -1,3 +1,13 @@
 <resources>
+
+    <string name="hello_blank_fragment">Temporal Blank Fragment</string>
+
+    <!-- GLOBAL STRINGS -->
     <string name="app_name">Yumekai</string>
+    <string name="app_name_first_part">Yume</string>
+    <string name="app_name_second_part">Kai</string>
+
+    <!-- SPLASH-SCREEN STRINGS -->
+    <string name="splash_screen_slogan">The Japanese culture in your hands!</string>
+    <string name="splash_screen_powered_by">powered by</string>
 </resources>

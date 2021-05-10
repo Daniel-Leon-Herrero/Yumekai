@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- YUMEKAI GLOBAL COLORS -->
+    <color name="red_primary">#b81d24</color>
+        <!-- Dark Mode Colors -->
+        <color name="dark_black">#221f1f</color>
+        <color name="alt_black">#393838</color>
+        <color name="soft_white">#F5F5F1</color>
+        <!-- Light Mode Colors -->
+
 </resources>
