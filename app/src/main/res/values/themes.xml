@@ -13,7 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
         <!-- YUMEKAI Standard Theme. -->
-        <item name="android:background">@color/dark_black</item>
+        <!-- <item name="android:background">@color/dark_black</item> -->
         <item name="android:textColor">@color/soft_white</item>
     </style>
 </resources>

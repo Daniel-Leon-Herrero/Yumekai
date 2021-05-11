@@ -7,6 +7,11 @@
     <string name="app_name_first_part">Yume</string>
     <string name="app_name_second_part">Kai</string>
 
+    <!--***** MENU STRINGS *****-->
+    <string name="menu_calendar">Calendar</string>
+    <string name="menu_recents">Recents</string>
+    <string name="menu_news">News</string>
+
     <!--***** SPLASH-SCREEN STRINGS *****-->
     <string name="splash_screen_slogan">The Japanese culture in your hands!</string>
     <string name="splash_screen_powered_by">powered by</string>
