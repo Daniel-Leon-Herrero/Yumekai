@@ -35,10 +35,18 @@ class OnBoardingActivity : AppCompatActivity() {
 
         indicator.setViewPager(this.slider)
 
-        btnSkip.setOnClickListener  {
-            this.slider.setCurrentItem(3, true)
-            btnLetGetStarted.visibility = View.VISIBLE
-        }
+        btnSkip.setOnClickListener  { this.slider.setCurrentItem(3, true) }
+
+        this.slider.registerOnPageChangeCallback( object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                btnLetGetStarted.visibility = if( position === 3 ) View.VISIBLE else View.GONE
+            }
+        })
 
         btnLetGetStarted.setOnClickListener {
             val intent = Intent(this, DashboardActivity::class.java)
