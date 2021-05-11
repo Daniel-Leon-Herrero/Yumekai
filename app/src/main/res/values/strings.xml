@@ -7,7 +7,25 @@
     <string name="app_name_first_part">Yume</string>
     <string name="app_name_second_part">Kai</string>
 
-    <!-- SPLASH-SCREEN STRINGS -->
+    <!--***** SPLASH-SCREEN STRINGS *****-->
     <string name="splash_screen_slogan">The Japanese culture in your hands!</string>
     <string name="splash_screen_powered_by">powered by</string>
+
+    <!--***** ON-BOARDING SCREEN *****-->
+    <!-- Titles -->
+    <string name="first_slide_title">Enjoy all the anime...</string>
+    <string name="second_slide_title">The best anime news ...</string>
+    <string name="third_slide_title">And you, do you like to read manga?</string>
+    <string name="fourth_slide_title">Lorem magno ipso factus</string>
+
+    <!-- Descriptions -->
+    <string name="first_slide_desc">Check the calendar, premieres and manage your memory drawer.</string>
+    <string name="second_slide_desc">Do you like to be informed of all the news? We have a news section designed for you.  Do not miss it !</string>
+    <string name="third_slide_desc">You are lucky. We have also thought of you. Join to enjoy all the mangaka art in our app.</string>
+    <string name="fourth_slide_desc">Lorem impusm. isurti ulipo! Lorem impusm. isurti ulipo.</string>
+
+    <!-- Buttons -->
+    <string name="skip_btn">Skip</string>
+    <string name="next_btn">Next</string>
+    <string name="let_get_started">Let get started</string>
 </resources>

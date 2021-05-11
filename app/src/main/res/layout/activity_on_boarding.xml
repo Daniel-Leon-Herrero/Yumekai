@@ -4,6 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.OnBoarding.OnBoardingActivity">
+    tools:context=".activities.OnBoarding.OnBoardingActivity"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1">
+        <TextView
+            android:text="@string/app_name_first_part"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="42sp"
+            android:textColor="@color/red_primary"
+            android:textAllCaps="true"
+            />
+        <TextView
+            android:text="@string/app_name_second_part"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:fontFamily="@font/nunito_black"
+            android:textSize="42sp"
+            android:textColor="@color/red_primary"
+            android:textAllCaps="true"
+            />
+    </LinearLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/onBoardingSlider"
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleLayout" />
+
+
+    <Button
+        android:id="@+id/btnSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:text="@string/skip_btn"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnLetGetStarted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red_primary"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:paddingStart="60dp"
+            android:paddingEnd="60dp"
+            android:text="@string/let_get_started"
+            android:textAllCaps="true"
+            android:textColor="@color/soft_white"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/slideIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="0dp"
+            android:paddingBottom="0dp"
+            app:ci_drawable="@drawable/white_radius"
+            app:ci_drawable_unselected="@drawable/white_radius"/>
+
+        <!--
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/transparent"
+            android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+            android:paddingBottom="0dp"
+            android:onClick="nextSlide"/>
+        -->
+
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
