@@ -5,30 +5,30 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 
-
-class CalenderAnimeAdapter(private val context: Context) :
-    RecyclerView.Adapter<CalenderAnimeAdapter.AnimesViewHolder>() {
+class CalendarAnimeAdapter(private val context: Context) :
+    RecyclerView.Adapter<CalendarAnimeAdapter.TendenciaViewHolder>() {
 
     private var dataList = mutableListOf<String>()
 
-    fun setListImagesAnimes(data: MutableList<String>) {
+    fun setListAnimes(data: MutableList<String>) {
         dataList = data
-        Log.d("DataList", dataList.toString())
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimesViewHolder {
-        Log.d("Ada", "Ada")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TendenciaViewHolder {
         val view =
             LayoutInflater.from(context).inflate(R.layout.item_calendar, parent, false)
-        return AnimesViewHolder(view)
+        return TendenciaViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: AnimesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TendenciaViewHolder, position: Int) {
         val tend = dataList[position]
         holder.bindView(tend)
     }
@@ -41,12 +41,10 @@ class CalenderAnimeAdapter(private val context: Context) :
         }
     }
 
-    inner class AnimesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(images: String) {
-            Picasso.get().load(images).into(itemView.findViewById<ImageView>(R.id.calendar_RV_image))
-            itemView.setOnClickListener {
+    inner class TendenciaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bindView(image: String) {
+            Picasso.get().load(image).into(itemView.findViewById<ImageView>(R.id.calendar_RV_image))
 
-            }
         }
     }
 }

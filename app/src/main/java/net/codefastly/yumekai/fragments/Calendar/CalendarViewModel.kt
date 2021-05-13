@@ -1,14 +1,14 @@
 package net.codefastly.yumekai.fragments.Calendar
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.helpers.RecyclesViews.CalendarAnimeAdapter
+import net.codefastly.yumekai.helpers.interfaces.APIService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
@@ -40,7 +40,7 @@ class CalendarViewModel : ViewModel() {
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
-    fun searchByDay(context: Context) {
+    fun searchByDay(context: Context, adapter: CalendarAnimeAdapter) {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val call = getRetrofit().create(APIService::class.java)
@@ -54,7 +54,8 @@ class CalendarViewModel : ViewModel() {
                         }
                         animeImageList.clear()
                         animeImageList.addAll(images)
-                        Log.d("Sear","sear")
+                        adapter.setListAnimes(animeImageList)
+                        adapter.notifyDataSetChanged()
                     }
                 }
 
