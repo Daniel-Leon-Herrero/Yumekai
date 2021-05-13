@@ -20,4 +20,9 @@
         android:name="net.codefastly.yumekai.fragments.News.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/animeDetailsFragment"
+        android:name="net.codefastly.yumekai.AnimeDetailsFragment"
+        android:label="fragment_anime_details"
+        tools:layout="@layout/fragment_anime_details" />
 </navigation>
