@@ -6,45 +6,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentCalendarBinding
-import java.time.LocalDate
-import java.util.*
 
 class CalendarFragment : Fragment() {
 
     private lateinit var binding: FragmentCalendarBinding
+    private lateinit var viewModel: CalendarViewModel
+    private lateinit var adapter:
+    private var url: String = "https://api.jikan.moe/v3/schedule/tuesday"
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
+        viewModel = ViewModelProvider(this).get(CalendarViewModel::class.java)
+
         // Inflate the layout for this fragment
         return binding.root
     }
 
 
     override fun onStart() {
-        binding.calenderLblDay.setText(obtainDayOfWeek())
+        binding.calenderLblDay.setText(viewModel.obtainDayOfWeek(requireContext()))
         super.onStart()
     }
 
-    fun obtainDayOfWeek(): String {
-        var dayString: String = ""
-        var calendar: Calendar = Calendar.getInstance()
-        var dayInt: Int = calendar.get(Calendar.DAY_OF_WEEK)
-
-        when(dayInt){
-            Calendar.SUNDAY -> dayString = getString(R.string.Sunday)
-            Calendar.MONDAY -> dayString = getString(R.string.Monday)
-            Calendar.TUESDAY -> dayString = getString(R.string.Tuesday)
-            Calendar.WEDNESDAY -> dayString = getString(R.string.Wednesday)
-            Calendar.THURSDAY -> dayString = getString(R.string.Thursday)
-            Calendar.FRIDAY -> dayString = getString(R.string.Feiday)
-            Calendar.SATURDAY -> dayString = getString(R.string.Saturday)
-        }
-        return dayString
-    }
+    //https://cursokotlin.com/capitulo-20-consumiento-apis-retrofit-2/ 6.44
 }

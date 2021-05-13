@@ -10,8 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.Calendar.CalendarFragment"
-        android:background="@color/dark_black">
+        android:background="@color/dark_black"
+        tools:context=".fragments.Calendar.CalendarFragment">
 
 
         <TextView
@@ -23,6 +23,8 @@
             app:layout_constraintHorizontal_bias="0.413"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
