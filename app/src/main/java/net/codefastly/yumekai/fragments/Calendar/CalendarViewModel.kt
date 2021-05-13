@@ -1,19 +1,15 @@
 package net.codefastly.yumekai.fragments.Calendar
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.R
-import net.codefastly.yumekai.helpers.RecyclesViews.CalendarAnimeAdapter
-import net.codefastly.yumekai.helpers.interfaces.APIService
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import net.codefastly.yumekai.repository.repositoryAPI
 import java.util.*
 
 class CalendarViewModel : ViewModel() {
+    private val repo = repositoryAPI()
 
     val animeImageList = mutableListOf<String>()
 
@@ -35,34 +31,13 @@ class CalendarViewModel : ViewModel() {
         return dayString
     }
 
-    private fun getRetrofit(): Retrofit {
-        return Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/schedule/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
-    }
-
-    fun searchByDay(context: Context, adapter: CalendarAnimeAdapter) {
-        CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.IO) {
-                val call = getRetrofit().create(APIService::class.java)
-                    .getCalendarAnimes("${obtainDayOfWeek(context)}")
-                val datos = call.body()
-                withContext(Dispatchers.Main) {
-                    if (call.isSuccessful) {
-                        val images: MutableList<String> = arrayListOf()
-                        datos?.day?.forEach { day ->
-                            images.add(day.image_url)
-                        }
-                        animeImageList.clear()
-                        animeImageList.addAll(images)
-                        adapter.setListAnimes(animeImageList)
-                        adapter.notifyDataSetChanged()
-                    }
-                }
 
 
-                if (call.isSuccessful) datos!!.request_hash else ""
-            }
-
+    fun searchByDay(day: String): LiveData<MutableList<String>> {
+        val mutableData = MutableLiveData<MutableList<String>>()
+        repo.getCalenderAnime(day).observeForever{ animes ->
+            mutableData.value = animes
         }
+        return mutableData
     }
 }

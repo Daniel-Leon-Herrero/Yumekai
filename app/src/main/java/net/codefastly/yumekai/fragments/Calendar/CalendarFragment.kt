@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import net.codefastly.yumekai.R
@@ -19,6 +20,7 @@ class CalendarFragment : Fragment() {
     private lateinit var viewModel: CalendarViewModel
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: CalendarAnimeAdapter
+    private lateinit var day: String;
 
 
     override fun onCreateView(
@@ -27,6 +29,8 @@ class CalendarFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
         viewModel = ViewModelProvider(this).get(CalendarViewModel::class.java)
+
+        day = viewModel.obtainDayOfWeek(requireContext())
         inicializeAnimeAdapter()
         // Inflate the layout for this fragment
         return binding.root
@@ -36,9 +40,17 @@ class CalendarFragment : Fragment() {
         recyclerView = binding.calendarRVAnime
         adapter = CalendarAnimeAdapter(requireContext())
         recyclerView.adapter = adapter
-        viewModel.searchByDay(requireContext(),adapter)
+        observeData()
     }
 
+    fun observeData() {
+
+        viewModel.searchByDay(day).observe(viewLifecycleOwner, Observer { animes ->
+            adapter.setListAnimes(animes)
+            adapter.notifyDataSetChanged()
+        })
+
+    }
 
 
     override fun onStart() {
