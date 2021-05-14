@@ -12,13 +12,14 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.models.CalendarAnimeDTO
 
 class CalendarAnimeAdapter(private val context: Context) :
     RecyclerView.Adapter<CalendarAnimeAdapter.TendenciaViewHolder>() {
 
-    private var dataList = mutableListOf<String>()
+    private var dataList = mutableListOf<CalendarAnimeDTO>()
 
-    fun setListAnimes(data: MutableList<String>) {
+    fun setListAnimes(data: MutableList<CalendarAnimeDTO>) {
         dataList = data
     }
 
@@ -42,8 +43,12 @@ class CalendarAnimeAdapter(private val context: Context) :
     }
 
     inner class TendenciaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(image: String) {
-            Picasso.get().load(image).into(itemView.findViewById<ImageView>(R.id.calendar_RV_image))
+        fun bindView(cal: CalendarAnimeDTO) {
+            if(cal.day.image_url.isNotEmpty()) {
+                Picasso.get().load(cal.day.image_url)
+                    .into(itemView.findViewById<ImageView>(R.id.calendar_RV_image))
+            }
+            itemView.findViewById<TextView>(R.id.calendar_categoryTag).text = cal.day.type
             itemView.setOnClickListener {
                 Log.d("Hola", "Hola")
             }

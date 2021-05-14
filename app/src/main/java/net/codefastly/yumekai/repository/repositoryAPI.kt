@@ -1,5 +1,6 @@
 package net.codefastly.yumekai.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
@@ -7,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.helpers.interfaces.APIService
+import net.codefastly.yumekai.models.CalendarAnimeDTO
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,8 +19,8 @@ class repositoryAPI {
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
-    fun getCalenderAnimeMonday(day: String): LiveData<MutableList<String>> {
-        val mutableData = MutableLiveData<MutableList<String>>()
+    fun getCalenderAnimeMonday(day: String): LiveData<MutableList<CalendarAnimeDTO>> {
+        val mutableData = MutableLiveData<MutableList<CalendarAnimeDTO>>()
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
@@ -27,12 +29,13 @@ class repositoryAPI {
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
-                        val images: MutableList<String> = arrayListOf()
+                        val calendar: MutableList<CalendarAnimeDTO> = arrayListOf()
                         datos?.day?.forEach { day ->
-                            images.add(day.image_url)
+                            var cal = CalendarAnimeDTO(day)
+                            calendar.add(cal)
                         }
 
-                        mutableData.value = images
+                        mutableData.value = calendar
                     }
                 }
 
@@ -41,8 +44,8 @@ class repositoryAPI {
         return mutableData
     }
 
-    fun getCalenderAnimeTuesday(day: String): LiveData<MutableList<String>> {
-        val mutableData = MutableLiveData<MutableList<String>>()
+    fun getCalenderAnimeTuesday(day: String): LiveData<MutableList<CalendarAnimeDTO>> {
+        val mutableData = MutableLiveData<MutableList<CalendarAnimeDTO>>()
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
@@ -51,12 +54,13 @@ class repositoryAPI {
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
-                        val images: MutableList<String> = arrayListOf()
+                        val calendar: MutableList<CalendarAnimeDTO> = arrayListOf()
                         datos?.day?.forEach { day ->
-                            images.add(day.image_url)
+                            var cal = CalendarAnimeDTO(day)
+                            calendar.add(cal)
                         }
 
-                        mutableData.value = images
+                        mutableData.value = calendar
                     }
                 }
 
@@ -65,8 +69,8 @@ class repositoryAPI {
         return mutableData
     }
 
-    fun getCalenderAnimeWednesday(day: String): LiveData<MutableList<String>> {
-        val mutableData = MutableLiveData<MutableList<String>>()
+    fun getCalenderAnimeWednesday(day: String): LiveData<MutableList<CalendarAnimeDTO>> {
+        val mutableData = MutableLiveData<MutableList<CalendarAnimeDTO>>()
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
@@ -75,12 +79,13 @@ class repositoryAPI {
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
-                        val images: MutableList<String> = arrayListOf()
+                        val calendar: MutableList<CalendarAnimeDTO> = arrayListOf()
                         datos?.day?.forEach { day ->
-                            images.add(day.image_url)
+                            var cal = CalendarAnimeDTO(day)
+                            calendar.add(cal)
                         }
 
-                        mutableData.value = images
+                        mutableData.value = calendar
                     }
                 }
 
@@ -89,8 +94,8 @@ class repositoryAPI {
         return mutableData
     }
 
-    fun getCalenderAnimeThursday(day: String): LiveData<MutableList<String>> {
-        val mutableData = MutableLiveData<MutableList<String>>()
+    fun getCalenderAnimeThursday(day: String): LiveData<MutableList<CalendarAnimeDTO>> {
+        val mutableData = MutableLiveData<MutableList<CalendarAnimeDTO>>()
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
@@ -99,12 +104,13 @@ class repositoryAPI {
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
-                        val images: MutableList<String> = arrayListOf()
+                        val calendar: MutableList<CalendarAnimeDTO> = arrayListOf()
                         datos?.day?.forEach { day ->
-                            images.add(day.image_url)
+                            var cal = CalendarAnimeDTO(day)
+                            calendar.add(cal)
                         }
 
-                        mutableData.value = images
+                        mutableData.value = calendar
                     }
                 }
 
@@ -113,8 +119,8 @@ class repositoryAPI {
         return mutableData
     }
 
-    fun getCalenderAnimeFriday(day: String): LiveData<MutableList<String>> {
-        val mutableData = MutableLiveData<MutableList<String>>()
+    fun getCalenderAnimeFriday(day: String): LiveData<MutableList<CalendarAnimeDTO>> {
+        val mutableData = MutableLiveData<MutableList<CalendarAnimeDTO>>()
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
@@ -123,22 +129,23 @@ class repositoryAPI {
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
-                        val images: MutableList<String> = arrayListOf()
+                        val calendar: MutableList<CalendarAnimeDTO> = arrayListOf()
                         datos?.day?.forEach { day ->
-                            images.add(day.image_url)
+                            var cal = CalendarAnimeDTO(day)
+                            calendar.add(cal)
                         }
-
-                        mutableData.value = images
+                        mutableData.value = calendar
                     }
                 }
 
             }
         }
+
         return mutableData
     }
 
-    fun getCalenderAnimeSaturday(day: String): LiveData<MutableList<String>> {
-        val mutableData = MutableLiveData<MutableList<String>>()
+    fun getCalenderAnimeSaturday(day: String): LiveData<MutableList<CalendarAnimeDTO>> {
+        val mutableData = MutableLiveData<MutableList<CalendarAnimeDTO>>()
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
@@ -147,12 +154,13 @@ class repositoryAPI {
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
-                        val images: MutableList<String> = arrayListOf()
+                        val calendar: MutableList<CalendarAnimeDTO> = arrayListOf()
                         datos?.day?.forEach { day ->
-                            images.add(day.image_url)
+                            var cal = CalendarAnimeDTO(day)
+                            calendar.add(cal)
                         }
 
-                        mutableData.value = images
+                        mutableData.value = calendar
                     }
                 }
 
@@ -161,8 +169,8 @@ class repositoryAPI {
         return mutableData
     }
 
-    fun getCalenderAnimeSunday(day: String): LiveData<MutableList<String>> {
-        val mutableData = MutableLiveData<MutableList<String>>()
+    fun getCalenderAnimeSunday(day: String): LiveData<MutableList<CalendarAnimeDTO>> {
+        val mutableData = MutableLiveData<MutableList<CalendarAnimeDTO>>()
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
@@ -171,12 +179,13 @@ class repositoryAPI {
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
-                        val images: MutableList<String> = arrayListOf()
+                        val calendar: MutableList<CalendarAnimeDTO> = arrayListOf()
                         datos?.day?.forEach { day ->
-                            images.add(day.image_url)
+                            var cal = CalendarAnimeDTO(day)
+                            calendar.add(cal)
                         }
 
-                        mutableData.value = images
+                        mutableData.value = calendar
                     }
                 }
 

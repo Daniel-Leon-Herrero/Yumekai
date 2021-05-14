@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.models.CalendarAnimeDTO
 import net.codefastly.yumekai.repository.repositoryAPI
 import java.util.*
 
@@ -34,8 +35,8 @@ class CalendarViewModel : ViewModel() {
 
 
 
-    fun searchByDay(day: String): LiveData<MutableList<String>> {
-        val mutableData = MutableLiveData<MutableList<String>>()
+    fun searchByDay(day: String): LiveData<MutableList<CalendarAnimeDTO>> {
+        val mutableData = MutableLiveData<MutableList<CalendarAnimeDTO>>()
         when(day){
             "monday" -> repo.getCalenderAnimeMonday(day).observeForever { animes ->
                             mutableData.value = animes
@@ -63,6 +64,7 @@ class CalendarViewModel : ViewModel() {
                             mutableData.value = animes
                             }
         }
+        Log.d("ViewModel", mutableData.toString())
         return mutableData
     }
 

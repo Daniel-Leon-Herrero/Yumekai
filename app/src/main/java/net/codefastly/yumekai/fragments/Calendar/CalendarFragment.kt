@@ -59,6 +59,7 @@ class CalendarFragment : Fragment() {
     fun observeData() {
 
         viewModel.searchByDay(viewModel.day.value!!).observe(viewLifecycleOwner, Observer { animes ->
+            Log.d("Fragment", animes.toString())
             adapter.setListAnimes(animes)
             adapter.notifyDataSetChanged()
         })
