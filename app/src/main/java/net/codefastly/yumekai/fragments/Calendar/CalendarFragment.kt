@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.delay
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentCalendarBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.CalendarAnimeAdapter
@@ -30,6 +31,7 @@ class CalendarFragment : Fragment() {
 
         viewModel.obtainDayOfWeek(requireContext())
         viewModel.day.observe(viewLifecycleOwner, Observer {
+            // Añadir Delay para no sobrecargar de peticiones
             observeData()
         })
 

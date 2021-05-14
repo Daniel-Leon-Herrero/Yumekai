@@ -2,9 +2,6 @@ package net.codefastly.yumekai.activities.Dashboard
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.navigation.findNavController
 import net.codefastly.yumekai.R
@@ -28,6 +25,10 @@ class DashboardActivity : AppCompatActivity() {
                 R.id.menu_item_drop_menu -> Toast.makeText(this,"Menu", Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        binding.menu.setItemSelected(R.id.menu_item_calendar)
     }
 }
