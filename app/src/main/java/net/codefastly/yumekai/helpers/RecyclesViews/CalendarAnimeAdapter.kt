@@ -44,7 +44,9 @@ class CalendarAnimeAdapter(private val context: Context) :
     inner class TendenciaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(image: String) {
             Picasso.get().load(image).into(itemView.findViewById<ImageView>(R.id.calendar_RV_image))
-
+            itemView.setOnClickListener {
+                Log.d("Hola", "Hola")
+            }
         }
     }
 }
