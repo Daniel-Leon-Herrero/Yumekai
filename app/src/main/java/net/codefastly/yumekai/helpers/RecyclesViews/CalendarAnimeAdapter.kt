@@ -1,25 +1,24 @@
 package net.codefastly.yumekai.helpers.RecyclesViews
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
-import net.codefastly.yumekai.models.CalendarAnimeDTO
+import net.codefastly.yumekai.fragments.Calendar.CalendarFragmentDirections
+import net.codefastly.yumekai.models.AnimeDTO
 
 class CalendarAnimeAdapter(private val context: Context) :
     RecyclerView.Adapter<CalendarAnimeAdapter.TendenciaViewHolder>() {
 
-    private var dataList = mutableListOf<CalendarAnimeDTO>()
+    private var dataList = mutableListOf<AnimeDTO>()
 
-    fun setListAnimes(data: MutableList<CalendarAnimeDTO>) {
+    fun setListAnimes(data: MutableList<AnimeDTO>) {
         dataList = data
     }
 
@@ -43,14 +42,15 @@ class CalendarAnimeAdapter(private val context: Context) :
     }
 
     inner class TendenciaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(cal: CalendarAnimeDTO) {
+        fun bindView(cal: AnimeDTO) {
             if(cal.day.image_url.isNotEmpty()) {
                 Picasso.get().load(cal.day.image_url)
                     .into(itemView.findViewById<ImageView>(R.id.calendar_RV_image))
             }
             itemView.findViewById<TextView>(R.id.calendar_categoryTag).text = cal.day.type
             itemView.setOnClickListener {
-                Log.d("Hola", "Hola")
+                var action = CalendarFragmentDirections.actionCalendarFragmentToAnimeFragment(cal)
+                it.findNavController().navigate(action)
             }
         }
     }

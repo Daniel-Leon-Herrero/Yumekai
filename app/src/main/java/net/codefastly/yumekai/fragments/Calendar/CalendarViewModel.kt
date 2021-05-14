@@ -1,12 +1,11 @@
 package net.codefastly.yumekai.fragments.Calendar
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import net.codefastly.yumekai.R
-import net.codefastly.yumekai.models.CalendarAnimeDTO
+import net.codefastly.yumekai.models.AnimeDTO
 import net.codefastly.yumekai.repository.repositoryAPI
 import java.util.*
 
@@ -35,36 +34,36 @@ class CalendarViewModel : ViewModel() {
 
 
 
-    fun searchByDay(day: String): LiveData<MutableList<CalendarAnimeDTO>> {
-        val mutableData = MutableLiveData<MutableList<CalendarAnimeDTO>>()
-        when(day){
-            "monday" -> repo.getCalenderAnimeMonday(day).observeForever { animes ->
-                            mutableData.value = animes
-                            }
-            "tuesday" -> repo.getCalenderAnimeTuesday(day).observeForever { animes ->
-                            mutableData.value = animes
-                            }
-            "wednesday" -> repo.getCalenderAnimeWednesday(day).observeForever { animes ->
-                            mutableData.value = animes
-                            }
+    fun searchByDay(day: String): LiveData<MutableList<AnimeDTO>> {
+        //Guardar next y prev
+        val mutableData = MutableLiveData<MutableList<AnimeDTO>>()
+            when (day) {
+                "monday" -> repo.getCalenderAnimeMonday(day).observeForever { animes ->
+                    mutableData.value = animes
+                }
+                "tuesday" -> repo.getCalenderAnimeTuesday(day).observeForever { animes ->
+                    mutableData.value = animes
+                }
+                "wednesday" -> repo.getCalenderAnimeWednesday(day).observeForever { animes ->
+                    mutableData.value = animes
+                }
 
-            "thursday" -> repo.getCalenderAnimeThursday(day).observeForever { animes ->
-                            mutableData.value = animes
-                             }
+                "thursday" -> repo.getCalenderAnimeThursday(day).observeForever { animes ->
+                    mutableData.value = animes
+                }
 
-            "friday" -> repo.getCalenderAnimeFriday(day).observeForever { animes ->
-                            mutableData.value = animes
-                            }
+                "friday" -> repo.getCalenderAnimeFriday(day).observeForever { animes ->
+                    mutableData.value = animes
+                }
 
-            "saturday" -> repo.getCalenderAnimeSaturday(day).observeForever { animes ->
-                            mutableData.value = animes
-                            }
+                "saturday" -> repo.getCalenderAnimeSaturday(day).observeForever { animes ->
+                    mutableData.value = animes
+                }
 
-            "sunday" -> repo.getCalenderAnimeSunday(day).observeForever { animes ->
-                            mutableData.value = animes
-                            }
+                "sunday" -> repo.getCalenderAnimeSunday(day).observeForever { animes ->
+                    mutableData.value = animes
+                }
         }
-        Log.d("ViewModel", mutableData.toString())
         return mutableData
     }
 
