@@ -11,10 +11,9 @@ import java.util.*
 
 class CalendarViewModel : ViewModel() {
     private val repo = repositoryAPI()
-
-
-    lateinit var day: String;
+    var day: MutableLiveData<String> = MutableLiveData("")
     val dayOfWeek = arrayOf("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
+
 
     fun obtainDayOfWeek(context: Context) {
         var dayString: String = ""
@@ -30,7 +29,7 @@ class CalendarViewModel : ViewModel() {
             Calendar.FRIDAY -> dayString = context.getString(R.string.Feiday)
             Calendar.SATURDAY -> dayString = context.getString(R.string.Saturday)
         }
-        day = dayString
+        day.value = dayString
     }
 
 

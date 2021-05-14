@@ -29,13 +29,17 @@ class CalendarFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(CalendarViewModel::class.java)
 
         viewModel.obtainDayOfWeek(requireContext())
+        viewModel.day.observe(viewLifecycleOwner, Observer {
+            observeData()
+        })
+
         binding.calenderBtnPrevius.setOnClickListener {
-            viewModel.day = viewModel.previusDay(viewModel.day)
+            viewModel.day.value = viewModel.previusDay(viewModel.day.value!!)
             actualizarDia()
         }
 
         binding.calendarBtnNext.setOnClickListener {
-            viewModel.day = viewModel.nextDay(viewModel.day)
+            viewModel.day.value = viewModel.nextDay(viewModel.day.value!!)
             actualizarDia()
         }
         inicializeAnimeAdapter()
@@ -52,7 +56,7 @@ class CalendarFragment : Fragment() {
 
     fun observeData() {
 
-        viewModel.searchByDay(viewModel.day).observe(viewLifecycleOwner, Observer { animes ->
+        viewModel.searchByDay(viewModel.day.value!!).observe(viewLifecycleOwner, Observer { animes ->
             adapter.setListAnimes(animes)
             adapter.notifyDataSetChanged()
         })
@@ -61,7 +65,7 @@ class CalendarFragment : Fragment() {
 
 
     fun actualizarDia(){
-        binding.calendarBtnDay.setText(viewModel.day)
+        binding.calendarBtnDay.setText(viewModel.day.value!!)
     }
 
 
