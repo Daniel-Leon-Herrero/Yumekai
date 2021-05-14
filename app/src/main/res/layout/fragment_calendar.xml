@@ -17,7 +17,7 @@
             android:id="@+id/titleCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calendario"
+            android:text=""
             android:textSize="28sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -54,6 +54,7 @@
                 />
 
             <Button
+                android:id="@+id/calendar_btnNext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Next"

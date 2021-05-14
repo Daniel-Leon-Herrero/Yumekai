@@ -17,13 +17,157 @@ class repositoryAPI {
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
-    fun getCalenderAnime(day: String): LiveData<MutableList<String>> {
+    fun getCalenderAnimeMonday(day: String): LiveData<MutableList<String>> {
         val mutableData = MutableLiveData<MutableList<String>>()
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val call = getRetrofit().create(APIService::class.java)
-                    .getCalendarAnimes("$day")
+                    .getCalendarAnimesMonday("$day")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        val images: MutableList<String> = arrayListOf()
+                        datos?.day?.forEach { day ->
+                            images.add(day.image_url)
+                        }
+
+                        mutableData.value = images
+                    }
+                }
+
+            }
+        }
+        return mutableData
+    }
+
+    fun getCalenderAnimeTuesday(day: String): LiveData<MutableList<String>> {
+        val mutableData = MutableLiveData<MutableList<String>>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getRetrofit().create(APIService::class.java)
+                    .getCalendarAnimesTuesday("$day")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        val images: MutableList<String> = arrayListOf()
+                        datos?.day?.forEach { day ->
+                            images.add(day.image_url)
+                        }
+
+                        mutableData.value = images
+                    }
+                }
+
+            }
+        }
+        return mutableData
+    }
+
+    fun getCalenderAnimeWednesday(day: String): LiveData<MutableList<String>> {
+        val mutableData = MutableLiveData<MutableList<String>>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getRetrofit().create(APIService::class.java)
+                    .getCalendarAnimesWednesday("$day")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        val images: MutableList<String> = arrayListOf()
+                        datos?.day?.forEach { day ->
+                            images.add(day.image_url)
+                        }
+
+                        mutableData.value = images
+                    }
+                }
+
+            }
+        }
+        return mutableData
+    }
+
+    fun getCalenderAnimeThursday(day: String): LiveData<MutableList<String>> {
+        val mutableData = MutableLiveData<MutableList<String>>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getRetrofit().create(APIService::class.java)
+                    .getCalendarAnimesThursday("$day")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        val images: MutableList<String> = arrayListOf()
+                        datos?.day?.forEach { day ->
+                            images.add(day.image_url)
+                        }
+
+                        mutableData.value = images
+                    }
+                }
+
+            }
+        }
+        return mutableData
+    }
+
+    fun getCalenderAnimeFriday(day: String): LiveData<MutableList<String>> {
+        val mutableData = MutableLiveData<MutableList<String>>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getRetrofit().create(APIService::class.java)
+                    .getCalendarAnimesFriday("$day")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        val images: MutableList<String> = arrayListOf()
+                        datos?.day?.forEach { day ->
+                            images.add(day.image_url)
+                        }
+
+                        mutableData.value = images
+                    }
+                }
+
+            }
+        }
+        return mutableData
+    }
+
+    fun getCalenderAnimeSaturday(day: String): LiveData<MutableList<String>> {
+        val mutableData = MutableLiveData<MutableList<String>>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getRetrofit().create(APIService::class.java)
+                    .getCalendarAnimesSaturday("$day")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        val images: MutableList<String> = arrayListOf()
+                        datos?.day?.forEach { day ->
+                            images.add(day.image_url)
+                        }
+
+                        mutableData.value = images
+                    }
+                }
+
+            }
+        }
+        return mutableData
+    }
+
+    fun getCalenderAnimeSunday(day: String): LiveData<MutableList<String>> {
+        val mutableData = MutableLiveData<MutableList<String>>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getRetrofit().create(APIService::class.java)
+                    .getCalendarAnimesSunday("$day")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {

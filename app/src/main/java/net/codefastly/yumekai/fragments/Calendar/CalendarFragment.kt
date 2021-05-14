@@ -20,8 +20,6 @@ class CalendarFragment : Fragment() {
     private lateinit var viewModel: CalendarViewModel
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: CalendarAnimeAdapter
-    private lateinit var day: String;
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +28,16 @@ class CalendarFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
         viewModel = ViewModelProvider(this).get(CalendarViewModel::class.java)
 
-        day = viewModel.obtainDayOfWeek(requireContext())
+        viewModel.obtainDayOfWeek(requireContext())
+        binding.calenderBtnPrevius.setOnClickListener {
+            viewModel.day = viewModel.previusDay(viewModel.day)
+            actualizarDia()
+        }
+
+        binding.calendarBtnNext.setOnClickListener {
+            viewModel.day = viewModel.nextDay(viewModel.day)
+            actualizarDia()
+        }
         inicializeAnimeAdapter()
         // Inflate the layout for this fragment
         return binding.root
@@ -45,7 +52,7 @@ class CalendarFragment : Fragment() {
 
     fun observeData() {
 
-        viewModel.searchByDay(day).observe(viewLifecycleOwner, Observer { animes ->
+        viewModel.searchByDay(viewModel.day).observe(viewLifecycleOwner, Observer { animes ->
             adapter.setListAnimes(animes)
             adapter.notifyDataSetChanged()
         })
@@ -53,8 +60,13 @@ class CalendarFragment : Fragment() {
     }
 
 
+    fun actualizarDia(){
+        binding.calendarBtnDay.setText(viewModel.day)
+    }
+
+
     override fun onStart() {
-        binding.calendarBtnDay.setText(viewModel.obtainDayOfWeek(requireContext()))
+        actualizarDia()
         super.onStart()
     }
 }
