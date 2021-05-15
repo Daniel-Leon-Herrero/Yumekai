@@ -1,8 +1,6 @@
-package net.codefastly.yumekai.models
+package net.codefastly.yumekai.models.calendar
 
 import com.google.gson.annotations.SerializedName
-import net.codefastly.yumekai.R
-import java.util.*
 
 data class CalendarAnimeWednesdayResponse(
 

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragmentDirections
-import net.codefastly.yumekai.models.AnimeDTO
+import net.codefastly.yumekai.models.calendar.AnimeDTO
 
 class CalendarAnimeAdapter(private val context: Context) :
     RecyclerView.Adapter<CalendarAnimeAdapter.TendenciaViewHolder>() {

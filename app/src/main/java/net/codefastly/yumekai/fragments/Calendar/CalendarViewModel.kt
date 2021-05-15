@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import net.codefastly.yumekai.R
-import net.codefastly.yumekai.models.AnimeDTO
+import net.codefastly.yumekai.models.calendar.AnimeDTO
 import net.codefastly.yumekai.repository.repositoryAPI
 import java.util.*
 

@@ -1,6 +1,6 @@
-package net.codefastly.yumekai.helpers.interfaces
+package net.codefastly.yumekai.interfaces
 
-import net.codefastly.yumekai.models.*
+import net.codefastly.yumekai.models.calendar.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Url

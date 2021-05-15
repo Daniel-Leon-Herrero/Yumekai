@@ -1,4 +1,4 @@
-package net.codefastly.yumekai.models
+package net.codefastly.yumekai.models.calendar
 
 import com.google.gson.annotations.SerializedName
 

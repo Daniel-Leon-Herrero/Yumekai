@@ -6,8 +6,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import net.codefastly.yumekai.helpers.interfaces.APIService
-import net.codefastly.yumekai.models.AnimeDTO
+import net.codefastly.yumekai.interfaces.APIService
+import net.codefastly.yumekai.models.calendar.AnimeDTO
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

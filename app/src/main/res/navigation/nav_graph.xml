@@ -31,6 +31,6 @@
         tools:layout="@layout/fragment_anime" >
         <argument
             android:name="anime1"
-            app:argType="net.codefastly.yumekai.models.AnimeDTO" />
+            app:argType="net.codefastly.yumekai.models.calendar.AnimeDTO" />
     </fragment>
 </navigation>
