@@ -33,4 +33,11 @@
     <string name="skip_btn">Skip</string>
     <string name="next_btn">Next</string>
     <string name="let_get_started">Let get started</string>
+    <string name="Sunday">sunday</string>
+    <string name="Monday">monday</string>
+    <string name="Tuesday">tuesday</string>
+    <string name="Wednesday">wednesday</string>
+    <string name="Thursday">thursday</string>
+    <string name="Feiday">friday</string>
+    <string name="Saturday">saturday</string>
 </resources>

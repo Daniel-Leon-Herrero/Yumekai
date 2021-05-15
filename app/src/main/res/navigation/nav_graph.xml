@@ -9,7 +9,11 @@
         android:id="@+id/calendarFragment"
         android:name="net.codefastly.yumekai.fragments.Calendar.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_animeFragment"
+            app:destination="@id/animeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recentFragment"
         android:name="net.codefastly.yumekai.fragments.Recent.RecentFragment"
@@ -21,8 +25,12 @@
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
     <fragment
-        android:id="@+id/animeDetailsFragment"
-        android:name="net.codefastly.yumekai.AnimeDetailsFragment"
-        android:label="fragment_anime_details"
-        tools:layout="@layout/fragment_anime_details" />
+        android:id="@+id/animeFragment"
+        android:name="net.codefastly.yumekai.fragments.Anime.AnimeFragment"
+        android:label="fragment_anime"
+        tools:layout="@layout/fragment_anime" >
+        <argument
+            android:name="anime1"
+            app:argType="net.codefastly.yumekai.models.AnimeDTO" />
+    </fragment>
 </navigation>

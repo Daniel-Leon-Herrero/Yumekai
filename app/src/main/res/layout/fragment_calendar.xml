@@ -17,7 +17,7 @@
             android:id="@+id/titleCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calendario"
+            android:text=""
             android:textSize="28sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -35,161 +35,81 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/calender_btn_Previus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Monday"
+                android:text="Previus"
                 android:textColor="@color/soft_white"
                 android:backgroundTint="@color/alt_black"
                 />
 
             <Button
+                android:id="@+id/calendar_btnDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Monday"
+                android:enabled="false"
+                android:textColor="@color/soft_white"
+                android:backgroundTint="@color/red_primary"
+                />
+
+            <Button
+                android:id="@+id/calendar_btnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
                 android:textColor="@color/soft_white"
                 android:backgroundTint="@color/alt_black"
                 />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monday"
-                android:textColor="@color/soft_white"
-                android:backgroundTint="@color/alt_black"
-                />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monday"
-                android:textColor="@color/soft_white"
-                android:backgroundTint="@color/alt_black"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/weekButtons2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            app:layout_constraintTop_toBottomOf="@+id/weekButtons1"
-            android:gravity="center">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monday"
-                android:textColor="@color/soft_white"
-                android:backgroundTint="@color/alt_black"
-                />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monday"
-                android:textColor="@color/soft_white"
-                android:backgroundTint="@color/alt_black"
-                />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monday"
-                android:textColor="@color/soft_white"
-                android:backgroundTint="@color/alt_black"
-                />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monday"
-                android:textColor="@color/soft_white"
-                android:backgroundTint="@color/alt_black"
-                />
         </LinearLayout>
 
         <!-- CONTENIDO -->
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/weekButtons2"
+            android:layout_margin="20dp"
+            android:background="@color/alt_black"
+            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.825"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:background="@color/alt_black"
-            android:layout_margin="20dp"
-            android:padding="10dp">
+            app:layout_constraintTop_toBottomOf="@+id/weekButtons1"
+            app:layout_constraintVertical_bias="1.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Series"
+                    android:layout_marginStart="20dp"
+                    android:text="Animes"
                     android:textSize="28sp"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginStart="20dp"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- AQUI RECYCLERVIEW SERIES -->
-
-                <TextView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/calendarRVAnime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Peliculas"
-                    android:textSize="28sp"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginStart="20dp"/>
-
-                <!-- AQUI RECYCLERVIEW PELICULAS -->
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="OVAs"
-                    android:textSize="28sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginStart="20dp"/>
-
-                <!-- AQUI RECYCLERVIEW OVAs -->
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ONAs"
-                    android:textSize="28sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginStart="20dp"/>
-
-                <!-- AQUI RECYCLERVIEW ONAs -->
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Especiales"
-                    android:textSize="28sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginStart="20dp"/>
-
-                <!-- AQUI RECYCLERVIEW ESPECIALES -->
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="25dp"
+                    app:spanCount="2" />
 
             </LinearLayout>
 
 
-        </ScrollView>
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
