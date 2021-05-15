@@ -1,15 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.News.NewsFragment"
-    android:background="@color/dark_black">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="News Fragment" />
+        tools:context=".MainActivity"
+        android:background="@color/dark_black"
+        android:padding="20dp">
 
-</FrameLayout>
+
+        <TextView
+            android:id="@+id/news_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/news_screen_title"
+            android:textColor="@color/soft_white"
+            android:textSize="28sp"
+            android:fontFamily="@font/nunito_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/alt_black"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+
+            <ImageView
+                android:id="@+id/news_btn_to_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_navigate_next_24"
+                android:background="@color/transparent"
+                android:padding="4dp"
+                android:paddingEnd="20dp"
+                android:tag="text"/>
+
+            <ImageView
+                android:id="@+id/news_btn_to_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_navigate_next_24"
+                android:background="@color/transparent"
+                android:padding="4dp"
+                android:paddingEnd="20dp"
+                android:tag="card"/>
+
+            <ImageView
+                android:id="@+id/news_btn_to_magazine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_navigate_next_24"
+                android:background="@color/transparent"
+                android:padding="4dp"
+                android:tag="magazine"/>
+
+        </LinearLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/newsSwiperRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/news_title">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

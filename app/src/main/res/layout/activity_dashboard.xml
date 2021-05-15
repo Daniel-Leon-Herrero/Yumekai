@@ -13,8 +13,6 @@
         tools:context=".activities.Dashboard.DashboardActivity"
         android:background="@color/dark_black">
 
-
-
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
@@ -75,16 +73,13 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="397dp"
-            android:layout_height="594dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/menu"
             app:layout_constraintEnd_toEndOf="parent"
-
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleLayout"
             app:layout_constraintVertical_bias="0.416"
             app:navGraph="@navigation/nav_graph" />
 

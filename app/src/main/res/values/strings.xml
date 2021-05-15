@@ -40,4 +40,12 @@
     <string name="Thursday">thursday</string>
     <string name="Feiday">friday</string>
     <string name="Saturday">saturday</string>
+
+    <!--***** NEWS SCREEN *****-->
+    <!-- Titles -->
+    <string name="news_screen_title">News</string>
+
+    <!-- Buttons -->
+    <string name="news_screen_continue_readig">Continue readig</string>
+
 </resources>
