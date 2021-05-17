@@ -15,6 +15,7 @@
         <!-- Dark Mode Colors -->
         <color name="dark_black">#221f1f</color>
         <color name="alt_black">#393838</color>
+        <color name="on_alt_black">#494747</color>
         <color name="soft_white">#F5F5F1</color>
         <!-- Light Mode Colors -->
 

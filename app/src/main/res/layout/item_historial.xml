@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    card_view:cardBackgroundColor="@color/alt_black"
+    card_view:cardCornerRadius="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_margin="5dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/history_screen_cardView"
+            android:layout_width="130dp"
+            android:layout_height="0dp"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="2dp"
+            card_view:cardUseCompatPadding="true">
+
+            <ImageView
+                android:id="@+id/history_screen_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_launcher_background"
+                android:scaleType="centerCrop"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            card_view:layout_constraintStart_toEndOf="@id/history_screen_cardView"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical">
+
+            <!-- TITULO -->
+
+            <TextView
+                android:id="@+id/history_screen_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/soft_white"
+                android:fontFamily="@font/nunito_bold"
+                tools:text = "La segunda pelicula de Fate/Grand Order Camelot retrasa su estreno." />
+
+
+            <!-- DESCRIPTION -->
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:layout_marginTop="6dp">
+
+                <TextView
+                    android:id="@+id/history_screen_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:textColor="@color/soft_white"
+                    android:fontFamily="@font/nunito"
+                    tools:text = "Esto es un ejemplo para la desc de la vista de articulos. Espero que esté quedando como de la vista de articulos. Espero que esté quedando comoripcion de de la vista de articulos. Espero que esté quedando como la vista de articulos. Espero que esté quedando como debe y sea espectacular. \nAqui se acaba de hacer un salto de linea increible." />
+
+            </ScrollView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <!-- BUTTON 1 -->
+                <Button
+                    android:id="@+id/history_screen_btn_finalized"
+                    android:layout_width="130dp"
+                    android:layout_height="45dp"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    android:text="Add to finalized"
+                    android:textAlignment="textStart"
+                    android:drawableStart="@drawable/ic_baseline_navigate_next_24"
+                    android:textSize="10sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/on_alt_black"
+                    android:paddingEnd="15dp"/>
+
+                <!-- BUTTON 2 -->
+                <Button
+                    android:id="@+id/history_screen_btn_recommended"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="130dp"
+                    android:layout_height="45dp"
+                    card_view:layout_constraintStart_toEndOf="@id/history_screen_btn_finalized"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    android:text="Add to recommended"
+                    android:textAlignment="textStart"
+                    android:drawableStart="@drawable/ic_baseline_navigate_next_24"
+                    android:textSize="10sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/on_alt_black"
+                    android:paddingEnd="15dp" />
+
+                <!-- BUTTON 3 -->
+                <Button
+                    android:id="@+id/history_screen_btn_following"
+                    android:layout_width="130dp"
+                    android:layout_height="45dp"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toBottomOf="@id/history_screen_btn_finalized"
+                    android:text="Add to following"
+                    android:textAlignment="textStart"
+                    android:drawableStart="@drawable/ic_baseline_navigate_next_24"
+                    android:textSize="10sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/on_alt_black"
+                    android:paddingEnd="15dp" />
+
+                <!-- BUTTON 4 -->
+                <Button
+                    android:id="@+id/history_screen_btn_favourites"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="130dp"
+                    android:layout_height="45dp"
+                    card_view:layout_constraintStart_toEndOf="@id/history_screen_btn_following"
+                    card_view:layout_constraintTop_toBottomOf="@id/history_screen_btn_recommended"
+                    android:text="Add to favourites"
+                    android:textAlignment="textStart"
+                    android:drawableStart="@drawable/ic_baseline_navigate_next_24"
+                    android:textSize="10sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/on_alt_black"
+                    android:paddingEnd="15dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
