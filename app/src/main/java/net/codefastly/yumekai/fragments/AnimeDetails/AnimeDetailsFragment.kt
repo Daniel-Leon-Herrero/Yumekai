@@ -45,6 +45,7 @@ class AnimeDetailsFragment : Fragment() {
 
     private fun bindData() {
         with(binding) {
+            var sb = StringBuilder()
             // Recuperar datos anteriores
             with(viewModel.anime.value?.day) {
                 animeBtnBack.setOnClickListener {
@@ -57,6 +58,17 @@ class AnimeDetailsFragment : Fragment() {
                 animeDetailsSynopsis.text = this?.synopsis
                 animeDetailsType.text = this?.type
                 inicializeCategoryAdapter(this?.genres)
+                if(this?.licensors?.size < 1){
+                    sb.append("-")
+                }else {
+                    this?.licensors.forEach { licensors ->
+                        sb.append(animeDetailsLicenses.text).append(licensors)
+                        if (this?.licensors?.size > 1) {
+                            sb.append(", ")
+                        }
+                    }
+                }
+                animeDetailsLicenses.text = sb.toString()
 
                 //Mas Detalles
                 with(viewModel.animeDetails) {
@@ -68,8 +80,20 @@ class AnimeDetailsFragment : Fragment() {
                             animeDetailsEnglishTitle.text = this?.title_english
                             animeDetailsJapaneseTitle.text = this?.title_japanese
                             animeDetailsAiring.text = this?.aired?.string
+                            animeDetailsReleased.text = this?.premiered
+                            this?.producers?.forEach { producer ->
+                                sb.append(animeDetailsProducers.text).append(producer.name).append(", ")
+                            }
+                            animeDetailsProducers.text = sb.toString()
 
-
+                            sb.clear()
+                            this?.studios?.forEach {studio ->
+                                sb.append(animeDetailsStudios.text).append(studio.name)
+                                if(this?.studios?.size > 1){
+                                    sb.append(", ")
+                                }
+                            }
+                            animeDetailsStudios.text = sb.toString()
                         }
                     })
                 }

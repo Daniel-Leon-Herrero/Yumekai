@@ -335,7 +335,7 @@
                         android:id="@+id/animeDetails_producers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TOHO animations, Shueisha"
+                        android:text=""
                         android:textColor="@color/soft_white"
                         android:textSize="12sp"
                         android:fontFamily="@font/nunito" />
@@ -344,7 +344,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Producers:"
+                        android:text="Licenses:"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp"
                         android:fontFamily="@font/nunito_bold" />
@@ -353,7 +353,7 @@
                         android:id="@+id/animeDetails_licenses"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Funimation, Crunchyroll"
+                        android:text=""
                         android:textColor="@color/soft_white"
                         android:textSize="12sp"
                         android:fontFamily="@font/nunito" />
@@ -371,7 +371,7 @@
                         android:id="@+id/animeDetails_studios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TMS Entertainment"
+                        android:text=""
                         android:textColor="@color/soft_white"
                         android:textSize="12sp"
                         android:fontFamily="@font/nunito" />
