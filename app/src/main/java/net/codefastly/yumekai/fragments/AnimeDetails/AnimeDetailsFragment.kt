@@ -69,6 +69,8 @@ class AnimeDetailsFragment : Fragment() {
                     }
                 }
                 animeDetailsLicenses.text = sb.toString()
+                animeDetailsSource.text = this?.source
+                animeDetailsMembres.text = this?.members.toString()
 
                 //Mas Detalles
                 with(viewModel.animeDetails) {
@@ -94,6 +96,12 @@ class AnimeDetailsFragment : Fragment() {
                                 }
                             }
                             animeDetailsStudios.text = sb.toString()
+                            animeDetailsPuntuation.text = "${this?.score} ( Puntuated by ${this?.scored_by} users )"
+                            animeDetailsPopularity.text = this?.popularity.toString()
+                            animeDetailsFavourites.text = this?.favorites.toString()
+
+                            //Falta por encontrar
+                            animeDetailsClasification.text = "-"
                         }
                     })
                 }
