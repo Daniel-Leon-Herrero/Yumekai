@@ -49,7 +49,7 @@ class CalendarAnimeAdapter(private val context: Context) :
             }
             itemView.findViewById<TextView>(R.id.calendar_categoryTag).text = cal.day.type
             itemView.setOnClickListener {
-                var action = CalendarFragmentDirections.actionCalendarFragmentToAnimeFragment(cal)
+                var action = CalendarFragmentDirections.actionCalendarFragmentToAnimeDetailsFragment(cal)
                 it.findNavController().navigate(action)
             }
         }
