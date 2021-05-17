@@ -14,7 +14,7 @@ import net.codefastly.yumekai.fragments.Calendar.CalendarFragmentDirections
 import net.codefastly.yumekai.models.calendar.AnimeDTO
 
 class CalendarAnimeAdapter(private val context: Context) :
-    RecyclerView.Adapter<CalendarAnimeAdapter.TendenciaViewHolder>() {
+    RecyclerView.Adapter<CalendarAnimeAdapter.AnimeCalendarViewHolder>() {
 
     private var dataList = mutableListOf<AnimeDTO>()
 
@@ -22,15 +22,15 @@ class CalendarAnimeAdapter(private val context: Context) :
         dataList = data
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TendenciaViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimeCalendarViewHolder {
         val view =
             LayoutInflater.from(context).inflate(R.layout.item_calendar, parent, false)
-        return TendenciaViewHolder(view)
+        return AnimeCalendarViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TendenciaViewHolder, position: Int) {
-        val tend = dataList[position]
-        holder.bindView(tend)
+    override fun onBindViewHolder(holder: AnimeCalendarViewHolder, position: Int) {
+        val anime = dataList[position]
+        holder.bindView(anime)
     }
 
     override fun getItemCount(): Int {
@@ -41,7 +41,7 @@ class CalendarAnimeAdapter(private val context: Context) :
         }
     }
 
-    inner class TendenciaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class AnimeCalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(cal: AnimeDTO) {
             if(cal.day.image_url.isNotEmpty()) {
                 Picasso.get().load(cal.day.image_url)

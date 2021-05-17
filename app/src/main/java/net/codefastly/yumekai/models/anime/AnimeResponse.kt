@@ -1,0 +1,42 @@
+package net.codefastly.yumekai.models.anime
+
+import com.google.gson.annotations.SerializedName
+
+data class AnimeResponse(
+    @SerializedName("aired") val aired: Aired,
+    @SerializedName("airing") val airing: Boolean,
+    @SerializedName("background") val background: Any,
+    @SerializedName("broadcast") val broadcast: String,
+    @SerializedName("duration") val duration: String,
+    @SerializedName("ending_themes") val ending_themes: List<String>,
+    @SerializedName("episodes") val episodes: Int,
+    @SerializedName("favorites") val favorites: Int,
+    @SerializedName("genres") val genres: List<Genre>,
+    @SerializedName("image_url") val image_url: String,
+    @SerializedName("licensors") val licensors: List<Any>,
+    @SerializedName("mal_id") val mal_id: Int,
+    @SerializedName("members") val members: Int,
+    @SerializedName("opening_themes") val opening_themes: List<String>,
+    @SerializedName("popularity") val popularity: Int,
+    @SerializedName("premiered") val premiered: String,
+    @SerializedName("producers") val producers: List<Producer>,
+    @SerializedName("rank") val rank: Int,
+    @SerializedName("rating") val rating: String,
+    @SerializedName("related") val related: Related,
+    @SerializedName("request_cache_expiry") val request_cache_expiry: Int,
+    @SerializedName("request_cached") val request_cached: Boolean,
+    @SerializedName("request_hash") val request_hash: String,
+    @SerializedName("score") val score: Double,
+    @SerializedName("scored_by") val scored_by: Int,
+    @SerializedName("source") val source: String,
+    @SerializedName("status") val status: String,
+    @SerializedName("studios") val studios: List<Studio>,
+    @SerializedName("synopsis") val synopsis: String,
+    @SerializedName("title") val title: String,
+    @SerializedName("title_english") val title_english: String,
+    @SerializedName("title_japanese") val title_japanese: String,
+    @SerializedName("title_synonyms") val title_synonyms: List<String>,
+    @SerializedName("trailer_url") val trailer_url: String,
+    @SerializedName("type") val type: String,
+    @SerializedName("url") val url: String
+)

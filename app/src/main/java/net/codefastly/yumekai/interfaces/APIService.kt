@@ -1,5 +1,6 @@
 package net.codefastly.yumekai.interfaces
 
+import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.*
 import retrofit2.Response
 import retrofit2.http.GET
@@ -29,4 +30,7 @@ interface APIService {
 
     @GET
     suspend fun getCalendarAnimesSunday(@Url url:String): Response<CalendarAnimeSundayResponse>
+
+    @GET
+    suspend fun getAnimes(@Url url:String): Response<AnimeResponse>
 }
