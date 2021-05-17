@@ -48,4 +48,12 @@
     <!-- Buttons -->
     <string name="news_screen_continue_readig">Continue readig</string>
 
+    <!--***** OUR-TEAM SCREEN *****-->
+    <!-- Descriptions -->
+    <string name="our_team_screen_desc">Application developed as a final project by application development students for lovers of Japanese culture and anime.</string>
+
+    <!-- Buttons -->
+    <string name="our_team_visit_web">Visit to our website</string>
+
+
 </resources>
