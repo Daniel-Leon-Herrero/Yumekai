@@ -52,7 +52,6 @@ class CalendarAnimeAdapter(private val context: Context) :
                     .into(itemView.findViewById<ImageView>(R.id.calendar_RV_image),
                         object : Callback {
                             override fun onSuccess() {
-                                Log.d("Picasso", "Success")
                             }
 
                             override fun onError(e: Exception?) {

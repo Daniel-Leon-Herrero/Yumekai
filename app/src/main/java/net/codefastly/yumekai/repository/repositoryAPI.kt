@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.interfaces.APIService
+import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.AnimeDTO
 import retrofit2.Retrofit
@@ -218,4 +219,26 @@ class repositoryAPI {
         }
         return mutableData
     }
+
+    fun getAnimeCharacter(id: Int): LiveData<CharacterAnimeResponse> {
+        var mutableData = MutableLiveData<CharacterAnimeResponse>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getAnimeRetrofit().create(APIService::class.java)
+                    .getAnimesCharacter("$id/characters_staff")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        mutableData.value = datos!!
+                    }
+                }
+
+            }
+        }
+
+        return mutableData
+    }
+
+
 }

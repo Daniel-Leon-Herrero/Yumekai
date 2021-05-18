@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_calendar" >
         <action
             android:id="@+id/action_calendarFragment_to_animeDetailsFragment"
-            app:destination="@id/animeDetailsFragment" />
+            app:destination="@id/animeDetailsFragment"
+            app:popUpTo="@id/calendarFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/recentFragment"

@@ -1,5 +1,6 @@
 package net.codefastly.yumekai.interfaces
 
+import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.*
 import retrofit2.Response
@@ -33,4 +34,7 @@ interface APIService {
 
     @GET
     suspend fun getAnimes(@Url url:String): Response<AnimeResponse>
+
+    @GET
+    suspend fun getAnimesCharacter(@Url url:String): Response<CharacterAnimeResponse>
 }
