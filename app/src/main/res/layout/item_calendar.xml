@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-<androidx.cardview.widget.CardView
-    android:layout_width="100dp"
-    android:layout_height="150dp"
-    android:layout_margin="16dp">
+<com.google.android.material.card.MaterialCardView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:card_view="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_height="240dp"
+android:layout_width="160dp"
+card_view:cardCornerRadius="4dp"
+tools:cardBackgroundColor="@color/alt_black"
+    android:layout_margin="10dp">
 
     <ImageView
         android:id="@+id/calendar_RV_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
-    <TextView
-        android:id="@+id/calendar_categoryTag"
-        android:layout_width="40dp"
+    <com.google.android.material.card.MaterialCardView
         android:layout_height="wrap_content"
+        android:layout_width="80dp"
         android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"
-        android:background="@color/red_primary"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        tools:text="Anime"
-        android:textSize="8sp"
-        android:fontFamily="@font/nunito_bold"
-        android:textAlignment="center"
-        android:textAllCaps="true"/>
+        card_view:cardBackgroundColor="@color/red_primary_op"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="0dp">
 
-</androidx.cardview.widget.CardView>
-</layout>
+        <TextView
+            android:id="@+id/calendar_categoryTag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            tools:text="Anime"
+            android:textSize="12sp"
+            android:fontFamily="@font/nunito_black"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/red_primary"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</com.google.android.material.card.MaterialCardView>

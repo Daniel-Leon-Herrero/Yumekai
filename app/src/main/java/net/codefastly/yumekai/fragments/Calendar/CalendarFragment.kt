@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import kotlinx.coroutines.delay
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentCalendarBinding
@@ -55,6 +55,11 @@ class CalendarFragment : Fragment() {
 
     private fun inicializeAnimeAdapter(){
         recyclerView = binding.calendarRVAnime
+        with( recyclerView ){
+            setHasFixedSize(true)
+            itemAnimator = DefaultItemAnimator()
+            layoutManager = GridLayoutManager(requireContext(),2 , GridLayoutManager.VERTICAL, false)
+        }
         adapter = CalendarAnimeAdapter(requireContext())
         recyclerView.adapter = adapter
         observeData()
