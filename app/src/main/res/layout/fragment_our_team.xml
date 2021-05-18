@@ -139,6 +139,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <!--
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -149,6 +150,7 @@
                 android:scaleType="fitEnd"
                 android:src="@drawable/ic_rare_shape" />
 
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
@@ -157,6 +159,7 @@
                 android:contentDescription="Our Team Shape"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_rare_shape" />
+                -->
 
         </FrameLayout>
 

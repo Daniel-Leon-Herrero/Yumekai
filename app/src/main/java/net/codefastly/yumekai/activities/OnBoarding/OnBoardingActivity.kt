@@ -68,10 +68,10 @@ class OnBoardingActivity : AppCompatActivity() {
      *
      */
     private fun postToList(){
-        this.addToList( getString(R.string.first_slide_title), getString(R.string.first_slide_desc), R.mipmap.ic_launcher )
-        this.addToList( getString(R.string.second_slide_title), getString(R.string.second_slide_desc), R.mipmap.ic_launcher )
-        this.addToList( getString(R.string.third_slide_title), getString(R.string.third_slide_desc), R.mipmap.ic_launcher )
-        this.addToList( getString(R.string.fourth_slide_title), getString(R.string.fourth_slide_desc), R.mipmap.ic_launcher )
+        this.addToList( getString(R.string.first_slide_title), getString(R.string.first_slide_desc), R.drawable.on_boarding_1 )
+        this.addToList( getString(R.string.second_slide_title), getString(R.string.second_slide_desc), R.drawable.on_boarding_2 )
+        this.addToList( getString(R.string.third_slide_title), getString(R.string.third_slide_desc), R.drawable.on_boarding_3 )
+        this.addToList( getString(R.string.fourth_slide_title), getString(R.string.fourth_slide_desc), R.drawable.on_boarding_1 )
     }
 
 }
