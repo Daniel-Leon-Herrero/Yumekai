@@ -76,48 +76,199 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@id/menu"
+            app:layout_constraintBottom_toTopOf="@id/dashboard_screen_coordinatorLayoutMenu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/titleLayout"
             app:layout_constraintVertical_bias="0.416"
             app:navGraph="@navigation/nav_graph" />
 
-        <com.ismaeldivita.chipnavigation.ChipNavigationBar
-            android:id="@+id/menu"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            app:cnb_menuResource="@menu/bottom_menu"
-            app:cnb_orientationMode="horizontal"
-            app:cnb_addBottomInset="false"
-            app:cnb_addLeftInset="false"
-            app:cnb_addRightInset="false"
-            app:cnb_addTopInset="false"
-            app:cnb_unselectedColor="@color/soft_white"
-            app:cnb_badgeColor="@color/red_primary"
-            app:cnb_radius="8dp"
-            app:cnb_iconSize="36dp"
-            android:background="@color/dark_black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
-
-        <FrameLayout
-            android:id="@+id/listView"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/dashboard_screen_coordinatorLayoutMenu"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/menu">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.ismaeldivita.chipnavigation.ChipNavigationBar
+                android:id="@+id/menu"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                app:cnb_menuResource="@menu/bottom_menu"
+                app:cnb_orientationMode="horizontal"
+                app:cnb_addBottomInset="false"
+                app:cnb_addLeftInset="false"
+                app:cnb_addRightInset="false"
+                app:cnb_addTopInset="false"
+                app:cnb_unselectedColor="@color/soft_white"
+                app:cnb_badgeColor="@color/red_primary"
+                app:cnb_radius="8dp"
+                app:cnb_iconSize="36dp"
+                android:background="@color/dark_black" />
+
+            <!-- Bottom sheet menu -->
+
+            <LinearLayout
+                android:id="@+id/dashboard_screen_bottom_sheet_menu"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="HOLA MUNDO" />
+                android:orientation="vertical"
+                android:background="@color/dark_black"
+                android:padding="10dp"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                app:behavior_hideable="false"
+                app:behavior_peekHeight="300dp">
 
-        </FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+
+                    <!-- VIEW SHOPS -->
+                    <Button
+                        android:id="@+id/bottom_menu_sheet_btn_shops"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/ic_baseline_shopping_cart_36"
+                        android:text="View shops"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="18sp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:backgroundTint="@color/alt_black"/>
+
+                    <!-- READ MANGA -->
+                    <Button
+                        android:id="@+id/bottom_menu_sheet_btn_manga"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/ic_baseline_menu_book_36"
+                        android:text="Read manga"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="18sp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:backgroundTint="@color/alt_black"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+
+                    <!-- REMEMBER BOX-->
+                    <Button
+                        android:id="@+id/bottom_menu_sheet_btn_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp"
+                        android:drawableTop="@drawable/ic_baseline_shopping_cart_36"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:backgroundTint="@color/alt_black"
+                        android:layout_marginEnd="8dp"/>
+
+                    <!-- HISTORIAL -->
+                    <Button
+                        android:id="@+id/bottom_menu_sheet_btn_historial"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:drawableTop="@drawable/ic_baseline_shopping_cart_36"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:backgroundTint="@color/alt_black"
+                        android:layout_marginEnd="12dp"/>
+
+                    <!-- LEADERBOARD-->
+                    <Button
+                        android:id="@+id/bottom_menu_sheet_btn_ranking"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:drawableTop="@drawable/ic_baseline_shopping_cart_36"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:backgroundTint="@color/alt_black"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="6dp"/>
+
+                    <!-- NOTES -->
+                    <Button
+                        android:id="@+id/bottom_menu_sheet_btn_notes"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:drawableTop="@drawable/ic_baseline_shopping_cart_36"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:backgroundTint="@color/alt_black" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- SETTINGS -->
+                    <Button
+                        android:id="@+id/bottom_menu_sheet_btn_settings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_outline_settings_36"
+                        android:drawableTint="@color/soft_white"
+                        android:background="@color/transparent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <!-- QR -->
+                    <Button
+                        android:id="@+id/bottom_menu_sheet_btn_scan_qr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_baseline_qr_code_36"
+                        android:drawableTint="@color/soft_white"
+                        android:background="@color/transparent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <!-- COMMUNITY -->
+                    <Button
+                        android:id="@+id/bottom_menu_sheet_btn_community"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:text="Community"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="16sp"
+                        android:backgroundTint="@color/red_primary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <!-- end Bottom Sheet menu -->
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
         <!--
