@@ -45,10 +45,10 @@ class CalendarFragment : Fragment() {
         }
         inicializeAnimeAdapter()
 
-        binding.calendarSwipe.setOnRefreshListener {
+     /*   binding.calendarSwipe.setOnRefreshListener {
             observeData()
             binding.calendarSwipe.isRefreshing = false
-        }
+        }*/
         // Inflate the layout for this fragment
         return binding.root
     }

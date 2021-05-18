@@ -10,10 +10,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragmentDirections
 import net.codefastly.yumekai.models.calendar.AnimeDTO
+import java.lang.Exception
 
 class CalendarAnimeAdapter(private val context: Context) :
     RecyclerView.Adapter<CalendarAnimeAdapter.AnimeCalendarViewHolder>() {
@@ -47,7 +49,21 @@ class CalendarAnimeAdapter(private val context: Context) :
         fun bindView(cal: AnimeDTO) {
             if(cal.day.image_url.isNotEmpty()) {
                 Picasso.get().load(cal.day.image_url)
-                    .into(itemView.findViewById<ImageView>(R.id.calendar_RV_image))
+                    .into(itemView.findViewById<ImageView>(R.id.calendar_RV_image),
+                        object : Callback {
+                            override fun onSuccess() {
+                                Log.d("Picasso", "Success")
+                            }
+
+                            override fun onError(e: Exception?) {
+                                itemView.findViewById<ImageView>(R.id.calendar_RV_image)
+                                    .setImageResource(R.drawable.yumekai_failed_portrait)
+                            }
+
+                        })
+            }else{
+                itemView.findViewById<ImageView>(R.id.calendar_RV_image)
+                    .setImageResource(R.drawable.yumekai_failed_portrait)
             }
             itemView.findViewById<TextView>(R.id.calendar_categoryTag).text = cal.day.type
             itemView.setOnClickListener {
