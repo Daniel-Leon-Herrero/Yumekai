@@ -1,5 +1,6 @@
 package net.codefastly.yumekai.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
@@ -7,14 +8,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.interfaces.APIService
+import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
+import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.AnimeDTO
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class repositoryAPI {
 
-    private fun getRetrofit(): Retrofit {
+    private fun getCalendarRetrofit(): Retrofit {
         return Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/schedule/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+    }
+
+    private fun getAnimeRetrofit(): Retrofit {
+        return Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/anime/")
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
@@ -23,7 +31,7 @@ class repositoryAPI {
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
-                val call = getRetrofit().create(APIService::class.java)
+                val call = getCalendarRetrofit().create(APIService::class.java)
                     .getCalendarAnimesMonday("$day")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
@@ -48,7 +56,7 @@ class repositoryAPI {
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
-                val call = getRetrofit().create(APIService::class.java)
+                val call = getCalendarRetrofit().create(APIService::class.java)
                     .getCalendarAnimesTuesday("$day")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
@@ -73,7 +81,7 @@ class repositoryAPI {
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
-                val call = getRetrofit().create(APIService::class.java)
+                val call = getCalendarRetrofit().create(APIService::class.java)
                     .getCalendarAnimesWednesday("$day")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
@@ -98,7 +106,7 @@ class repositoryAPI {
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
-                val call = getRetrofit().create(APIService::class.java)
+                val call = getCalendarRetrofit().create(APIService::class.java)
                     .getCalendarAnimesThursday("$day")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
@@ -123,7 +131,7 @@ class repositoryAPI {
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
-                val call = getRetrofit().create(APIService::class.java)
+                val call = getCalendarRetrofit().create(APIService::class.java)
                     .getCalendarAnimesFriday("$day")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
@@ -148,7 +156,7 @@ class repositoryAPI {
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
-                val call = getRetrofit().create(APIService::class.java)
+                val call = getCalendarRetrofit().create(APIService::class.java)
                     .getCalendarAnimesSaturday("$day")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
@@ -173,7 +181,7 @@ class repositoryAPI {
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
-                val call = getRetrofit().create(APIService::class.java)
+                val call = getCalendarRetrofit().create(APIService::class.java)
                     .getCalendarAnimesSunday("$day")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
@@ -192,4 +200,45 @@ class repositoryAPI {
         }
         return mutableData
     }
+
+    fun getAnime(id: Int): LiveData<AnimeResponse> {
+        var mutableData = MutableLiveData<AnimeResponse>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getAnimeRetrofit().create(APIService::class.java)
+                    .getAnimes("$id")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        mutableData.value = datos!!
+                    }
+                }
+
+            }
+        }
+        return mutableData
+    }
+
+    fun getAnimeCharacter(id: Int): LiveData<CharacterAnimeResponse> {
+        var mutableData = MutableLiveData<CharacterAnimeResponse>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getAnimeRetrofit().create(APIService::class.java)
+                    .getAnimesCharacter("$id/characters_staff")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        mutableData.value = datos!!
+                    }
+                }
+
+            }
+        }
+
+        return mutableData
+    }
+
+
 }

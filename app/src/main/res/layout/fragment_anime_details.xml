@@ -1,520 +1,576 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.AnimeDetails.AnimeDetailsFragment"
-    android:background="@color/dark_black"
-    android:padding="20dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        android:drawableStart="@drawable/ic_baseline_keyboard_arrow_left_36"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </data>
 
-    <LinearLayout
-        android:id="@+id/layoutShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@color/soft_white"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp">
-
-        <Button
-            android:id="@+id/btnShareAnime"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:background="@color/transparent"
-            android:drawableStart="@drawable/ic_baseline_share_36"
-            android:layout_marginEnd="10dp"/>
-
-        <Button
-            android:id="@+id/btnQrAnime"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:background="@color/transparent"
-            android:drawableTint="@color/red_primary"
-            android:drawableStart="@drawable/ic_baseline_qr_code_36"/>
-
-    </LinearLayout>
-
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutShare"
-        android:layout_marginTop="20dp">
+        android:layout_height="match_parent"
+        tools:context=".fragments.AnimeDetails.AnimeDetailsFragment"
+        android:background="@color/dark_black"
+        android:padding="20dp">
+
+
+        <Button
+            android:id="@+id/anime_BtnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:drawableStart="@drawable/ic_baseline_keyboard_arrow_left_36"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/layoutShare"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/soft_white"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
-            <!-- IMAGE ANIME -->
-            <ImageView
-                android:id="@+id/animeDetails_img"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:srcCompat = "@drawable/ic_launcher_background"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+            <Button
+                android:id="@+id/btnShareAnime"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@color/transparent"
+                android:drawableStart="@drawable/ic_baseline_share_36"
+                android:layout_marginEnd="10dp" />
 
-            <!-- TITLE -->
-            <TextView
-                android:id="@+id/animeDetails_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dr.Stone"
-                android:textColor="@color/red_primary"
-                android:textSize="28sp"
-                android:fontFamily="@font/nunito_extrabold" />
-
-            <!-- STATUS -->
-            <TextView
-                android:id="@+id/animeDetails_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Finalizado"
-                android:textColor="@color/red_primary"
-                android:textSize="14sp"
-                android:fontFamily="@font/nunito_bold"
-                android:background="@color/red_primary_op"
-                android:paddingEnd="20dp"
-                android:paddingStart="20dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp">
-
-                <!-- POSITION/RANK -->
-                <Button
-                    android:id="@+id/animeDetails_position"
-                    android:layout_width="110dp"
-                    android:layout_height="36dp"
-                    android:drawableStart="@drawable/ic_baseline_navigate_next_24"
-                    android:drawableTint="@color/red_primary"
-                    android:textAlignment="textStart"
-                    android:text="#209"
-                    android:textColor="@color/red_primary"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/nunito_extrabold"
-                    android:background="@color/red_primary_op"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="10dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:layout_marginEnd="20dp"/>
-
-                <!-- DURATION -->
-                <Button
-                    android:id="@+id/animeDetails_duration"
-                    android:layout_width="110dp"
-                    android:layout_height="36dp"
-                    android:drawableStart="@drawable/ic_baseline_navigate_next_24"
-                    android:drawableTint="@color/red_primary"
-                    android:textAlignment="textStart"
-                    android:text="24min"
-                    android:textAllCaps="false"
-                    android:textColor="@color/red_primary"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/nunito_extrabold"
-                    android:background="@color/red_primary_op"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="10dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:layout_marginEnd="20dp"/>
-
-                <!-- TYPE -->
-                <Button
-                    android:id="@+id/animeDetails_type"
-                    android:layout_width="110dp"
-                    android:layout_height="36dp"
-                    android:drawableStart="@drawable/ic_baseline_navigate_next_24"
-                    android:drawableTint="@color/red_primary"
-                    android:textAlignment="textStart"
-                    android:text="TV"
-                    android:textColor="@color/red_primary"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/nunito_extrabold"
-                    android:background="@color/red_primary_op"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="10dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp" />
-
-            </LinearLayout>
-
-            <!-- SYNOPSIS -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Synopsis"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="18sp"/>
-            <TextView
-                android:id="@+id/animeDetails_synopsis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Después de varios años..."
-                android:textColor="@color/soft_white"
-                android:textSize="12sp"
-                android:fontFamily="@font/nunito"
-                android:background="@color/alt_black"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"/>
-
-            <!-- CATEGORIES -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Categories"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="18sp"/>
-            <!-- AQUI RECYCLERVIEW DE CATEGORIAS -->
-
-            <!-- ALTERNATIVE TITLES -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Alternative Titles"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="18sp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/alt_black"
-                android:orientation="vertical"
-                android:padding="10dp">
-                <!-- ENGLISH TITLE -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="English:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_englishTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dr.Stone"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-                <!-- JAPANESE TITLE -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Japanese:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_japaneseTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Arigato"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-            </LinearLayout>
-
-            <!-- INFORMATION -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Information"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="18sp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/alt_black"
-                android:orientation="vertical"
-                android:padding="10dp">
-                <!-- AIRING -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Airing:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_airing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="05 Jul. 2019 - 13 Dic. 2019"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-                <!-- RELEASED -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Released:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_released"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Summer 2019"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-                <!-- PRODUCERS -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Producers:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_producers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TOHO animations, Shueisha"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-                <!-- LICENSES -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Producers:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_licenses"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Funimation, Crunchyroll"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-                <!-- STUDIOS -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Studios:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_studios"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TMS Entertainment"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-                <!-- SOURCE -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Source:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_source"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Manga"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-                <!-- CLASIFICATION -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Source:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_clasification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="PG-13 - 13 year or more"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-            </LinearLayout>
-
-
-
-            <!-- STATS-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Stats"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="18sp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/alt_black"
-                android:orientation="vertical"
-                android:padding="10dp">
-                <!-- PUNTUTATION -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Puntuation:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_puntuation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8.32 ( puntuated by 612.064 users )"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-                <!-- POPULARITY -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Popuarity:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_popularity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="#70"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-                <!-- MEMBRES -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Membres:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_membres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-                <!-- FAVOURITES -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Favourites:"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito_bold"/>
-                <TextView
-                    android:id="@+id/animeDetails_favourites"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textColor="@color/soft_white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/nunito"/>
-
-            </LinearLayout>
-
-
-            <!-- RELATIONS -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Relations"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="18sp"/>
-
-            <!-- AQUI RECYCLERVIEW DE LAYOUTMANAGER => GRID, 2 COLUMNAS, VERTICAL -->
-
-
-            <!-- CHARACTERS -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Characters"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="18sp"/>
-
-            <!-- AQUI RECYCLERVIEW DE LAYOUTMANAGER => 1 FILA, HORIZONTAL -->
-
-            <!-- STAFF -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Staff"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="18sp"/>
-
-            <!-- AQUI RECYCLERVIEW DE LAYOUTMANAGER => 1 FILA, HORIZONTAL -->
-
-
-
+            <Button
+                android:id="@+id/btnQrAnime"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@color/transparent"
+                android:drawableTint="@color/red_primary"
+                android:drawableStart="@drawable/ic_baseline_qr_code_36" />
 
         </LinearLayout>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutShare"
+            android:layout_marginTop="20dp">
 
-    </ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- IMAGE ANIME -->
+                <ImageView
+                    android:id="@+id/animeDetails_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:srcCompat="@drawable/ic_launcher_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- TITLE -->
+                <TextView
+                    android:id="@+id/animeDetails_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr.Stone"
+                    android:textColor="@color/red_primary"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/nunito_extrabold" />
+
+                <!-- STATUS -->
+                <TextView
+                    android:id="@+id/animeDetails_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Finalizado"
+                    android:textColor="@color/red_primary"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:background="@color/red_primary_op"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <!-- POSITION/RANK -->
+                    <Button
+                        android:id="@+id/animeDetails_position"
+                        android:layout_width="110dp"
+                        android:layout_height="36dp"
+                        android:drawableStart="@drawable/ic_baseline_navigate_next_24"
+                        android:drawableTint="@color/red_primary"
+                        android:textAlignment="textStart"
+                        android:text="#209"
+                        android:textColor="@color/red_primary"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:background="@color/red_primary_op"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:layout_marginEnd="20dp" />
+
+                    <!-- DURATION -->
+                    <Button
+                        android:id="@+id/animeDetails_duration"
+                        android:layout_width="110dp"
+                        android:layout_height="36dp"
+                        android:drawableStart="@drawable/ic_baseline_navigate_next_24"
+                        android:drawableTint="@color/red_primary"
+                        android:textAlignment="textStart"
+                        android:text="24min"
+                        android:textAllCaps="false"
+                        android:textColor="@color/red_primary"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:background="@color/red_primary_op"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:layout_marginEnd="20dp" />
+
+                    <!-- TYPE -->
+                    <Button
+                        android:id="@+id/animeDetails_type"
+                        android:layout_width="110dp"
+                        android:layout_height="36dp"
+                        android:drawableStart="@drawable/ic_baseline_navigate_next_24"
+                        android:drawableTint="@color/red_primary"
+                        android:textAlignment="textStart"
+                        android:text="TV"
+                        android:textColor="@color/red_primary"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:background="@color/red_primary_op"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp" />
+
+                </LinearLayout>
+
+                <!-- SYNOPSIS -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Synopsis"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/animeDetails_synopsis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Después de varios años..."
+                    android:textColor="@color/soft_white"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/nunito"
+                    android:background="@color/alt_black"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp" />
+
+                <!-- CATEGORIES -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Categories"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="18sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/animeDetails_RVCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    app:spanCount="1" />
+
+
+                <!-- ALTERNATIVE TITLES -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Alternative Titles"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/alt_black"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <!-- ENGLISH TITLE -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="English:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_englishTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dr.Stone"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                    <!-- JAPANESE TITLE -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Japanese:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_japaneseTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Arigato"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                </LinearLayout>
+
+                <!-- INFORMATION -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Information"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/alt_black"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <!-- AIRING -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Airing:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_airing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="05 Jul. 2019 - 13 Dic. 2019"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                    <!-- RELEASED -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Released:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_released"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Summer 2019"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                    <!-- PRODUCERS -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Producers:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_producers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                    <!-- LICENSES -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Licenses:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_licenses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                    <!-- STUDIOS -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Studios:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_studios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                    <!-- SOURCE -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Source:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_source"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Manga"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                    <!-- CLASIFICATION -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clasification:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_clasification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PG-13 - 13 year or more"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+                </LinearLayout>
+
+
+                <!-- STATS-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Stats"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/alt_black"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <!-- PUNTUTATION -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Puntuation:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_puntuation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8.32 ( puntuated by 612.064 users )"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                    <!-- POPULARITY -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Popuarity:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_popularity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#70"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                    <!-- MEMBRES -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Membres:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_membres"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                    <!-- FAVOURITES -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Favourites:"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito_bold" />
+
+                    <TextView
+                        android:id="@+id/animeDetails_favourites"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/nunito" />
+
+                </LinearLayout>
+
+
+                <!-- RELATIONS -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Relations"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="18sp" />
+
+                <!-- AQUI RECYCLERVIEW DE LAYOUTMANAGER => GRID, 2 COLUMNAS, VERTICAL -->
+
+
+                <!-- CHARACTERS -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Characters"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="18sp" />
+
+                <!-- AQUI RECYCLERVIEW DE LAYOUTMANAGER => 1 FILA, HORIZONTAL -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/animeDetails_RVCharacter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    app:spanCount="1" />
+
+                <!-- STAFF -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Staff"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="18sp" />
+
+                <!-- AQUI RECYCLERVIEW DE LAYOUTMANAGER => 1 FILA, HORIZONTAL -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/animeDetails_RVStaff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    app:spanCount="1" />
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

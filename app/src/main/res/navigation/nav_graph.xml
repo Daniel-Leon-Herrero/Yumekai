@@ -11,8 +11,10 @@
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" >
         <action
-            android:id="@+id/action_calendarFragment_to_animeFragment"
-            app:destination="@id/animeFragment" />
+            android:id="@+id/action_calendarFragment_to_animeDetailsFragment"
+            app:destination="@id/animeDetailsFragment"
+            app:popUpTo="@id/calendarFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/recentFragment"
@@ -25,10 +27,9 @@
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
     <fragment
-        android:id="@+id/animeFragment"
-        android:name="net.codefastly.yumekai.fragments.Anime.AnimeFragment"
-        android:label="fragment_anime"
-        tools:layout="@layout/fragment_anime" >
+        android:id="@+id/animeDetailsFragment"
+        android:name="net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment"
+        android:label="AnimeDetailsFragment" >
         <argument
             android:name="anime1"
             app:argType="net.codefastly.yumekai.models.calendar.AnimeDTO" />
