@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.models.recents.ModelDTO
@@ -49,9 +50,12 @@ class RecentAdapter(private val context: Context) :
                     findViewById<TextView>(R.id.item_recent_category).text = category
                     findViewById<TextView>(R.id.item_recent_detail).text = detail
                     findViewById<ImageView>(R.id.item_recent_img).setBackgroundResource(icon)
-                    findViewById<ImageView>(R.id.item_recent_img).background.setTint(resources.getColor(R.color.red_primary))
-                    findViewById<Button>(R.id.item_recent_button).setOnClickListener {
-                        Toast.makeText(context,textButton,Toast.LENGTH_SHORT).show()
+                    findViewById<ImageView>(R.id.item_recent_img).background.setTint(resources.getColor(iconTint))
+                    with(findViewById<Button>(R.id.item_recent_button)) {
+                        this.setText(textButton)
+                        setOnClickListener {
+                            findNavController().navigate(R.id.action_recentFragment_to_calendarFragment)
+                        }
                     }
                 }
             }

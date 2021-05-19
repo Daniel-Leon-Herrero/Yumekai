@@ -6,5 +6,6 @@ class ModelDTO(
     var category: String,
     var detail: String,
     var icon: Int,
-    var textButton: String
+    var iconTint: Int,
+    var textButton: String,
 )

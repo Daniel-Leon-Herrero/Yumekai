@@ -20,7 +20,11 @@
         android:id="@+id/recentFragment"
         android:name="net.codefastly.yumekai.fragments.Recent.RecentFragment"
         android:label="fragment_recent"
-        tools:layout="@layout/fragment_recent" />
+        tools:layout="@layout/fragment_recent" >
+        <action
+            android:id="@+id/action_recentFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="net.codefastly.yumekai.fragments.News.NewsFragment"

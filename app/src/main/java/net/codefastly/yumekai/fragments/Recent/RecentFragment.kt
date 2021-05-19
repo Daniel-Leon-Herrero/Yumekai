@@ -56,8 +56,8 @@ class RecentFragment : Fragment() {
         recyclerView = binding.recentRecyclerView
         adapter = RecentAdapter(requireContext())
         recyclerView.adapter = adapter
-        var list = listOf<ModelDTO>(ModelDTO("Historial","Prueba",R.drawable.ic_baseline_navigate_next_24,"More Historial"),
-            ModelDTO("Peliculas","Prueba", R.drawable.ic_outline_article_36, "More Peliculas")
+        var list = listOf<ModelDTO>(ModelDTO("Historial","Prueba",R.drawable.ic_baseline_navigate_next_24,R.color.red_primary,"More Historial"),
+            ModelDTO("Peliculas","Prueba", R.drawable.ic_outline_article_36,R.color.red_primary, "More Peliculas")
         )
         adapter.setData(list)
         adapter.notifyDataSetChanged()
