@@ -33,6 +33,11 @@ class DashboardActivity : AppCompatActivity() {
 
         bottomSheetBehavior = BottomSheetBehavior.from( binding.dashboardScreenBottomSheetMenu )
 
+
+        binding.bottomMenuSheetBtnHistorial.setOnClickListener { _ ->
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_calendarFragment_to_historyFragment)
+        }
+
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when( newState ) {

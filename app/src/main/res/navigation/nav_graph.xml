@@ -15,23 +15,40 @@
             app:destination="@id/animeDetailsFragment"
             app:popUpTo="@id/calendarFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_calendarFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/recentFragment"
         android:name="net.codefastly.yumekai.fragments.Recent.RecentFragment"
         android:label="fragment_recent"
-        tools:layout="@layout/fragment_recent" />
+        tools:layout="@layout/fragment_recent" >
+        <action
+            android:id="@+id/action_recentFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="net.codefastly.yumekai.fragments.News.NewsFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_newsFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/animeDetailsFragment"
         android:name="net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment"
-        android:label="AnimeDetailsFragment" >
+        android:label="AnimeDetailsFragment"
+        tools:layout="@layout/fragment_anime_details" >
         <argument
             android:name="anime1"
             app:argType="net.codefastly.yumekai.models.calendar.AnimeDTO" />
     </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="net.codefastly.yumekai.fragments.History.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history" />
 </navigation>
