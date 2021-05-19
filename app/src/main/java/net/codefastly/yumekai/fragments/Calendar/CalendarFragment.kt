@@ -32,16 +32,15 @@ class CalendarFragment : Fragment() {
         viewModel.day.observe(viewLifecycleOwner, Observer {
             // Añadir Delay para no sobrecargar de peticiones
             observeData()
+            actualizarDia()
         })
 
         binding.calenderBtnPrevius.setOnClickListener {
             viewModel.day.value = viewModel.previusDay(viewModel.day.value!!)
-            actualizarDia()
         }
 
         binding.calendarBtnNext.setOnClickListener {
             viewModel.day.value = viewModel.nextDay(viewModel.day.value!!)
-            actualizarDia()
         }
         inicializeAnimeAdapter()
 
