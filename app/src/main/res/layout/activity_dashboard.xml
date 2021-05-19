@@ -104,7 +104,8 @@
                 android:background="@color/dark_black"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
                 app:behavior_hideable="false"
-                app:behavior_peekHeight="74dp">
+                app:behavior_peekHeight="374dp">
+                <!-- 74dp -->
 
                 <com.ismaeldivita.chipnavigation.ChipNavigationBar
                     android:id="@+id/menu"
@@ -173,7 +174,7 @@
                         android:id="@+id/bottom_menu_sheet_btn_box"
                         android:layout_width="wrap_content"
                         android:layout_height="80dp"
-                        android:drawableTop="@drawable/ic_baseline_shopping_cart_36"
+                        android:drawableTop="@drawable/ic_outline_settings_system_daydream_36"
                         android:paddingTop="20dp"
                         android:paddingBottom="20dp"
                         android:paddingStart="20dp"
@@ -186,7 +187,7 @@
                         android:id="@+id/bottom_menu_sheet_btn_historial"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:drawableTop="@drawable/ic_baseline_shopping_cart_36"
+                        android:drawableTop="@drawable/ic_outline_history_36"
                         android:paddingTop="20dp"
                         android:paddingBottom="20dp"
                         android:paddingStart="20dp"
@@ -199,7 +200,7 @@
                         android:id="@+id/bottom_menu_sheet_btn_ranking"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:drawableTop="@drawable/ic_baseline_shopping_cart_36"
+                        android:drawableTop="@drawable/ic_outline_leaderboard_36"
                         android:paddingTop="20dp"
                         android:paddingBottom="20dp"
                         android:paddingStart="20dp"
@@ -213,7 +214,7 @@
                         android:id="@+id/bottom_menu_sheet_btn_notes"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:drawableTop="@drawable/ic_baseline_shopping_cart_36"
+                        android:drawableTop="@drawable/ic_baseline_playlist_add_check_36"
                         android:paddingTop="20dp"
                         android:paddingBottom="20dp"
                         android:paddingStart="20dp"

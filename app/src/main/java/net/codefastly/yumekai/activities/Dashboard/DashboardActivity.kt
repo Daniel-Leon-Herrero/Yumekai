@@ -1,5 +1,7 @@
 package net.codefastly.yumekai.activities.Dashboard
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +10,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.graphics.drawable.toDrawable
 import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
@@ -21,6 +24,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private var lastMenuItemId: Int = 2131296559
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,14 +65,9 @@ class DashboardActivity : AppCompatActivity() {
                     this.lastMenuItemId = id
                     findNavController(R.id.nav_host_fragment).navigate(R.id.newsFragment)
                 }
-                R.id.menu_item_drop_menu -> {
-                    expandCloseMenuSheet()
-                }
+                R.id.menu_item_drop_menu -> expandCloseMenuSheet()
             }
         }
-
-
-
 
     }
 
@@ -77,9 +76,9 @@ class DashboardActivity : AppCompatActivity() {
         binding.menu.setItemSelected(R.id.menu_item_calendar)
     }
 
-
     private fun expandCloseMenuSheet() {
         binding.menu.setItemSelected( this.lastMenuItemId )
+
         if( bottomSheetBehavior!!.state != BottomSheetBehavior.STATE_EXPANDED ){
             bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_EXPANDED
         } else {
