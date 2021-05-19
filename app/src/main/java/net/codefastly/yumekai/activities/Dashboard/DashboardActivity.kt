@@ -24,7 +24,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private var lastMenuItemId: Int = 2131296559
 
-    @SuppressLint("ResourceAsColor")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,7 +35,11 @@ class DashboardActivity : AppCompatActivity() {
 
 
         binding.bottomMenuSheetBtnHistorial.setOnClickListener { _ ->
-            findNavController(R.id.nav_host_fragment).navigate(R.id.action_calendarFragment_to_historyFragment)
+            when( binding.menu.getSelectedItemId()){
+                R.id.menu_item_calendar -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_calendarFragment_to_historyFragment)
+                R.id.menu_item_recents -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_recentFragment_to_historyFragment)
+            }
+
         }
 
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {

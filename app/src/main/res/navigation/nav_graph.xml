@@ -13,8 +13,7 @@
         <action
             android:id="@+id/action_calendarFragment_to_animeDetailsFragment"
             app:destination="@id/animeDetailsFragment"
-            app:popUpTo="@id/calendarFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/calendarFragment" />
         <action
             android:id="@+id/action_calendarFragment_to_historyFragment"
             app:destination="@id/historyFragment" />

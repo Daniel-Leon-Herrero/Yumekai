@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,10 @@ class HistoryFragment : Fragment() {
         binding = DataBindingUtil.inflate( inflater, R.layout.fragment_history, container, false )
 
         initRecyclerView()
+
+        binding.historyScreenBtnBack.setOnClickListener {
+            requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
+        }
 
         return binding.root
     }
