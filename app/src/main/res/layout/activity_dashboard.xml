@@ -104,8 +104,7 @@
                 android:background="@color/dark_black"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
                 app:behavior_hideable="false"
-                app:behavior_peekHeight="374dp">
-                <!-- 74dp -->
+                app:behavior_peekHeight="74dp">
 
                 <com.ismaeldivita.chipnavigation.ChipNavigationBar
                     android:id="@+id/menu"
