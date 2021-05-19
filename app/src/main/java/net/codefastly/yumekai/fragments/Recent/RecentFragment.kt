@@ -1,5 +1,6 @@
 package net.codefastly.yumekai.fragments.Recent
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentRecentBinding
+import net.codefastly.yumekai.helpers.RecyclesViews.MorePopularAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.RecentAdapter
 import net.codefastly.yumekai.models.recents.ModelDTO
 
@@ -19,6 +21,8 @@ class RecentFragment : Fragment() {
 
     private lateinit var binding: FragmentRecentBinding
     private lateinit var viewmodel: RecentViewModel
+    private lateinit var recyclerViewPopular: RecyclerView
+    private lateinit var adapterPopular: MorePopularAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RecentAdapter
 
@@ -31,20 +35,31 @@ class RecentFragment : Fragment() {
 
         viewmodel = ViewModelProvider(this).get(RecentViewModel::class.java)
 
+        inicializePopularRecyclerView()
         inicializeRecyclerView()
         // Inflate the layout for this fragment
         return binding.root
     }
 
-    fun inicializeRecyclerView(){
-        recyclerView = binding.recentsRecyclerView
-        adapter = RecentAdapter(requireContext())
-        recyclerView.adapter = adapter
+    fun inicializePopularRecyclerView() {
+        recyclerViewPopular = binding.recentPopularRecyclerView
+        adapterPopular = MorePopularAdapter(requireContext())
+        recyclerViewPopular.adapter = adapterPopular
         viewmodel.getRecentsData().observe(viewLifecycleOwner, Observer { recents ->
-            adapter.setData(recents.results)
-            adapter.notifyDataSetChanged()
+            adapterPopular.setData(recents.results)
+            adapterPopular.notifyDataSetChanged()
         })
 
     }
 
+    fun inicializeRecyclerView(){
+        recyclerView = binding.recentRecyclerView
+        adapter = RecentAdapter(requireContext())
+        recyclerView.adapter = adapter
+        var list = listOf<ModelDTO>(ModelDTO("Historial","Prueba",R.drawable.ic_baseline_navigate_next_24,"More Historial"),
+            ModelDTO("Peliculas","Prueba", R.drawable.ic_outline_article_36, "More Peliculas")
+        )
+        adapter.setData(list)
+        adapter.notifyDataSetChanged()
+    }
 }

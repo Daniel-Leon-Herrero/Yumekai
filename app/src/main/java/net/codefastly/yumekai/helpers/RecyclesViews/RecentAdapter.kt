@@ -1,67 +1,60 @@
 package net.codefastly.yumekai.helpers.RecyclesViews
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.ColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.models.recents.ModelDTO
-import net.codefastly.yumekai.models.recents.RecentsResponse
-import net.codefastly.yumekai.models.recents.Result
 
-class RecentAdapter(private val context: Context) : RecyclerView.Adapter<RecentAdapter.RecentViewHolder>() {
+class RecentAdapter(private val context: Context) :
+    RecyclerView.Adapter<RecentAdapter.RecentViewHolder>() {
 
-    private var dataList = listOf<Result>()
+    private var dataList = listOf<ModelDTO>()
 
-    fun setData(data: List<Result>){
+    fun setData(data: List<ModelDTO>) {
         dataList = data
     }
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RecentAdapter.RecentViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_recents_populars,parent, false)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentViewHolder {
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.item_recent_recyclerview, parent, false)
         return RecentViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecentAdapter.RecentViewHolder, position: Int) {
-        val item = dataList[position]
+    override fun onBindViewHolder(holder: RecentViewHolder, position: Int) {
+        var item = dataList[position]
         holder.bind(item)
     }
 
     override fun getItemCount(): Int {
-        if(dataList.size > 0){
+        if (dataList.size > 0) {
             return dataList.size
-        }else{
+        } else {
             return 0
         }
     }
 
     inner class RecentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: Result){
-            with(item){
-                with(itemView){
-                    if(image_url.isNotEmpty()){
-                        Picasso.get().load(image_url).into(findViewById<ImageView>(R.id.item_popular_bg))
-                        Picasso.get().load(image_url).into(findViewById<ImageView>(R.id.item_popular_cover))
+        fun bind(item: ModelDTO) {
+            with(itemView) {
+                with(item) {
+                    findViewById<TextView>(R.id.item_recent_category).text = category
+                    findViewById<TextView>(R.id.item_recent_detail).text = detail
+                    findViewById<ImageView>(R.id.item_recent_img).setBackgroundResource(icon)
+                    findViewById<ImageView>(R.id.item_recent_img).background.setTint(resources.getColor(R.color.red_primary))
+                    findViewById<Button>(R.id.item_recent_button).setOnClickListener {
+                        Toast.makeText(context,textButton,Toast.LENGTH_SHORT).show()
                     }
-
-                    findViewById<TextView>(R.id.item_popular_title).text = title
-                    if(synopsis.isNotEmpty()){
-                        findViewById<TextView>(R.id.item_popular_description).text = synopsis
-                    }else{
-                        findViewById<TextView>(R.id.item_popular_description).text = "Doesn't have synopsis"
-                    }
-                    findViewById<TextView>(R.id.item_popular_caps).text = episodes.toString()
-                    findViewById<TextView>(R.id.item_popular_type).text = type
                 }
             }
         }
     }
-
-
 }
