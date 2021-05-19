@@ -14,7 +14,7 @@
             android:id="@+id/action_calendarFragment_to_animeDetailsFragment"
             app:destination="@id/animeDetailsFragment"
             app:popUpTo="@id/calendarFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/recentFragment"

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/alt_black">
+
+    <ImageView
+        android:id="@+id/item_popular_bg"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        tools:src="@drawable/yumekai_failed_portrait"
+        android:layout_height="250px"/>
+
+    <TextView
+        android:id="@+id/item_popular_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/red_primary"
+        android:padding="5dp"
+        android:text="Hola" />
+
+    <ImageView
+        android:id="@+id/item_popular_cover"
+        android:layout_width="120dp"
+        android:layout_height="206dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="69dp"
+        tools:src="@drawable/yumekai_failed_portrait"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/item_popular_title"
+        android:layout_width="259dp"
+        android:layout_height="32dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="113dp"
+        android:layout_marginEnd="21dp"
+        android:layout_toEndOf="@+id/item_popular_cover"
+        android:text="Prueba prueba prueba prueba prueba" />
+
+    <TextView
+        android:id="@+id/item_popular_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="151dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toEndOf="@+id/item_popular_cover"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis scelerisque velit. Fusce fringilla aliquam lacus, id facilisis nisl aliquet iaculis. In tristique varius nisl ac facilisis. Fusce tempus magna null" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_popular_description"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="26dp"
+        android:background="@color/dark_black">
+
+        <TextView
+            android:id="@+id/item_popular_text_cap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="CAPS" />
+
+        <TextView
+            android:id="@+id/item_popular_caps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_popular_text_cap"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="2dp"
+            android:text="12" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

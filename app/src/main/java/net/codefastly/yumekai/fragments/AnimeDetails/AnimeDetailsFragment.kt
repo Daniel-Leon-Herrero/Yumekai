@@ -87,6 +87,7 @@ class AnimeDetailsFragment : Fragment() {
                             animeDetailsJapaneseTitle.text = this?.title_japanese
                             animeDetailsAiring.text = this?.aired?.string
                             animeDetailsReleased.text = this?.premiered
+                            sb.clear()
                             this?.producers?.forEach { producer ->
                                 sb.append(animeDetailsProducers.text).append(producer.name)
                                     .append(", ")
