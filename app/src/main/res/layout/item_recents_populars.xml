@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/alt_black">
+    android:background="@color/alt_black"
+    android:layout_margin="5dp">
 
     <ImageView
         android:id="@+id/item_popular_bg"
@@ -30,10 +31,10 @@
         android:layout_height="206dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="69dp"
-        tools:src="@drawable/yumekai_failed_portrait"
-        android:scaleType="centerCrop" />
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="72dp"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/yumekai_failed_portrait" />
 
     <TextView
         android:id="@+id/item_popular_title"
@@ -42,20 +43,20 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="19dp"
-        android:layout_marginTop="113dp"
-        android:layout_marginEnd="21dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="20dp"
         android:layout_toEndOf="@+id/item_popular_cover"
         android:text="Prueba prueba prueba prueba prueba" />
 
     <TextView
         android:id="@+id/item_popular_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="257dp"
+        android:layout_height="98dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="151dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="139dp"
+        android:layout_marginEnd="9dp"
         android:layout_toEndOf="@+id/item_popular_cover"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis scelerisque velit. Fusce fringilla aliquam lacus, id facilisis nisl aliquet iaculis. In tristique varius nisl ac facilisis. Fusce tempus magna null" />
 
@@ -65,8 +66,9 @@
         android:layout_below="@+id/item_popular_description"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="false"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="26dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/dark_black">
 
         <TextView
@@ -83,7 +85,7 @@
             android:layout_below="@+id/item_popular_text_cap"
             android:layout_alignParentStart="true"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginBottom="6dp"
             android:text="12" />
 
 

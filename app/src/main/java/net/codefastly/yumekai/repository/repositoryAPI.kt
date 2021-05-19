@@ -11,6 +11,7 @@ import net.codefastly.yumekai.interfaces.APIService
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.AnimeDTO
+import net.codefastly.yumekai.models.recents.RecentsResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -23,6 +24,11 @@ class repositoryAPI {
 
     private fun getAnimeRetrofit(): Retrofit {
         return Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/anime/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+    }
+
+    private fun getRecentsRetrofit(): Retrofit {
+        return Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/search/")
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
@@ -237,6 +243,25 @@ class repositoryAPI {
             }
         }
 
+        return mutableData
+    }
+
+    fun getRecents(): LiveData<RecentsResponse> {
+        var mutableData = MutableLiveData<RecentsResponse>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+               val call = getRecentsRetrofit().create(APIService::class.java)
+                    .getRecents("anime?status=airing&order_by=members&order_by=start_date")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        mutableData.value = datos!!
+                    }
+                }
+
+            }
+        }
         return mutableData
     }
 
