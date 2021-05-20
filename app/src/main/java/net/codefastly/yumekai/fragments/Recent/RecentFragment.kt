@@ -54,14 +54,14 @@ class RecentFragment : Fragment() {
 
     }
 
-    fun observePopularData(){
+    fun observePopularData() {
         viewmodel.getRecentsData().observe(viewLifecycleOwner, Observer { recents ->
             adapterPopular.setData(recents.results)
             adapterPopular.notifyDataSetChanged()
         })
     }
 
-    fun inicializeRecyclerView(){
+    fun inicializeRecyclerView() {
         recyclerView = binding.recentRecyclerView
         adapter = RecentAdapter(requireContext())
         recyclerView.adapter = adapter
@@ -69,35 +69,102 @@ class RecentFragment : Fragment() {
 
     }
 
-    fun value(item: RecentsResponse?): RecentsResponse{
-        var result = listOf<Result>(Result(true,"15/5/2021",300,"aaaaaaa",11,500,"ff",50.6,"5/5/2021","A jose le toco Beatrice", "Jose ama a su beatrice","hentai","sdsdsdsdsd"))
-        var itemList : RecentsResponse = RecentsResponse(1,11,true,"dsdsdsdsdsd", result)
-        if(item != null){
-            return item
-        }else{
-            return itemList
-        }
-    }
 
-    fun ObserveData(){
-        with(viewmodel){
+    fun ObserveData() {
+        with(viewmodel) {
+
             getRecentsData().observeForever(Observer {
                 history = it
+                actualizeData()
+            })
+
+            getRecentsTVData().observeForever(Observer {
+                tv = it
                 actualizeData()
             })
             getRecentsMoviesData().observeForever(Observer {
                 movies = it
                 actualizeData()
             })
+
+            getRecentsOvaData().observeForever(Observer {
+                ova = it
+                actualizeData()
+            })
+
+            getRecentsONAData().observeForever(Observer {
+                ona = it
+                actualizeData()
+            })
+
+            getRecentsSpecialData().observeForever(Observer {
+                special = it
+                actualizeData()
+            })
         }
     }
 
-    fun actualizeData(){
+    fun actualizeData() {
 
-        var list = listOf<ModelDTO>(ModelDTO(1,"Historial","Prueba",R.drawable.ic_baseline_navigate_next_24,R.color.red_primary,"More Historial",value(viewmodel.history)),
-            ModelDTO(2,"Peliculas","Prueba", R.drawable.ic_outline_article_36,R.color.red_primary, "More Peliculas",value(viewmodel.movies)),
-            ModelDTO(3,"OVA","Prueba", R.drawable.ic_outline_article_36,R.color.red_primary, "More Peliculas",value(viewmodel.movies)),
+        var list = listOf<ModelDTO>(
+            ModelDTO(
+                1,
+                "Historial",
+                "Last seen anime",
+                R.drawable.ic_baseline_navigate_next_24,
+                R.color.red_primary,
+                "More Historial",
+                viewmodel.history
+            ),
+            ModelDTO(
+                2,
+                "TV",
+                "Recent TV",
+                R.drawable.ic_outline_article_36,
+                R.color.red_primary,
+                "More TV",
+                viewmodel.tv
+            ),
+
+            ModelDTO(
+                3,
+                "Peliculas",
+                "Recent Movies",
+                R.drawable.ic_outline_article_36,
+                R.color.red_primary,
+                "More Peliculas",
+                viewmodel.movies
+            ),
+
+            ModelDTO(
+                4,
+                "OVA",
+                "Recent OVA's",
+                R.drawable.ic_outline_article_36,
+                R.color.red_primary,
+                "More OVA",
+                viewmodel.ova
+            ),
+            ModelDTO(
+                5,
+                "ONA",
+                "Recent ONA's",
+                R.drawable.ic_outline_article_36,
+                R.color.red_primary,
+                "More ONA",
+                viewmodel.ona
+            ),
+            ModelDTO(
+                6,
+                "Special",
+                "Recent Special's",
+                R.drawable.ic_outline_article_36,
+                R.color.red_primary,
+                "More Special",
+                viewmodel.special
+            ),
         )
+        Log.d("Hola", list.toString())
         adapter.setData(list)
         adapter.notifyDataSetChanged()
         observePopularData()
