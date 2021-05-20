@@ -65,4 +65,8 @@
         <!-- Descriptions -->
         <string name="history_screen_no_content_desc">It seems that you have not used the application enough.</string>
 
+    <!--***** RECENT SCREEN *****-->
+    <!-- Titles -->
+    <string name="recent_screen_title">Recent</string>
+
 </resources>

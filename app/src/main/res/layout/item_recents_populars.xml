@@ -1,95 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="220dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/alt_black"
-    android:layout_margin="5dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/alt_black"
+    app:cardCornerRadius="6dp"
+    android:layout_margin="10dp">
 
+    <!-- BACKGROUND -->
     <ImageView
         android:id="@+id/item_popular_bg"
-        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        tools:src="@drawable/yumekai_failed_portrait"
-        android:layout_height="250px"/>
-
-    <TextView
-        android:id="@+id/item_popular_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/red_primary"
-        android:padding="5dp"
-        android:text="Hola" />
-
-    <ImageView
-        android:id="@+id/item_popular_cover"
-        android:layout_width="120dp"
-        android:layout_height="206dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="72dp"
+        android:layout_height="70dp"
+        android:src="@drawable/yumekai_failed_portrait"
         android:scaleType="centerCrop"
-        tools:src="@drawable/yumekai_failed_portrait" />
+        android:alpha=".3" />
 
-    <TextView
-        android:id="@+id/item_popular_title"
-        android:layout_width="259dp"
-        android:layout_height="32dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="20dp"
-        android:layout_toEndOf="@+id/item_popular_cover"
-        android:text="Prueba prueba prueba prueba prueba" />
+    <!-- CATEGORY BADGE -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
 
-    <TextView
-        android:id="@+id/item_popular_description"
-        android:layout_width="257dp"
-        android:layout_height="98dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="139dp"
-        android:layout_marginEnd="9dp"
-        android:layout_toEndOf="@+id/item_popular_cover"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis scelerisque velit. Fusce fringilla aliquam lacus, id facilisis nisl aliquet iaculis. In tristique varius nisl ac facilisis. Fusce tempus magna null" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/item_popular_description"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="false"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/dark_black">
-
-        <TextView
-            android:id="@+id/item_popular_text_cap"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/item_popular_type_cardView"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="CAPS" />
+            app:cardBackgroundColor="@color/red_primary"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="14dp">
 
-        <TextView
-            android:id="@+id/item_popular_caps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_popular_text_cap"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="18dp"
-            android:layout_marginBottom="6dp"
-            android:text="12" />
+            <TextView
+                android:id="@+id/item_popular_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                tools:text="serie"
+                android:textAllCaps="true"
+                android:textAlignment="center"
+                android:fontFamily="@font/nunito_bold"
+                android:padding="2dp"
+                android:textSize="10sp"
+                android:gravity="center_horizontal"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- COVER -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/item_popular_cover_cardView"
+            android:layout_width="110dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/item_popular_type_cardView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            app:cardCornerRadius="4dp">
+
+            <ImageView
+                android:id="@+id/item_popular_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/yumekai_failed_portrait" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- INFORMATION LAYOUT -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toEndOf="@id/item_popular_cover_cardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/item_popular_caps_cardView"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
+            android:layout_marginTop="72dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp" >
+
+            <!-- TITLE -->
+            <TextView
+                android:id="@+id/item_popular_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="14sp"
+                tools:text="Mushoku Tensei: Jobless Reicarnation" />
+
+            <!-- DESCRIPTION -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+
+                <TextView
+                    android:id="@+id/item_popular_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/nunito"
+                    android:textSize="10sp"
+                    tools:text="Mushoku Tensei: Isekai Ittara Honki Dasu (無職転生 〜異世界行ったら本気だす〜?) es una novela web japonesa escrita por Rifujin na Magonote, publicada originalmente en el sitio web Shōsetsuka ni Narō entre el 22 de noviembre de 2012 y el 3 de abril de 2015. Una serie de novelas ligeras comenzó su publicación el 23 de enero de 2014 bajo el sello MF Books de Media Factory con ilustraciones realizadas por un usuario de Pixiv llamado ShiroTaka." />
+
+            </ScrollView>
 
 
-    </RelativeLayout>
+        </LinearLayout>
 
 
-</RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/item_popular_caps_cardView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardBackgroundColor="@color/dark_black"
+            app:cardCornerRadius="6dp">
+
+            <TextView
+                android:id="@+id/item_popular_caps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                tools:text="CAP 999"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:fontFamily="@font/nunito_black"
+                android:textSize="10sp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

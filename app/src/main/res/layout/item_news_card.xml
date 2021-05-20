@@ -22,7 +22,7 @@
             android:id="@+id/feed_cardView_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/yumekai_failed_portrait"
             android:scaleType="centerCrop"/>
 
     </com.google.android.material.card.MaterialCardView>

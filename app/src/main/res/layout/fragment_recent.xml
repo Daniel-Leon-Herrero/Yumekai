@@ -9,58 +9,212 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        tools:context=".fragments.Recent.RecentFragment"
+        android:background="@color/dark_black"
+        android:padding="20dp" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/dark_black"
-            tools:context=".fragments.Recent.RecentFragment">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/recent_screen_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="200dp"
-                android:text="Recents"
-                android:textSize="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.243"
+                android:text="@string/recent_screen_title"
+                android:textColor="@color/soft_white"
+                android:textSize="28sp"
+                android:fontFamily="@font/nunito_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView2"
+            <Button
+                android:id="@+id/recent_screen_btn_more_popular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="16dp"
-                android:text="More Popular"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recent_screen_title"
+                android:background="@color/transparent"
+                android:text="View more"
+                android:textAllCaps="false"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="12sp"/>
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="4dp"
-                android:text="The news that most liked"
+            <LinearLayout
+                android:id="@+id/recent_screen_more_popular_layout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/recent_screen_btn_more_popular"
+                app:layout_constraintEnd_toStartOf="@+id/recent_screen_btn_more_popular"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@id/recent_screen_title"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_outline_remove_red_eye_24"
+                    app:tint="@color/red_primary" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="More populars"
+                        android:fontFamily="@font/nunito"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The news that more like"
+                        android:fontFamily="@font/nunito"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recent_popular_RecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintTop_toBottomOf="@id/recent_screen_more_popular_layout" />
 
+            <LinearLayout
+                android:id="@+id/recent_screen_buttons_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recent_popular_RecyclerView"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal">
+
+                <!-- RANDOM BUTTON -->
+                <LinearLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/recent_screen_btn_random"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/rounded_corners"
+                        app:icon="@drawable/ic_outline_history_36"
+                        app:iconTint="@color/dark_black"
+                        app:iconGravity="textTop"
+                        app:iconPadding="0dp"
+                        android:gravity="center"
+                        app:backgroundTint="@color/soft_white"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Random"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textAllCaps="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"/>
+                </LinearLayout>
+
+                <!-- FOR ME -->
+                <LinearLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/recent_screen_btn_for_me"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/rounded_corners"
+                        app:icon="@drawable/ic_outline_history_36"
+                        app:iconTint="@color/dark_black"
+                        app:iconGravity="textTop"
+                        app:iconPadding="0dp"
+                        android:gravity="center"
+                        app:backgroundTint="@color/soft_white"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="For me"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textAllCaps="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"/>
+                </LinearLayout>
+
+                <!-- DIRECTORY -->
+                <LinearLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/recent_screen_btn_directory"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/rounded_corners"
+                        app:icon="@drawable/ic_outline_history_36"
+                        app:iconTint="@color/dark_black"
+                        app:iconGravity="textTop"
+                        app:iconPadding="0dp"
+                        android:gravity="center"
+                        app:backgroundTint="@color/soft_white"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Directory"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textAllCaps="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/soft_white"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recent_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/recent_screen_buttons_layout" />
+
+
+            <!--
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="266dp"
@@ -151,15 +305,11 @@
                 </RelativeLayout>
 
 
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recent_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+        -->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
