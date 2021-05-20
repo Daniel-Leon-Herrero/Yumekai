@@ -252,7 +252,26 @@ class repositoryAPI {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                val call = getRecentsRetrofit().create(APIService::class.java)
-                    .getRecents("anime?status=airing&order_by=members&order_by=start_date")
+                    .getRecents("anime?q=&order_by=members&sort=desc&page=1")
+                val datos = call.body()
+                withContext(Dispatchers.Main) {
+                    if (call.isSuccessful) {
+                        mutableData.value = datos!!
+                    }
+                }
+
+            }
+        }
+        return mutableData
+    }
+
+    fun getRecentsMovies(): LiveData<RecentsResponse> {
+        var mutableData = MutableLiveData<RecentsResponse>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getRecentsRetrofit().create(APIService::class.java)
+                    .getRecents("anime?q=&order_by=members&type=movie&page=1")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {

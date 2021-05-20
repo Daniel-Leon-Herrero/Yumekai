@@ -20,4 +20,12 @@ class RecentViewModel: ViewModel() {
         })
         return mutableData
     }
+
+    fun getRecentsMoviesData(): MutableLiveData<RecentsResponse>{
+        var mutableData: MutableLiveData<RecentsResponse> = MutableLiveData()
+        repo.getRecentsMovies().observeForever(Observer { recents ->
+            mutableData.value = recents
+        })
+        return mutableData
+    }
 }

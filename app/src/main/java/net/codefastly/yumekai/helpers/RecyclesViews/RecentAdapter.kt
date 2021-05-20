@@ -10,15 +10,20 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.fragments.Recent.RecentViewModel
 import net.codefastly.yumekai.models.recents.ModelDTO
+import net.codefastly.yumekai.models.recents.Result
 
 class RecentAdapter(private val context: Context) :
     RecyclerView.Adapter<RecentAdapter.RecentViewHolder>() {
-
     private var dataList = listOf<ModelDTO>()
+    private val itemDataList = listOf<Result>()
+    private lateinit var itemAdapter: ItemRecentAnimeAdapter
 
     fun setData(data: List<ModelDTO>) {
         dataList = data
@@ -57,6 +62,15 @@ class RecentAdapter(private val context: Context) :
                             findNavController().navigate(R.id.action_recentFragment_to_historyFragment)
                         }
                     }
+                    with(findViewById<RecyclerView>(R.id.item_recents_recyclerView)){
+                        itemAdapter = ItemRecentAnimeAdapter(context)
+                        adapter = itemAdapter
+                        item.itemList.observeForever(Observer { movies ->
+                            itemAdapter.setData(movies.results)
+                            itemAdapter.notifyDataSetChanged()
+                        })
+                    }
+
                 }
             }
         }
