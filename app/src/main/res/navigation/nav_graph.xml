@@ -64,4 +64,10 @@
         android:name="net.codefastly.yumekai.fragments.Search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <action
+        android:id="@+id/action_global_recentFragment"
+        app:destination="@id/recentFragment" />
+    <action
+        android:id="@+id/action_global_calendarFragment"
+        app:destination="@id/calendarFragment" />
 </navigation>

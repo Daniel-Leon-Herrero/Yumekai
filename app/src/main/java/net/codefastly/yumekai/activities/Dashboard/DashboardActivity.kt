@@ -11,31 +11,45 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.graphics.drawable.toDrawable
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavGraphNavigator
 import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.ActivityDashboardBinding
+import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
+import net.codefastly.yumekai.fragments.News.NewsFragment
+import net.codefastly.yumekai.fragments.Recent.RecentFragment
 
 class DashboardActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityDashboardBinding
+    private lateinit var binding: ActivityDashboardBinding
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
     private var lastMenuItemId: Int = 2131296559
+    private lateinit var calendarFragment: CalendarFragment
+    private lateinit var recentFragment: RecentFragment
+    private lateinit var newsFragment: NewsFragment
+    private lateinit var currentFragment: Fragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.binding = ActivityDashboardBinding.inflate( layoutInflater )
-        setContentView( this.binding.root )
+        this.binding = ActivityDashboardBinding.inflate(layoutInflater)
+        setContentView(this.binding.root)
 
-        bottomSheetBehavior = BottomSheetBehavior.from( binding.dashboardScreenBottomSheetMenu )
-
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.dashboardScreenBottomSheetMenu)
+        if (savedInstanceState == null) {
+            calendarFragment = CalendarFragment()
+            recentFragment = RecentFragment()
+            newsFragment = NewsFragment()
+            currentFragment = calendarFragment
+        }
 
         binding.bottomMenuSheetBtnHistorial.setOnClickListener { _ ->
-            when( binding.menu.getSelectedItemId()){
+            when (binding.menu.getSelectedItemId()) {
                 R.id.menu_item_calendar -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_calendarFragment_to_historyFragment)
                 R.id.menu_item_recents -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_recentFragment_to_historyFragment)
                 R.id.menu_item_news -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_newsFragment_to_historyFragment)
@@ -43,21 +57,27 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         binding.btnSearch.setOnClickListener { _ ->
-            when( binding.menu.getSelectedItemId()){
+            when (binding.menu.getSelectedItemId()) {
                 R.id.menu_item_calendar -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_calendarFragment_to_searchFragment)
                 R.id.menu_item_recents -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_recentFragment_to_searchFragment)
                 R.id.menu_item_news -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_newsFragment_to_searchFragment)
             }
         }
 
-        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.setBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when( newState ) {
-                    BottomSheetBehavior.STATE_HIDDEN -> {}
-                    BottomSheetBehavior.STATE_EXPANDED -> {}
-                    BottomSheetBehavior.STATE_COLLAPSED -> {}
-                    BottomSheetBehavior.STATE_DRAGGING -> {}
-                    BottomSheetBehavior.STATE_SETTLING -> {}
+                when (newState) {
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+                    }
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                    }
+                    BottomSheetBehavior.STATE_DRAGGING -> {
+                    }
+                    BottomSheetBehavior.STATE_SETTLING -> {
+                    }
                 }
             }
 
@@ -69,21 +89,54 @@ class DashboardActivity : AppCompatActivity() {
 
 
         binding.menu.setOnItemSelectedListener { id ->
-            when(id){
+            val transaction = supportFragmentManager.beginTransaction()
+            when (id) {
                 R.id.menu_item_calendar -> {
                     this.lastMenuItemId = id
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.calendarFragment)
+                    if (calendarFragment.isAdded) {
+                        transaction
+                            .hide(currentFragment)
+                            .show(calendarFragment)
+                    } else {
+                        transaction
+                            .hide(currentFragment)
+                            .add(R.id.nav_host_fragment, calendarFragment, "calendarFragment")
+                    }
+                    currentFragment = calendarFragment
+                    // transaction.replace(R.id.nav_host_fragment,calendarFragment)
                 }
                 R.id.menu_item_recents -> {
                     this.lastMenuItemId = id
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.recentFragment)
+                    if (recentFragment.isAdded) {
+                        transaction
+                            .hide(currentFragment)
+                            .show(recentFragment)
+                    } else {
+                        transaction
+                            .hide(currentFragment)
+                            .add(R.id.nav_host_fragment, recentFragment, "recentFragment")
+                    }
+                    currentFragment = recentFragment
+                    // transaction.replace(R.id.nav_host_fragment,recentFragment)
                 }
                 R.id.menu_item_news -> {
                     this.lastMenuItemId = id
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.newsFragment)
+                    if (newsFragment.isAdded) {
+                        transaction
+                            .hide(currentFragment)
+                            .show(newsFragment)
+                    } else {
+                        transaction
+                            .hide(currentFragment)
+                            .add(R.id.nav_host_fragment, newsFragment, "newsFragment")
+                    }
+                    currentFragment = newsFragment
+                    //   transaction.replace(R.id.nav_host_fragment,newsFragment)
                 }
+
                 R.id.menu_item_drop_menu -> expandCloseMenuSheet()
             }
+            transaction.commit()
         }
 
     }
@@ -94,9 +147,9 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun expandCloseMenuSheet() {
-        binding.menu.setItemSelected( this.lastMenuItemId )
+        binding.menu.setItemSelected(this.lastMenuItemId)
 
-        if( bottomSheetBehavior!!.state != BottomSheetBehavior.STATE_EXPANDED ){
+        if (bottomSheetBehavior!!.state != BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_EXPANDED
         } else {
             bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
