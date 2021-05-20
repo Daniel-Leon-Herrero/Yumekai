@@ -1,6 +1,7 @@
 package net.codefastly.yumekai.activities.Dashboard
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.activities.DashboardFullScreen.DashboardFullScreen
 import net.codefastly.yumekai.databinding.ActivityDashboardBinding
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
 import net.codefastly.yumekai.fragments.News.NewsFragment
@@ -49,11 +51,8 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         binding.bottomMenuSheetBtnHistorial.setOnClickListener { _ ->
-            when (binding.menu.getSelectedItemId()) {
-                R.id.menu_item_calendar -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_calendarFragment_to_historyFragment)
-                R.id.menu_item_recents -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_recentFragment_to_historyFragment)
-                R.id.menu_item_news -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_newsFragment_to_historyFragment)
-            }
+            val intent = Intent(this, DashboardFullScreen::class.java)
+            startActivity(intent)
         }
 
         binding.btnSearch.setOnClickListener { _ ->
@@ -103,7 +102,6 @@ class DashboardActivity : AppCompatActivity() {
                             .add(R.id.nav_host_fragment, calendarFragment, "calendarFragment")
                     }
                     currentFragment = calendarFragment
-                    // transaction.replace(R.id.nav_host_fragment,calendarFragment)
                 }
                 R.id.menu_item_recents -> {
                     this.lastMenuItemId = id
@@ -117,7 +115,6 @@ class DashboardActivity : AppCompatActivity() {
                             .add(R.id.nav_host_fragment, recentFragment, "recentFragment")
                     }
                     currentFragment = recentFragment
-                    // transaction.replace(R.id.nav_host_fragment,recentFragment)
                 }
                 R.id.menu_item_news -> {
                     this.lastMenuItemId = id
@@ -131,7 +128,6 @@ class DashboardActivity : AppCompatActivity() {
                             .add(R.id.nav_host_fragment, newsFragment, "newsFragment")
                     }
                     currentFragment = newsFragment
-                    //   transaction.replace(R.id.nav_host_fragment,newsFragment)
                 }
 
                 R.id.menu_item_drop_menu -> expandCloseMenuSheet()
@@ -143,7 +139,7 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        binding.menu.setItemSelected(R.id.menu_item_calendar)
+        binding.menu.setItemSelected(lastMenuItemId)
     }
 
     private fun expandCloseMenuSheet() {
