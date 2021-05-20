@@ -6,47 +6,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/dark_black">
 
-    <ImageView
-        android:id="@+id/item_recent_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        tools:src="@drawable/ic_baseline_navigate_next_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/red_primary" />
 
-    <TextView
-        android:id="@+id/item_recent_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="4dp"
-        android:textSize="18dp"
-        android:text="Prueba"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/item_recent_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:text="Prueba"
-        android:textSize="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_recent_category" />
-
+    <!-- VIEW MORE BUTTON -->
     <Button
         android:id="@+id/item_recent_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/dark_black"
-        android:text="Prueba"
-        android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/transparent"
+        android:text=""
+        tools:text="View more"
+        android:textAllCaps="false"
+        android:fontFamily="@font/nunito_bold"
+        android:textSize="12sp"/>
+
+    <!-- ITEM DETAILS LAYOUT -->
+    <LinearLayout
+        android:id="@+id/item_recent_details_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/item_recent_button"
+        app:layout_constraintEnd_toStartOf="@id/item_recent_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/item_recent_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/ic_outline_remove_red_eye_24"
+            app:tint="@color/red_primary" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp">
+
+            <TextView
+                android:id="@+id/item_recent_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                tools:text="Last movies"
+                android:fontFamily="@font/nunito"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/item_recent_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                tools:text="Last movies published"
+                android:fontFamily="@font/nunito"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_recents_recyclerView"
@@ -59,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_recent_detail"
+        app:layout_constraintTop_toBottomOf="@id/item_recent_details_layout"
         app:spanCount="1" />
 
 

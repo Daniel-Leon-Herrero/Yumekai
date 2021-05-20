@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- TITLE -->
             <TextView
                 android:id="@+id/recent_screen_title"
                 android:layout_width="wrap_content"
@@ -30,6 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- VIEW MORE BUTTON -->
             <Button
                 android:id="@+id/recent_screen_btn_more_popular"
                 android:layout_width="wrap_content"
@@ -42,6 +44,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:textSize="12sp"/>
 
+            <!-- MORE POPULAR LAYOUT -->
             <LinearLayout
                 android:id="@+id/recent_screen_more_popular_layout"
                 android:layout_width="0dp"
