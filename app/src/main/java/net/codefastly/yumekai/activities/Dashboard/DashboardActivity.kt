@@ -38,8 +38,16 @@ class DashboardActivity : AppCompatActivity() {
             when( binding.menu.getSelectedItemId()){
                 R.id.menu_item_calendar -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_calendarFragment_to_historyFragment)
                 R.id.menu_item_recents -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_recentFragment_to_historyFragment)
+                R.id.menu_item_news -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_newsFragment_to_historyFragment)
             }
+        }
 
+        binding.btnSearch.setOnClickListener { _ ->
+            when( binding.menu.getSelectedItemId()){
+                R.id.menu_item_calendar -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_calendarFragment_to_searchFragment)
+                R.id.menu_item_recents -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_recentFragment_to_searchFragment)
+                R.id.menu_item_news -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_newsFragment_to_searchFragment)
+            }
         }
 
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {

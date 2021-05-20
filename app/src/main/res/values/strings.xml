@@ -58,15 +58,22 @@
     <!--***** HISTORY SCREEN *****-->
     <!-- Titles -->
     <string name="history_screen_title">Historical</string>
-        <!-- (( NO CONTENT ITEM )) -->
-        <!-- Titles -->
-        <string name="history_screen_no_content_title">No content...</string>
+    <!-- (( NO CONTENT ITEM )) -->
+    <!-- Titles -->
+    <string name="history_screen_no_content_title">No content...</string>
 
-        <!-- Descriptions -->
-        <string name="history_screen_no_content_desc">It seems that you have not used the application enough.</string>
+    <!-- Descriptions -->
+    <string name="history_screen_no_content_desc">It seems that you have not used the application enough.</string>
 
     <!--***** RECENT SCREEN *****-->
     <!-- Titles -->
     <string name="recent_screen_title">Recent</string>
+
+    <!--***** SEARCH SCREEN *****-->
+    <!-- Titles -->
+    <string name="search_screen_title">Search</string>
+
+    <!-- Descriptions -->
+    <string name="search_screen_description">Search your favourite anime!</string>
 
 </resources>
