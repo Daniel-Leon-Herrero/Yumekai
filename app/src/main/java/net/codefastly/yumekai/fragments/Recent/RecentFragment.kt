@@ -2,11 +2,13 @@ package net.codefastly.yumekai.fragments.Recent
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +17,8 @@ import net.codefastly.yumekai.databinding.FragmentRecentBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.MorePopularAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.RecentAdapter
 import net.codefastly.yumekai.models.recents.ModelDTO
+import net.codefastly.yumekai.models.recents.RecentsResponse
+import net.codefastly.yumekai.models.recents.Result
 
 
 class RecentFragment : Fragment() {
@@ -45,21 +49,57 @@ class RecentFragment : Fragment() {
         recyclerViewPopular = binding.recentPopularRecyclerView
         adapterPopular = MorePopularAdapter(requireContext())
         recyclerViewPopular.adapter = adapterPopular
+        observePopularData()
+
+
+    }
+
+    fun observePopularData(){
         viewmodel.getRecentsData().observe(viewLifecycleOwner, Observer { recents ->
             adapterPopular.setData(recents.results)
             adapterPopular.notifyDataSetChanged()
         })
-
     }
 
     fun inicializeRecyclerView(){
         recyclerView = binding.recentRecyclerView
         adapter = RecentAdapter(requireContext())
         recyclerView.adapter = adapter
-        var list = listOf<ModelDTO>(ModelDTO("Historial","Prueba",R.drawable.ic_baseline_navigate_next_24,R.color.red_primary,"More Historial",viewmodel.getRecentsData()),
-            ModelDTO("Peliculas","Prueba", R.drawable.ic_outline_article_36,R.color.red_primary, "More Peliculas",viewmodel.getRecentsMoviesData()),
+        ObserveData()
+
+    }
+
+    fun value(item: RecentsResponse?): RecentsResponse{
+        var result = listOf<Result>(Result(true,"15/5/2021",300,"aaaaaaa",11,500,"ff",50.6,"5/5/2021","A jose le toco Beatrice", "Jose ama a su beatrice","hentai","sdsdsdsdsd"))
+        var itemList : RecentsResponse = RecentsResponse(1,11,true,"dsdsdsdsdsd", result)
+        if(item != null){
+            return item
+        }else{
+            return itemList
+        }
+    }
+
+    fun ObserveData(){
+        with(viewmodel){
+            getRecentsData().observeForever(Observer {
+                history = it
+                actualizeData()
+            })
+            getRecentsMoviesData().observeForever(Observer {
+                movies = it
+                actualizeData()
+            })
+        }
+    }
+
+    fun actualizeData(){
+
+        var list = listOf<ModelDTO>(ModelDTO(1,"Historial","Prueba",R.drawable.ic_baseline_navigate_next_24,R.color.red_primary,"More Historial",value(viewmodel.history)),
+            ModelDTO(2,"Peliculas","Prueba", R.drawable.ic_outline_article_36,R.color.red_primary, "More Peliculas",value(viewmodel.movies)),
+            ModelDTO(3,"OVA","Prueba", R.drawable.ic_outline_article_36,R.color.red_primary, "More Peliculas",value(viewmodel.movies)),
         )
         adapter.setData(list)
         adapter.notifyDataSetChanged()
+        observePopularData()
     }
 }
