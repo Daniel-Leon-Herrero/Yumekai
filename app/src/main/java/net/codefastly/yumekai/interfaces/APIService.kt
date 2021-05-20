@@ -41,4 +41,7 @@ interface APIService {
 
     @GET
     suspend fun getRecents(@Url url:String): Response<RecentsResponse>
+
+    @GET
+    suspend fun searchAnimeByQuery(@Url url:String): Response<RecentsResponse>
 }
