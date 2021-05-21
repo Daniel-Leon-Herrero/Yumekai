@@ -18,9 +18,11 @@ import net.codefastly.yumekai.databinding.FragmentAnimeDetailsBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.CategoryAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.CharacterAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.StaffAnimeAdapter
-import net.codefastly.yumekai.models.calendar.Genre
+import net.codefastly.yumekai.models.anime.Genre
+import net.codefastly.yumekai.models.calendar.AnimeDTO
+import java.io.Serializable
 
-class AnimeDetailsFragment : Fragment() {
+class AnimeDetailsFragment(val anime: Int) : Fragment() {
     private lateinit var binding: FragmentAnimeDetailsBinding
     private lateinit var viewModel: AnimeDetailsViewModel
     private lateinit var recyclerViewCategories: RecyclerView
@@ -29,7 +31,6 @@ class AnimeDetailsFragment : Fragment() {
     private lateinit var adapterCharacter: CharacterAnimeAdapter
     private lateinit var recyclerViewStaff: RecyclerView
     private lateinit var adapterStaff: StaffAnimeAdapter
-    val args: AnimeDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +41,7 @@ class AnimeDetailsFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_anime_details, container, false)
 
-        viewModel.anime.value = args.anime1
+        viewModel.anime.value = anime
 
         bindData()
         // Inflate the layout for this fragment
@@ -50,36 +51,34 @@ class AnimeDetailsFragment : Fragment() {
     private fun bindData() {
         with(binding) {
             var sb = StringBuilder()
-            // Recuperar datos anteriores
-            with(viewModel.anime.value?.day) {
                 animeBtnBack.setOnClickListener {
-                    requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
+                    requireActivity().finish()
                 }
-                if (this?.image_url!!.isNotEmpty()) {
-                    Picasso.get().load(this?.image_url).into(animeDetailsImg)
-                }
-                animeDetailsTitle.text = this?.title
-                animeDetailsSynopsis.text = this?.synopsis
-                animeDetailsType.text = this?.type
-                inicializeCategoryAdapter(this?.genres)
-                if (this?.licensors?.size < 1) {
-                    sb.append("-")
-                } else {
-                    this?.licensors.forEach { licensors ->
-                        sb.append(animeDetailsLicenses.text).append(licensors)
-                        if (this?.licensors?.size > 1) {
-                            sb.append(", ")
-                        }
-                    }
-                }
-                animeDetailsLicenses.text = sb.toString()
-                animeDetailsSource.text = this?.source
-                animeDetailsMembres.text = this?.members.toString()
 
                 //Mas Detalles
                 with(viewModel.animeDetails) {
                     observe(viewLifecycleOwner, Observer {
                         with(this?.value) {
+                            if (this?.image_url!!.isNotEmpty()) {
+                                Picasso.get().load(this?.image_url).into(animeDetailsImg)
+                            }
+                            animeDetailsTitle.text = this?.title
+                            animeDetailsSynopsis.text = this?.synopsis
+                            animeDetailsType.text = this?.type
+                            inicializeCategoryAdapter(this?.genres)
+                            if (this?.licensors?.size < 1) {
+                                sb.append("-")
+                            } else {
+                                this?.licensors.forEach { licensors ->
+                                    sb.append(animeDetailsLicenses.text).append(licensors.name)
+                                    if (this?.licensors?.size > 1) {
+                                        sb.append(", ")
+                                    }
+                                }
+                            }
+                            animeDetailsLicenses.text = sb.toString()
+                            animeDetailsSource.text = this?.source
+                            animeDetailsMembres.text = this?.members.toString()
                             animeDetailsStatus.text = this?.status
                             animeDetailsDuration.text = this?.duration
                             animeDetailsPosition.text = "#" + this?.rank.toString()
@@ -116,7 +115,7 @@ class AnimeDetailsFragment : Fragment() {
                 with(viewModel.animeCharacter.value) {
                     inicializeCharacterStaffAdapter()
                 }
-            }
+
         }
     }
 

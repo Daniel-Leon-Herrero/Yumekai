@@ -1,6 +1,7 @@
 package net.codefastly.yumekai.models.calendar
 
 import com.google.gson.annotations.SerializedName
+import net.codefastly.yumekai.models.anime.Licensor
 
 data class Day(
     @SerializedName("airing_start") val airing_start: String,

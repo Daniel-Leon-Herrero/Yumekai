@@ -66,7 +66,6 @@ class RecentFragment : Fragment() {
         recyclerView = binding.recentRecyclerView
         adapter = RecentAdapter(requireContext())
         recyclerView.adapter = adapter
-        recyclerView.setHasFixedSize(true)
         ObserveData()
 
     }

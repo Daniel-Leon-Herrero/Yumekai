@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.codefastly.yumekai.R
-import net.codefastly.yumekai.models.calendar.Genre
+import net.codefastly.yumekai.models.anime.Genre
 
 class CategoryAnimeAdapter(private val context: Context) :
     RecyclerView.Adapter<CategoryAnimeAdapter.AnimeCategoryViewHolder>() {
