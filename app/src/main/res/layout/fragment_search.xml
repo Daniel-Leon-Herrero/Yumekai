@@ -74,7 +74,8 @@
                 android:contextClickable="true"
                 android:layout_marginTop="5dp"
                 android:inputType="text"
-                app:iconifiedByDefault="true" />
+                app:iconifiedByDefault="true"
+                />
 
 
         </LinearLayout>

@@ -29,7 +29,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
-    private var lastMenuItemId: Int = 2131296559
+    private var lastMenuItemId: Int = R.id.menu_item_calendar
     private lateinit var calendarFragment: CalendarFragment
     private lateinit var recentFragment: RecentFragment
     private lateinit var newsFragment: NewsFragment
@@ -50,6 +50,8 @@ class DashboardActivity : AppCompatActivity() {
             currentFragment = calendarFragment
         }
 
+
+
         binding.bottomMenuSheetBtnHistorial.setOnClickListener { _ ->
             val intent = Intent(this, DashboardFullScreen::class.java).apply {
                 this.putExtra( "FULL_SCREEN_TO_LOAD", R.id.bottom_menu_sheet_btn_historial )
@@ -59,13 +61,6 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         binding.btnSearch.setOnClickListener { _ ->
-            /*
-            when (binding.menu.getSelectedItemId()) {
-                R.id.menu_item_calendar -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_calendarFragment_to_searchFragment)
-                R.id.menu_item_recents -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_recentFragment_to_searchFragment)
-                R.id.menu_item_news -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_newsFragment_to_searchFragment)
-            }
-            */
             val intent = Intent(this, DashboardFullScreen::class.java).apply {
                 this.putExtra( "FULL_SCREEN_TO_LOAD", R.id.btnSearch )
             }
@@ -148,7 +143,7 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        binding.menu.setItemSelected(lastMenuItemId)
+        binding.menu.setItemSelected(this.lastMenuItemId)
     }
 
     private fun expandCloseMenuSheet() {

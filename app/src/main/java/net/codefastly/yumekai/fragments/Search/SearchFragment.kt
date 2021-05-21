@@ -36,8 +36,15 @@ class SearchFragment : Fragment() {
 
         binding.searchScreenSearchView.setOnQueryTextListener( object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                var queryCategory: String = ""
                 if( !viewModel.fetchingData && !query.isNullOrEmpty()){
-                    viewModel.fetchAnimeByQuery( query!! )
+                    if( query!!.startsWith("@")){
+                        queryCategory = query!!.substring(1, query!!.indexOf(":")).toLowerCase()
+                    }
+                    when(queryCategory){
+                        "manga" -> viewModel.fetchAnimeByQuery(query, queryCategory)
+                        else -> viewModel.fetchAnimeByQuery(query, "anime" )
+                    }
                 }
                 return true
             }
@@ -47,7 +54,7 @@ class SearchFragment : Fragment() {
             }
         })
 
-        viewModel.animeList.observe( viewLifecycleOwner , { animeList ->
+        viewModel.dataList.observe( viewLifecycleOwner , { animeList ->
             binding.searchScreenRv.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             searchAdapter.setDataList( animeList )
             searchAdapter.notifyDataSetChanged()
