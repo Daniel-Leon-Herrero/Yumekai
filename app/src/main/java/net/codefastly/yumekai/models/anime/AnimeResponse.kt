@@ -13,7 +13,7 @@ data class AnimeResponse(
     @SerializedName("favorites") val favorites: Int,
     @SerializedName("genres") val genres: List<Genre>,
     @SerializedName("image_url") val image_url: String,
-    @SerializedName("licensors") val licensors: List<Any>,
+    @SerializedName("licensors") val licensors: List<Licensor>,
     @SerializedName("mal_id") val mal_id: Int,
     @SerializedName("members") val members: Int,
     @SerializedName("opening_themes") val opening_themes: List<String>,

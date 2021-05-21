@@ -1,6 +1,8 @@
 package net.codefastly.yumekai.helpers.RecyclesViews
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.activities.Dashboard.DashboardActivity
+import net.codefastly.yumekai.activities.DashboardFullScreen.DashboardFullScreen
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragmentDirections
 import net.codefastly.yumekai.models.calendar.AnimeDTO
 import java.lang.Exception
@@ -66,8 +70,12 @@ class CalendarAnimeAdapter(private val context: Context) :
             }
             itemView.findViewById<TextView>(R.id.calendar_categoryTag).text = cal.day.type
             itemView.setOnClickListener {
-                var action = CalendarFragmentDirections.actionCalendarFragmentToAnimeDetailsFragment(cal)
-                it.findNavController().navigate(action)
+                val intent =  Intent(context, DashboardFullScreen::class.java).apply {
+                    this.putExtra( "FULL_SCREEN_TO_LOAD", 1122 )
+                    this.putExtra("ANIME_DETAILS", cal.day.mal_id)
+
+                }
+                context.startActivity(intent)
             }
         }
     }

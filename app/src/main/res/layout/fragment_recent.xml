@@ -17,7 +17,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <!-- TITLE -->
             <TextView
@@ -215,7 +215,7 @@
             </LinearLayout>
 
 
-                    <androidx.recyclerview.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recent_recyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -224,11 +224,9 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/recent_screen_buttons_layout" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
-
 
 </layout>

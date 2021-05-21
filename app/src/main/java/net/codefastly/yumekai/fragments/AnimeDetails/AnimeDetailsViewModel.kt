@@ -9,23 +9,23 @@ import net.codefastly.yumekai.repository.repositoryAPI
 
 class AnimeDetailsViewModel : ViewModel() {
     private val repo = repositoryAPI()
-    var anime: MutableLiveData<AnimeDTO> = MutableLiveData()
+    var anime: MutableLiveData<Int> = MutableLiveData()
     var animeDetails: MutableLiveData<AnimeResponse> = MutableLiveData()
     var animeCharacter: MutableLiveData<CharacterAnimeResponse> = MutableLiveData()
 
 
     init {
         anime.observeForever(Observer {
-            getAnime()
+            getAnime(it)
         })
     }
 
-    fun getAnime() {
+    fun getAnime(anime: Int) {
 
-        repo.getAnime(anime.value?.day!!.mal_id).observeForever { animes ->
+        repo.getAnime(anime).observeForever { animes ->
             animeDetails.value = animes
         }
-        repo.getAnimeCharacter(anime.value?.day!!.mal_id).observeForever{ staff ->
+        repo.getAnimeCharacter(anime).observeForever{ staff ->
             animeCharacter.value = staff
         }
 
