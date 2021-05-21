@@ -48,6 +48,7 @@ class SearchFragment : Fragment() {
         })
 
         viewModel.animeList.observe( viewLifecycleOwner , { animeList ->
+            binding.searchScreenRv.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             searchAdapter.setDataList( animeList )
             searchAdapter.notifyDataSetChanged()
         })
@@ -63,7 +64,7 @@ class SearchFragment : Fragment() {
         searchAdapter = SearchAnimeAdapter( requireContext() )
         with(binding.searchScreenRv){
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager( requireContext(), LinearLayoutManager.VERTICAL, false)
             itemAnimator = DefaultItemAnimator()
             adapter = searchAdapter
         }

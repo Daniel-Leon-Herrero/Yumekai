@@ -75,5 +75,9 @@
 
     <!-- Descriptions -->
     <string name="search_screen_description">Search your favourite anime!</string>
+    <!-- (( NO CONTENT ITEM )) -->
+    <string name="search_screen_no_content_title">You have not searched yet!</string>
+    <string name="search_screen_no_content_desc">Find your favorite anime, manga with the tags @anime: and @manga:</string>
+
 
 </resources>
