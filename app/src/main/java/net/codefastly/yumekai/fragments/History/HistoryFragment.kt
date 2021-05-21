@@ -30,7 +30,7 @@ class HistoryFragment : Fragment() {
         initRecyclerView()
 
         binding.historyScreenBtnBack.setOnClickListener {
-            requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
+            requireActivity().finish()
         }
 
         return binding.root

@@ -265,25 +265,6 @@ class repositoryAPI {
         return mutableData
     }
 
-    fun getRecentsTV(): LiveData<RecentsResponse> {
-        var mutableData = MutableLiveData<RecentsResponse>()
-
-        CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.IO) {
-                val call = getRecentsRetrofit().create(APIService::class.java)
-                    .getRecents("anime?status=airing&order_by=members&type=TV&order_by=start_date")
-                val datos = call.body()
-                withContext(Dispatchers.Main) {
-                    if (call.isSuccessful) {
-                        mutableData.value = datos!!
-                    }
-                }
-
-            }
-        }
-        return mutableData
-    }
-
     fun getRecentsMovies(): LiveData<RecentsResponse> {
         var mutableData = MutableLiveData<RecentsResponse>()
 
@@ -303,60 +284,23 @@ class repositoryAPI {
         return mutableData
     }
 
-    fun getRecentsOva(): LiveData<RecentsResponse> {
-        var mutableData = MutableLiveData<RecentsResponse>()
 
+    fun searchAnimeByQuery( query: String ): LiveData<RecentsResponse> {
+        var mutableData = MutableLiveData<RecentsResponse>()
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val call = getRecentsRetrofit().create(APIService::class.java)
-                    .getRecents("anime?status=airing&order_by=members&type=ova&order_by=start_date")
+                    .searchAnimeByQuery("anime?q=${query}&page=1")
                 val datos = call.body()
-                withContext(Dispatchers.Main) {
-                    if (call.isSuccessful) {
+                withContext(Dispatchers.Main){
+                    if ( call.isSuccessful ){
                         mutableData.value = datos!!
                     }
                 }
-
             }
         }
         return mutableData
     }
 
-    fun getRecentsOna(): LiveData<RecentsResponse> {
-        var mutableData = MutableLiveData<RecentsResponse>()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.IO) {
-                val call = getRecentsRetrofit().create(APIService::class.java)
-                    .getRecents("anime?status=airing&order_by=score&type=ona&order_by=start_date")
-                val datos = call.body()
-                withContext(Dispatchers.Main) {
-                    if (call.isSuccessful) {
-                        mutableData.value = datos!!
-                    }
-                }
-
-            }
-        }
-        return mutableData
-    }
-
-    fun getRecentsSpecial(): LiveData<RecentsResponse> {
-        var mutableData = MutableLiveData<RecentsResponse>()
-
-        CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.IO) {
-                val call = getRecentsRetrofit().create(APIService::class.java)
-                    .getRecents("anime?q=&order_by=members&type=special&page=1")
-                val datos = call.body()
-                withContext(Dispatchers.Main) {
-                    if (call.isSuccessful) {
-                        mutableData.value = datos!!
-                    }
-                }
-
-            }
-        }
-        return mutableData
-    }
 }
