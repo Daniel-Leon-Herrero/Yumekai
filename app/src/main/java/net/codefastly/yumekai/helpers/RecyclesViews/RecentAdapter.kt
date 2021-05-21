@@ -37,6 +37,9 @@ class RecentAdapter(private val context: Context) :
 
     fun setData(data: List<ModelDTO>) {
         dataList.value = data
+        data.forEach {
+            Log.d("Valor", it.toString())
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentViewHolder {
@@ -94,7 +97,7 @@ class RecentAdapter(private val context: Context) :
     fun setItemsInCategoryRV(recyclerView: RecyclerView, items: ModelDTO) {
         itemHistoryAdapter = ItemRecentAnimeAdapter(context)
         itemMovieAdapter = ItemRecentAnimeAdapter(context)
-
+        recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.itemAnimator = DefaultItemAnimator()

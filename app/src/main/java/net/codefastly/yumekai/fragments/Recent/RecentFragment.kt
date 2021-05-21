@@ -41,6 +41,7 @@ class RecentFragment : Fragment() {
 
         inicializePopularRecyclerView()
         inicializeRecyclerView()
+
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -65,6 +66,7 @@ class RecentFragment : Fragment() {
         recyclerView = binding.recentRecyclerView
         adapter = RecentAdapter(requireContext())
         recyclerView.adapter = adapter
+        recyclerView.setHasFixedSize(true)
         ObserveData()
 
     }
@@ -75,36 +77,36 @@ class RecentFragment : Fragment() {
 
             getRecentsData().observeForever(Observer {
                 history = it
-                actualizeData()
+                refresdata()
             })
 
             getRecentsTVData().observeForever(Observer {
                 tv = it
-                actualizeData()
+                refresdata()
             })
             getRecentsMoviesData().observeForever(Observer {
                 movies = it
-                actualizeData()
+                refresdata()
             })
 
             getRecentsOvaData().observeForever(Observer {
                 ova = it
-                actualizeData()
+                refresdata()
             })
 
             getRecentsONAData().observeForever(Observer {
                 ona = it
-                actualizeData()
+                refresdata()
             })
 
             getRecentsSpecialData().observeForever(Observer {
                 special = it
-                actualizeData()
+                refresdata()
             })
         }
     }
 
-    fun actualizeData() {
+    fun refresdata() {
 
         var list = listOf<ModelDTO>(
             ModelDTO(
