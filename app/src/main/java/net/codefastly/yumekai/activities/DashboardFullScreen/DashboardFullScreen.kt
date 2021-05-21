@@ -20,7 +20,6 @@ class DashboardFullScreen : AppCompatActivity() {
 
         val FULL_SCREEN_TO_LOAD =  intent.getIntExtra("FULL_SCREEN_TO_LOAD", 0)
         val ANIME_DETAIL = intent.getIntExtra("ANIME_DETAILS",0)
-        Log.d("Anime ID", ANIME_DETAIL.toString())
         loadOnFullScreen( FULL_SCREEN_TO_LOAD,ANIME_DETAIL  )
 
 

@@ -1,9 +1,13 @@
 package net.codefastly.yumekai.fragments.Recent
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import net.codefastly.yumekai.R
+import net.codefastly.yumekai.models.recents.ModelDTO
 import net.codefastly.yumekai.models.recents.RecentsResponse
 import net.codefastly.yumekai.models.recents.Result
 import net.codefastly.yumekai.repository.repositoryAPI
@@ -29,14 +33,14 @@ class RecentViewModel : ViewModel() {
     )
     var itemList: RecentsResponse = RecentsResponse(1, 11, true, "dsdsdsdsdsd", result)
     private val repo = repositoryAPI()
-    var history: RecentsResponse = itemList
-    var tv: RecentsResponse = itemList
-    var movies: RecentsResponse = itemList
-    var ova: RecentsResponse = itemList
-    var ona: RecentsResponse = itemList
-    var special: RecentsResponse = itemList
-    init {
-    }
+    var history = MutableLiveData<RecentsResponse>(itemList)
+    var tv = MutableLiveData<RecentsResponse>(itemList)
+    var movies = MutableLiveData<RecentsResponse>(itemList)
+    var ova = MutableLiveData<RecentsResponse>(itemList)
+    var ona = MutableLiveData<RecentsResponse>(itemList)
+    var special = MutableLiveData<RecentsResponse>(itemList)
+    var list = MutableLiveData<List<ModelDTO>>()
+
 
     fun getRecentsData(): MutableLiveData<RecentsResponse> {
         var mutableData: MutableLiveData<RecentsResponse> = MutableLiveData()
@@ -46,43 +50,90 @@ class RecentViewModel : ViewModel() {
         return mutableData
     }
 
-    fun getRecentsTVData(): MutableLiveData<RecentsResponse> {
-        var mutableData: MutableLiveData<RecentsResponse> = MutableLiveData()
-        repo.getRecentsTV().observeForever(Observer { recents ->
-            mutableData.value = recents
-        })
-        return mutableData
+    fun getAllData(){
+        viewModelScope.launch {
+            withContext(Dispatchers.Main) {
+                repo.getRecentsMovies().observeForever(Observer {
+                    movies.value = it
+                })
+                delay(500)
+                repo.getRecentsTV().observeForever(Observer {
+                    tv.value = it
+                })
+                delay(500)
+                repo.getRecentsOna().observeForever(Observer {
+                    ona.value = it
+                })
+                delay(500)
+                repo.getRecentsOva().observeForever(Observer {
+                    ova.value = it
+                })
+                delay(500)
+                repo.getRecentsSpecial().observeForever(Observer {
+                    special.value = it
+                })
+                delay(500)
+                refreshData()
+            }
+        }
     }
+    fun refreshData(){
+        list.value = listOf( ModelDTO(
+            1,
+            "Historial",
+            "Last seen anime",
+            R.drawable.ic_baseline_navigate_next_24,
+            R.color.red_primary,
+            "More Historial",
+            history.value!!
+        ),
+            ModelDTO(
+                2,
+                "TV",
+                "Recent TV",
+                R.drawable.ic_outline_article_36,
+                R.color.red_primary,
+                "More TV",
+                tv.value!!
+            ),
 
-    fun getRecentsMoviesData(): MutableLiveData<RecentsResponse> {
-        var mutableData: MutableLiveData<RecentsResponse> = MutableLiveData()
-        repo.getRecentsMovies().observeForever(Observer { recents ->
-            mutableData.value = recents
-        })
-        return mutableData
-    }
+            ModelDTO(
+                3,
+                "Peliculas",
+                "Recent Movies",
+                R.drawable.ic_outline_article_36,
+                R.color.red_primary,
+                "More Peliculas",
+                movies.value!!
+            ),
 
-    fun getRecentsOvaData(): MutableLiveData<RecentsResponse> {
-        var mutableData: MutableLiveData<RecentsResponse> = MutableLiveData()
-        repo.getRecentsOva().observeForever(Observer { recents ->
-            mutableData.value = recents
-        })
-        return mutableData
-    }
-
-    fun getRecentsONAData(): MutableLiveData<RecentsResponse> {
-        var mutableData: MutableLiveData<RecentsResponse> = MutableLiveData()
-        repo.getRecentsOna().observeForever(Observer { recents ->
-            mutableData.value = recents
-        })
-        return mutableData
-    }
-
-    fun getRecentsSpecialData(): MutableLiveData<RecentsResponse> {
-        var mutableData: MutableLiveData<RecentsResponse> = MutableLiveData()
-        repo.getRecentsSpecial().observeForever(Observer { recents ->
-            mutableData.value = recents
-        })
-        return mutableData
+            ModelDTO(
+                4,
+                "OVA",
+                "Recent OVA's",
+                R.drawable.ic_outline_article_36,
+                R.color.red_primary,
+                "More OVA",
+                ova.value!!
+            ),
+            ModelDTO(
+                5,
+                "ONA",
+                "Recent ONA's",
+                R.drawable.ic_outline_article_36,
+                R.color.red_primary,
+                "More ONA",
+                ona.value!!
+            ),
+            ModelDTO(
+                6,
+                "Special",
+                "Recent Special's",
+                R.drawable.ic_outline_article_36,
+                R.color.red_primary,
+                "More Special",
+                special.value!!
+            ),
+        )
     }
 }

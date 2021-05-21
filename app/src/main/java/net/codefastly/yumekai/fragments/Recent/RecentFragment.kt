@@ -12,6 +12,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentRecentBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.MorePopularAdapter
@@ -38,7 +42,7 @@ class RecentFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recent, container, false)
 
         viewmodel = ViewModelProvider(this).get(RecentViewModel::class.java)
-
+        viewmodel.getAllData()
         inicializePopularRecyclerView()
         inicializeRecyclerView()
 
@@ -70,103 +74,16 @@ class RecentFragment : Fragment() {
 
     }
 
-
     fun ObserveData() {
-        with(viewmodel) {
+        viewmodel.list.observe(viewLifecycleOwner, Observer {
+            refresdata()
+        })
 
-            getRecentsData().observeForever(Observer {
-                history = it
-                refresdata()
-            })
-
-            getRecentsTVData().observeForever(Observer {
-                tv = it
-                refresdata()
-            })
-            getRecentsMoviesData().observeForever(Observer {
-                movies = it
-                refresdata()
-            })
-
-            getRecentsOvaData().observeForever(Observer {
-                ova = it
-                refresdata()
-            })
-
-            getRecentsONAData().observeForever(Observer {
-                ona = it
-                refresdata()
-            })
-
-            getRecentsSpecialData().observeForever(Observer {
-                special = it
-                refresdata()
-            })
-        }
     }
 
+
     fun refresdata() {
-
-        var list = listOf<ModelDTO>(
-            ModelDTO(
-                1,
-                "Historial",
-                "Last seen anime",
-                R.drawable.ic_baseline_navigate_next_24,
-                R.color.red_primary,
-                "More Historial",
-                viewmodel.history
-            ),
-            ModelDTO(
-                2,
-                "TV",
-                "Recent TV",
-                R.drawable.ic_outline_article_36,
-                R.color.red_primary,
-                "More TV",
-                viewmodel.tv
-            ),
-
-            ModelDTO(
-                3,
-                "Peliculas",
-                "Recent Movies",
-                R.drawable.ic_outline_article_36,
-                R.color.red_primary,
-                "More Peliculas",
-                viewmodel.movies
-            ),
-
-            ModelDTO(
-                4,
-                "OVA",
-                "Recent OVA's",
-                R.drawable.ic_outline_article_36,
-                R.color.red_primary,
-                "More OVA",
-                viewmodel.ova
-            ),
-            ModelDTO(
-                5,
-                "ONA",
-                "Recent ONA's",
-                R.drawable.ic_outline_article_36,
-                R.color.red_primary,
-                "More ONA",
-                viewmodel.ona
-            ),
-            ModelDTO(
-                6,
-                "Special",
-                "Recent Special's",
-                R.drawable.ic_outline_article_36,
-                R.color.red_primary,
-                "More Special",
-                viewmodel.special
-            ),
-        )
-        Log.d("Hola", list.toString())
-        adapter.setData(list)
+        adapter.setData(viewmodel.list.value!!)
         adapter.notifyDataSetChanged()
         observePopularData()
     }
