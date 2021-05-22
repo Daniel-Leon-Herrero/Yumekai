@@ -68,7 +68,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun initRecylcerView(){
-        searchAdapter = SearchAnimeAdapter( requireContext() )
+        searchAdapter = SearchAnimeAdapter( requireContext() , this)
         with(binding.searchScreenRv){
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager( requireContext(), LinearLayoutManager.VERTICAL, false)

@@ -1,6 +1,5 @@
-package net.codefastly.yumekai.repository
+package net.codefastly.yumekai.repository.online
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope

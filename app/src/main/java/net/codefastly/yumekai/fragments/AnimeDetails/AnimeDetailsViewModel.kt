@@ -1,11 +1,9 @@
 package net.codefastly.yumekai.fragments.AnimeDetails
 
-import android.util.Log
 import androidx.lifecycle.*
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
-import net.codefastly.yumekai.models.calendar.AnimeDTO
-import net.codefastly.yumekai.repository.repositoryAPI
+import net.codefastly.yumekai.repository.online.repositoryAPI
 
 class AnimeDetailsViewModel : ViewModel() {
     private val repo = repositoryAPI()

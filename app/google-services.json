@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "681020223340",
+    "project_id": "yumekai-app",
+    "storage_bucket": "yumekai-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681020223340:android:365e3b2bd3d777c5490d49",
+        "android_client_info": {
+          "package_name": "net.codefastly.yumekai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681020223340-1q7vcs3c1oh2kgf2ji4kebef5k44pruo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.codefastly.yumekai",
+            "certificate_hash": "340c42537f8b6763e7ea3d568cb1b26f0198ebae"
+          }
+        },
+        {
+          "client_id": "681020223340-v2k24shlhq2pmtcllnjou73fg1s241v4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5HmXP5csSf26TabTY0Do4nmOj5CkPXwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681020223340-v2k24shlhq2pmtcllnjou73fg1s241v4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

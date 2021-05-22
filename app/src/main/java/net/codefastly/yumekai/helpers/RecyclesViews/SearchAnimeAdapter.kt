@@ -12,15 +12,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.ActivityNavigator
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.activities.DashboardFullScreen.DashboardFullScreen
+import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
+import net.codefastly.yumekai.fragments.Search.SearchFragment
 import net.codefastly.yumekai.models.recents.Result
 
-class SearchAnimeAdapter( private val context: Context):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchAnimeAdapter( private val context: Context, val currentFragment: Fragment):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private val VIEW_TYPE_EMPTY: Int = 0
@@ -67,12 +71,10 @@ class SearchAnimeAdapter( private val context: Context):RecyclerView.Adapter<Rec
             }
             itemView.findViewById<TextView>(R.id.calendar_categoryTag).text = anime.type
             itemView.setOnClickListener {
-                val intent =  Intent(context, DashboardFullScreen::class.java).apply {
-                    this.putExtra( "FULL_SCREEN_TO_LOAD", 1122 )
-                    this.putExtra("ANIME_DETAILS", anime.mal_id)
-
-                }
-                context.startActivity(intent)
+                val mContext = context as FragmentActivity
+                val transaction = mContext.supportFragmentManager.beginTransaction()
+                transaction.hide(currentFragment).add(R.id.nav_host_fullscreen_fragment,AnimeDetailsFragment(anime.mal_id,currentFragment))
+                transaction.commit()
             }
         }
     }

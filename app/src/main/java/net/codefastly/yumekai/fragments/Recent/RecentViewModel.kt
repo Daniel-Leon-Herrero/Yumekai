@@ -1,6 +1,5 @@
 package net.codefastly.yumekai.fragments.Recent
 
-import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -10,7 +9,7 @@ import net.codefastly.yumekai.R
 import net.codefastly.yumekai.models.recents.ModelDTO
 import net.codefastly.yumekai.models.recents.RecentsResponse
 import net.codefastly.yumekai.models.recents.Result
-import net.codefastly.yumekai.repository.repositoryAPI
+import net.codefastly.yumekai.repository.online.repositoryAPI
 
 class RecentViewModel : ViewModel() {
     var recentsData = MutableLiveData<RecentsResponse>()

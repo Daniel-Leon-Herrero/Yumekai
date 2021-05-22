@@ -2,10 +2,9 @@ package net.codefastly.yumekai.fragments.Search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import net.codefastly.yumekai.models.recents.Result
-import net.codefastly.yumekai.repository.repositoryAPI
+import net.codefastly.yumekai.repository.online.repositoryAPI
 
 class SearchViewModel: ViewModel() {
 
