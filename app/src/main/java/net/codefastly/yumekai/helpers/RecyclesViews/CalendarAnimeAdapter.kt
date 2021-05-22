@@ -17,7 +17,6 @@ import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.activities.Dashboard.DashboardActivity
 import net.codefastly.yumekai.activities.DashboardFullScreen.DashboardFullScreen
-import net.codefastly.yumekai.fragments.Calendar.CalendarFragmentDirections
 import net.codefastly.yumekai.models.calendar.AnimeDTO
 import java.lang.Exception
 

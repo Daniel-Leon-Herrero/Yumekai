@@ -48,6 +48,9 @@ class DashboardActivity : AppCompatActivity() {
             recentFragment = RecentFragment()
             newsFragment = NewsFragment()
             currentFragment = calendarFragment
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(R.id.nav_host_fragment,currentFragment)
+            transaction.commit()
         }
 
 

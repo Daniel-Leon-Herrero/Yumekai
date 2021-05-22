@@ -82,7 +82,6 @@ class RecentAdapter(private val context: Context) :
                     with(findViewById<Button>(R.id.item_recent_button)) {
                         this.setText(textButton)
                         setOnClickListener {
-                            findNavController().navigate(R.id.action_recentFragment_to_historyFragment)
                         }
                     }
 
