@@ -70,6 +70,14 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        /* TEMPORAL PARA PRUEBAS */
+        binding.btnCategoryFilter.setOnClickListener {
+            val intent = Intent(this, DashboardFullScreen::class.java).apply {
+                this.putExtra( "FULL_SCREEN_TO_LOAD", R.id.btnCategoryFilter )
+            }
+            startActivity(intent)
+        }
+
         bottomSheetBehavior.setBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -91,7 +99,6 @@ class DashboardActivity : AppCompatActivity() {
             }
 
         })
-
 
 
         binding.menu.setOnItemSelectedListener { id ->
