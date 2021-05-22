@@ -1,4 +1,4 @@
-package net.codefastly.yumekai.viewmodels
+package net.codefastly.yumekai.utilities
 
 import net.codefastly.yumekai.fragments.Calendar.CalendarViewModel
 import net.codefastly.yumekai.fragments.News.NewsViewModel
