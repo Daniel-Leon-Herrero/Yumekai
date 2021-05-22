@@ -11,7 +11,7 @@ import net.codefastly.yumekai.models.calendar.AnimeDTO
 import net.codefastly.yumekai.models.recents.ModelDTO
 import java.io.Serializable
 import kotlin.properties.Delegates
-/***/
+
 class DashboardFullScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
