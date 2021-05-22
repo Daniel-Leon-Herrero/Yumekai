@@ -45,7 +45,6 @@ class RecentViewModel : ViewModel() {
     var list = MutableLiveData<List<ModelDTO>>()
 
     init {
-
         getRecentsData()
         getAllData()
     }
@@ -147,6 +146,5 @@ class RecentViewModel : ViewModel() {
                 special.value!!
             ),
         )
-        Log.d("ListData", list.value.toString())
     }
 }

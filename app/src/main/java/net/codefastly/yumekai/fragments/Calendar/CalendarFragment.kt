@@ -1,20 +1,17 @@
 package net.codefastly.yumekai.fragments.Calendar
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.*
-import kotlinx.coroutines.delay
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentCalendarBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.CalendarAnimeAdapter
-import net.codefastly.yumekai.viewmodels.getCalendarViewModel
+import net.codefastly.yumekai.utilities.getCalendarViewModel
 
 class CalendarFragment : Fragment() {
 

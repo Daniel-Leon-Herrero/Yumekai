@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentNewsBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.NewsAnimeAdapter
-import net.codefastly.yumekai.viewmodels.getNewsViewModel
+import net.codefastly.yumekai.utilities.getNewsViewModel
 
 class NewsFragment : Fragment() {
 
