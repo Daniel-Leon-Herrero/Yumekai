@@ -56,16 +56,17 @@ class ShopCategoriesAdapter(val context: Context):RecyclerView.Adapter<ShopCateg
 
                     itemView.setOnClickListener {
                         if(cat.lock){
-                            Snackbar.make(itemView,"Aun no esta disponible",Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(itemView,"This category is not available now",Snackbar.LENGTH_SHORT).show()
                         }else{
-                            val mContext = context as FragmentActivity
+                          /*  val mContext = context as FragmentActivity
                             val transaction = mContext.supportFragmentManager.beginTransaction()
                             transaction.replace(
                                 R.id.nav_host_fullscreen_fragment,
                                 SearchFragment(),
                                 "searchFragment"
                             )
-                            transaction.commit()
+                            transaction.commit()*/
+                            Snackbar.make(itemView,"Go to "+ cat.name,Snackbar.LENGTH_SHORT).show()
                         }
                     }
                 }

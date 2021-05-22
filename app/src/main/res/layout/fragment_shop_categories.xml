@@ -17,10 +17,9 @@
             android:id="@+id/shop_category_btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="16dp"
-            android:background="@color/transparent"
-            android:drawableStart="@drawable/ic_baseline_keyboard_arrow_left_36"
+            android:background="@color/alt_black"
+            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_left_36"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,10 +39,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="28dp"
             android:text="SHOP CATEGORIES"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_screen_btn_back" />
+            app:layout_constraintTop_toBottomOf="@+id/shop_category_RVBanner" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shop_category_RVCategories"

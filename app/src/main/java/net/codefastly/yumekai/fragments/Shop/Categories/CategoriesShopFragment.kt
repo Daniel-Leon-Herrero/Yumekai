@@ -6,18 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentShopCategoriesBinding
+import net.codefastly.yumekai.helpers.RecyclesViews.ShopBannerAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.ShopCategoriesAdapter
 
 class CategoriesShopFragment : Fragment() {
 
     private lateinit var binding : FragmentShopCategoriesBinding
     private lateinit var viewModel: CategoriesShopViewModel
-    private lateinit var adapter: ShopCategoriesAdapter
+    private lateinit var adapterCategories: ShopCategoriesAdapter
+    private lateinit var adapterBanner: ShopBannerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,17 +28,25 @@ class CategoriesShopFragment : Fragment() {
         binding.shopCategoryBtnBack.setOnClickListener {
             requireActivity().finish()
         }
+        inicializeBanner()
         inicializeCategories()
 
         // Inflate the layout for this fragment
         return binding.root
     }
 
+    fun inicializeBanner(){
+        adapterBanner = ShopBannerAdapter(requireContext())
+        binding.shopCategoryRVBanner.adapter = adapterBanner
+        adapterBanner.setData(viewModel.bannerData)
+        adapterBanner.notifyDataSetChanged()
+    }
+
     fun inicializeCategories(){
-        adapter = ShopCategoriesAdapter(requireContext())
-        binding.shopCategoryRVCategories.adapter = adapter
-        adapter.setData(viewModel.categoriesItem)
-        adapter.notifyDataSetChanged()
+        adapterCategories = ShopCategoriesAdapter(requireContext())
+        binding.shopCategoryRVCategories.adapter = adapterCategories
+        adapterCategories.setData(viewModel.categoriesItem)
+        adapterCategories.notifyDataSetChanged()
 
     }
 }
