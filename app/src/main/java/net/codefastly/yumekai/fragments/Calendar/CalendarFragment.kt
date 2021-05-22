@@ -1,6 +1,7 @@
 package net.codefastly.yumekai.fragments.Calendar
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import kotlinx.coroutines.delay
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentCalendarBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.CalendarAnimeAdapter
+import net.codefastly.yumekai.viewmodels.getCalendarViewModel
 
 class CalendarFragment : Fragment() {
 
@@ -26,9 +28,9 @@ class CalendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
-        viewModel = ViewModelProvider(this).get(CalendarViewModel::class.java)
 
-        viewModel.obtainDayOfWeek(requireContext())
+        viewModel = getCalendarViewModel()
+       // viewModel.obtainDayOfWeek(requireContext())
         viewModel.day.observe(viewLifecycleOwner, Observer {
             // Añadir Delay para no sobrecargar de peticiones
             observeData()
@@ -66,7 +68,7 @@ class CalendarFragment : Fragment() {
 
     fun observeData() {
 
-        viewModel.searchByDay(viewModel.day.value!!).observe(viewLifecycleOwner, Observer { animes ->
+        viewModel.anime.observe(viewLifecycleOwner, Observer { animes ->
             adapter.setListAnimes(animes)
             adapter.notifyDataSetChanged()
         })

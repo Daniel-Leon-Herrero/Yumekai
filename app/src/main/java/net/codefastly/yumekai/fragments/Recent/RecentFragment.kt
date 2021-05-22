@@ -23,6 +23,7 @@ import net.codefastly.yumekai.helpers.RecyclesViews.RecentAdapter
 import net.codefastly.yumekai.models.recents.ModelDTO
 import net.codefastly.yumekai.models.recents.RecentsResponse
 import net.codefastly.yumekai.models.recents.Result
+import net.codefastly.yumekai.viewmodels.getRecentsViewModel
 
 
 class RecentFragment : Fragment() {
@@ -41,8 +42,7 @@ class RecentFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recent, container, false)
 
-        viewmodel = ViewModelProvider(this).get(RecentViewModel::class.java)
-        viewmodel.getAllData()
+        viewmodel = getRecentsViewModel()
         inicializePopularRecyclerView()
         inicializeRecyclerView()
 
@@ -60,7 +60,7 @@ class RecentFragment : Fragment() {
     }
 
     fun observePopularData() {
-        viewmodel.getRecentsData().observe(viewLifecycleOwner, Observer { recents ->
+        viewmodel.recentsData.observe(viewLifecycleOwner, Observer { recents ->
             adapterPopular.setData(recents.results)
             adapterPopular.notifyDataSetChanged()
         })

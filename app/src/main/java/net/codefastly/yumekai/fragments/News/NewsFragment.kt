@@ -12,11 +12,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentNewsBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.NewsAnimeAdapter
+import net.codefastly.yumekai.viewmodels.getNewsViewModel
 
 class NewsFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsBinding
-    private val viewModel by lazy { ViewModelProvider(this).get(NewsViewModel::class.java) }
+    private lateinit var  viewModel: NewsViewModel
 
     private lateinit var recyclerAdapter: NewsAnimeAdapter
 
@@ -26,7 +27,7 @@ class NewsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate( inflater, R.layout.fragment_news, container, false )
-
+        viewModel = getNewsViewModel()
         this.initRecyclerView()
 
         if(!viewModel.fetchingData){

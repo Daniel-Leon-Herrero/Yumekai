@@ -21,6 +21,9 @@ class NewsViewModel: ViewModel() {
     private val RSS2JSON = "https://api.rss2json.com/v1/api.json?rss_url="
 
     var fetchingData : Boolean = false
+    init {
+        fetchFeedRSS()
+    }
 
     fun fetchFeedRSS(){
         viewModelScope.launch {

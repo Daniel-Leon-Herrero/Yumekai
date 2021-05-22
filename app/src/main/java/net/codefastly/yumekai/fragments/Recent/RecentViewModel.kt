@@ -13,6 +13,9 @@ import net.codefastly.yumekai.models.recents.Result
 import net.codefastly.yumekai.repository.repositoryAPI
 
 class RecentViewModel : ViewModel() {
+    var recentsData = MutableLiveData<RecentsResponse>()
+    private val repo = repositoryAPI()
+
 
     var result = listOf<Result>(
         Result(
@@ -32,7 +35,7 @@ class RecentViewModel : ViewModel() {
         )
     )
     var itemList: RecentsResponse = RecentsResponse(1, 11, true, "dsdsdsdsdsd", result)
-    private val repo = repositoryAPI()
+
     var history = MutableLiveData<RecentsResponse>(itemList)
     var tv = MutableLiveData<RecentsResponse>(itemList)
     var movies = MutableLiveData<RecentsResponse>(itemList)
@@ -41,18 +44,27 @@ class RecentViewModel : ViewModel() {
     var special = MutableLiveData<RecentsResponse>(itemList)
     var list = MutableLiveData<List<ModelDTO>>()
 
+    init {
 
-    fun getRecentsData(): MutableLiveData<RecentsResponse> {
+        getRecentsData()
+        getAllData()
+    }
+
+
+    fun getRecentsData() {
         var mutableData: MutableLiveData<RecentsResponse> = MutableLiveData()
         repo.getRecents().observeForever(Observer { recents ->
             mutableData.value = recents
         })
-        return mutableData
+
+        recentsData = mutableData
     }
 
     fun getAllData(){
+
         viewModelScope.launch {
             withContext(Dispatchers.Main) {
+
                 repo.getRecentsMovies().observeForever(Observer {
                     movies.value = it
                 })
@@ -68,7 +80,7 @@ class RecentViewModel : ViewModel() {
                 repo.getRecentsOva().observeForever(Observer {
                     ova.value = it
                 })
-                delay(500)
+                delay(800)
                 repo.getRecentsSpecial().observeForever(Observer {
                     special.value = it
                 })
@@ -135,5 +147,6 @@ class RecentViewModel : ViewModel() {
                 special.value!!
             ),
         )
+        Log.d("ListData", list.value.toString())
     }
 }
