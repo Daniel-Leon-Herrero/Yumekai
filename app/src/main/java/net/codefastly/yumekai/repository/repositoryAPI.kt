@@ -361,12 +361,12 @@ class repositoryAPI {
     }
 
 
-    fun searchAnimeByQuery( query: String ): LiveData<RecentsResponse> {
+    fun searchDataByQuery( query: String, queryCategory: String ): LiveData<RecentsResponse> {
         var mutableData = MutableLiveData<RecentsResponse>()
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val call = getRecentsRetrofit().create(APIService::class.java)
-                    .searchAnimeByQuery("anime?q=${query}&page=1")
+                    .searchAnimeByQuery("${queryCategory}?q=${query}&page=1")
                 val datos = call.body()
                 withContext(Dispatchers.Main){
                     if ( call.isSuccessful ){
@@ -377,6 +377,7 @@ class repositoryAPI {
         }
         return mutableData
     }
+
 
 
 }

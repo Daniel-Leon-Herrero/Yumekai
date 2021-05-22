@@ -11,17 +11,19 @@ class SearchViewModel: ViewModel() {
 
     private val repo = repositoryAPI()
 
-    private val _animeList = MutableLiveData<List<Result>>()
-    val animeList : LiveData<List<Result>> get() = _animeList
+    private val _dataList = MutableLiveData<List<Result>>()
+    val dataList : LiveData<List<Result>> get() = _dataList
 
     var fetchingData: Boolean = false
 
-    fun fetchAnimeByQuery( query: String ){
+    fun fetchAnimeByQuery( query: String, queryCategory: String ){
         fetchingData = true;
-        repo.searchAnimeByQuery(query).observeForever { dataResponse ->
+        repo.searchDataByQuery(query, queryCategory).observeForever { dataResponse ->
             fetchingData = false
-            _animeList.value = dataResponse.results
+            _dataList.value = dataResponse.results
         }
     }
+
+
 
 }
