@@ -69,7 +69,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        tools:text="VOLUME 1"
+                        tools:text="Volume 1"
+                        android:textAllCaps="true"
                         android:fontFamily="@font/nunito_black"/>
 
                     <!-- LAST PRICE -->

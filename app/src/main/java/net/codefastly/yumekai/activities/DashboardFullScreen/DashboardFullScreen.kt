@@ -2,17 +2,13 @@ package net.codefastly.yumekai.activities.DashboardFullScreen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
 import net.codefastly.yumekai.fragments.History.HistoryFragment
 import net.codefastly.yumekai.fragments.Search.SearchFragment
 import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
 import net.codefastly.yumekai.fragments.Shop.Categories.CategoriesShopFragment
-import net.codefastly.yumekai.models.calendar.AnimeDTO
-import net.codefastly.yumekai.models.recents.ModelDTO
-import java.io.Serializable
-import kotlin.properties.Delegates
+
 
 class DashboardFullScreen : AppCompatActivity() {
 
@@ -40,7 +36,7 @@ class DashboardFullScreen : AppCompatActivity() {
             )
             1122 -> transaction.replace(
                 R.id.nav_host_fullscreen_fragment,
-                AnimeDetailsFragment(Anime),
+                AnimeDetailsFragment(Anime, SearchFragment()),
                 "AnimeDetailsFragment"
             )
             R.id.btnCategoryFilter -> transaction.replace(
