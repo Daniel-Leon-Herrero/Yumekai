@@ -21,12 +21,14 @@ class DashboardFullScreen : AppCompatActivity() {
 
         val FULL_SCREEN_TO_LOAD = intent.getIntExtra("FULL_SCREEN_TO_LOAD", 0)
         val ANIME_DETAIL = intent.getIntExtra("ANIME_DETAILS", 0)
-        val PREVIOUS_FRAGMENT = intent.getStringExtra("PREVIOUS_FRAGMENT")
+        /* val PREVIOUS_FRAGMENT = intent.getStringExtra("PREVIOUS_FRAGMENT")
+        * loadOnFullScreen(FULL_SCREEN_TO_LOAD, ANIME_DETAIL, if( PREVIOUS_FRAGMENT.isNullOrEmpty()) "" else PREVIOUS_FRAGMENT )
+        * */
 
-        loadOnFullScreen(FULL_SCREEN_TO_LOAD, ANIME_DETAIL, if( PREVIOUS_FRAGMENT.isNullOrEmpty()) "" else PREVIOUS_FRAGMENT )
+        loadOnFullScreen(FULL_SCREEN_TO_LOAD, ANIME_DETAIL)
     }
 
-    private fun loadOnFullScreen(btnId: Int, Anime: Int, previousFragmentTag: String ) {
+    private fun loadOnFullScreen(btnId: Int, Anime: Int ) {
         val transaction = supportFragmentManager.beginTransaction()
         when (btnId) {
             R.id.btnSearch -> transaction.replace(
@@ -41,7 +43,7 @@ class DashboardFullScreen : AppCompatActivity() {
             )
             1122 -> transaction.replace(
                 R.id.nav_host_fullscreen_fragment,
-                AnimeDetailsFragment(Anime, getPreviousFragment( previousFragmentTag ) ),
+                AnimeDetailsFragment(Anime, null ),
                 "AnimeDetailsFragment"
             )
             R.id.btnCategoryFilter -> transaction.replace(
@@ -59,13 +61,15 @@ class DashboardFullScreen : AppCompatActivity() {
         transaction.commit()
     }
 
-    private fun getPreviousFragment( tag: String ): Fragment? {
+    /*
+    * private fun getPreviousFragment( tag: String ): Fragment? {
         Log.d("TAG", tag)
         return when(tag){
             "calendar" -> null
             "recent" -> null
-            else -> SearchFragment()
+            else -> null
         }
     }
+    * */
 
 }
