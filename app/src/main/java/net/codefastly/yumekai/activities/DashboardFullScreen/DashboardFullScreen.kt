@@ -8,6 +8,7 @@ import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
 import net.codefastly.yumekai.fragments.History.HistoryFragment
 import net.codefastly.yumekai.fragments.Search.SearchFragment
 import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
+import net.codefastly.yumekai.fragments.Shop.Categories.CategoriesShopFragment
 import net.codefastly.yumekai.models.calendar.AnimeDTO
 import net.codefastly.yumekai.models.recents.ModelDTO
 import java.io.Serializable
@@ -46,6 +47,11 @@ class DashboardFullScreen : AppCompatActivity() {
                 R.id.nav_host_fullscreen_fragment,
                 SeriesFragment(),
                 "seriesFragment"
+            )
+            R.id.bottom_menu_sheet_btn_shops -> transaction.replace(
+                R.id.nav_host_fullscreen_fragment,
+                CategoriesShopFragment(),
+                "CategoriesShopFragment"
             )
             else -> finish()
         }

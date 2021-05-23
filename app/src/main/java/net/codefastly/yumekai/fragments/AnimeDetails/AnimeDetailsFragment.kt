@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -22,7 +23,7 @@ import net.codefastly.yumekai.models.anime.Genre
 import net.codefastly.yumekai.models.calendar.AnimeDTO
 import java.io.Serializable
 
-class AnimeDetailsFragment(val anime: Int) : Fragment() {
+class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fragment() {
     private lateinit var binding: FragmentAnimeDetailsBinding
     private lateinit var viewModel: AnimeDetailsViewModel
     private lateinit var recyclerViewCategories: RecyclerView
@@ -41,6 +42,17 @@ class AnimeDetailsFragment(val anime: Int) : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_anime_details, container, false)
 
+        binding.animeBtnBack.setOnClickListener {
+            if(previousFragment == null){
+                requireActivity().finish()
+            }else{
+                val mContext = context as FragmentActivity
+                val transaction = mContext.supportFragmentManager.beginTransaction()
+                transaction.remove(this).show(previousFragment)
+                transaction.commit()
+            }
+
+        }
         viewModel.anime.value = anime
 
         bindData()
@@ -51,9 +63,6 @@ class AnimeDetailsFragment(val anime: Int) : Fragment() {
     private fun bindData() {
         with(binding) {
             var sb = StringBuilder()
-                animeBtnBack.setOnClickListener {
-                    requireActivity().finish()
-                }
 
                 //Mas Detalles
                 with(viewModel.animeDetails) {

@@ -1,12 +1,9 @@
 package net.codefastly.yumekai.fragments.Calendar
 
-import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import net.codefastly.yumekai.R
 import net.codefastly.yumekai.models.calendar.AnimeDTO
-import net.codefastly.yumekai.repository.repositoryAPI
+import net.codefastly.yumekai.repository.online.repositoryAPI
 import java.util.*
 
 class CalendarViewModel : ViewModel() {

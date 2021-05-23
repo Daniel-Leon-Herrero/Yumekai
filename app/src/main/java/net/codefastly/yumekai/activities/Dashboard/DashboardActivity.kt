@@ -63,6 +63,14 @@ class DashboardActivity : AppCompatActivity() {
             expandCloseMenuSheet()
         }
 
+        binding.bottomMenuSheetBtnShops.setOnClickListener {
+            val intent = Intent(this, DashboardFullScreen::class.java).apply {
+                this.putExtra( "FULL_SCREEN_TO_LOAD", R.id.bottom_menu_sheet_btn_shops )
+            }
+            startActivity(intent)
+            expandCloseMenuSheet()
+        }
+
         binding.btnSearch.setOnClickListener { _ ->
             val intent = Intent(this, DashboardFullScreen::class.java).apply {
                 this.putExtra( "FULL_SCREEN_TO_LOAD", R.id.btnSearch )
