@@ -1,15 +1,10 @@
 package net.codefastly.yumekai.fragments.Shop.Series
 
-import android.content.ContentValues.TAG
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import net.codefastly.yumekai.models.shop.SerieShop
-import net.codefastly.yumekai.models.shop.Volume
 import net.codefastly.yumekai.models.shop.VolumeShop
 import net.codefastly.yumekai.repository.online.RepositoryFirebase
 
@@ -18,6 +13,7 @@ class SeriesViewModel: ViewModel() {
     private lateinit var _owner: LifecycleOwner
 
     private val repositoryFirebase: RepositoryFirebase = RepositoryFirebase()
+
 
     var fetching: Boolean = false
 

@@ -17,6 +17,7 @@ class VolumesMangaAdapter( private val context: Context):RecyclerView.Adapter<Vo
     private var dataList= mutableListOf<VolumeShop>()
 
     fun setData( data: MutableList<VolumeShop> ){
+        data.sortBy { it.volume }
         this.dataList = data
     }
 
