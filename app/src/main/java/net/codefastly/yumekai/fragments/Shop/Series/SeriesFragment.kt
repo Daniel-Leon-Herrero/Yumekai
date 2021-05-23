@@ -35,6 +35,7 @@ class SeriesFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_series, container, false)
 
         initRecyclersView()
+
         viewModel.getAllVolumes("manga")
 
         viewModel.series.observe( requireActivity(), { dataList ->
@@ -50,8 +51,6 @@ class SeriesFragment : Fragment() {
         binding.seriesScreenBtnClose.setOnClickListener {
             requireActivity().finish()
         }
-
-
 
         return binding.root
     }
