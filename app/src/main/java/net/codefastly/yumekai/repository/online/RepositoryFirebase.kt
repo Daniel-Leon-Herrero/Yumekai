@@ -3,10 +3,10 @@ package net.codefastly.yumekai.repository.online
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
-import net.codefastly.yumekai.models.shop.SerieShop
 import net.codefastly.yumekai.models.shop.VolumeDetailsShop
 import net.codefastly.yumekai.models.shop.VolumeShop
 import java.lang.Exception
@@ -57,9 +57,9 @@ class RepositoryFirebase{
 
     }
 
-    fun getVolumesBySerie( serie: String ){
+    fun getVolumesBySerie( serie: String ): LiveData<MutableList<VolumeShop>> {
 
-        val mutableData : MutableLiveData<List<VolumeShop>>
+        val mutableData = MutableLiveData<MutableList<VolumeShop>>()
 
         db
             .collection("volumes")
@@ -68,6 +68,7 @@ class RepositoryFirebase{
             .addOnSuccessListener { documents ->
                 try {
                     if( documents != null ){
+                        var dataList = mutableListOf<VolumeShop>()
                         for (document in documents){
                             val details = document.data["details"] as Map<String, Any>
                             val volume = VolumeShop(
@@ -81,16 +82,17 @@ class RepositoryFirebase{
                                 document.data["title"] as String,
                                 document.data["volumne"] as Long,
                             )
-
-
-
+                            dataList.add(volume)
                         }
+                        mutableData.value = dataList
                     }
                 }catch ( ex: Exception ){
                     Log.e(TAG, ex.message.toString() )
                 }
             }
             .addOnFailureListener {  e -> Log.e(TAG, "Error writing document", e) }
+
+        return mutableData
     }
 
 }

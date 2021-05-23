@@ -34,9 +34,8 @@ class SeriesFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_series, container, false)
 
+        initViewModel()
         initRecyclersView()
-
-        viewModel.getAllVolumes("manga")
 
         viewModel.series.observe( requireActivity(), { dataList ->
             seriesAdapter.setData( dataList )
@@ -70,6 +69,12 @@ class SeriesFragment : Fragment() {
             itemAnimator = DefaultItemAnimator()
             adapter = seriesAdapter
         }
+    }
+
+    private fun initViewModel(){
+        viewModel.attach( this )
+        viewModel.getAllSeries()
+        viewModel.getVolumesBySerie("Magi")
     }
 
 

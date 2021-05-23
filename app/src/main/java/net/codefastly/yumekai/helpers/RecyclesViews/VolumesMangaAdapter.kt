@@ -8,14 +8,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
-import net.codefastly.yumekai.models.shop.Volume
+import net.codefastly.yumekai.models.shop.VolumeShop
 
 class VolumesMangaAdapter( private val context: Context):RecyclerView.Adapter<VolumesMangaAdapter.VolumesMangaViewHolder>() {
 
-    private var dataList: List<Volume> = emptyList()
+    private var dataList= mutableListOf<VolumeShop>()
 
-    fun setData( data: List<Volume> ){
+    fun setData( data: MutableList<VolumeShop> ){
         this.dataList = data
     }
 
@@ -32,15 +33,19 @@ class VolumesMangaAdapter( private val context: Context):RecyclerView.Adapter<Vo
         holder.render( volume )
     }
 
-    override fun getItemCount(): Int = if( dataList.isNotEmpty() ) this.dataList.size else 1
+    override fun getItemCount(): Int = if( dataList.isNotEmpty() ) this.dataList.size else 0
 
     inner class VolumesMangaViewHolder( itemView: View ): RecyclerView.ViewHolder( itemView ){
-        fun render( volume: Volume ){
+        fun render( volume: VolumeShop ){
+            if ( volume.image_url.isNullOrEmpty() ){
+                itemView.findViewById<ImageView>(R.id.item_shop_volume_image).setImageResource(R.drawable.magi_manga_vol1)
+            }else{
+                Picasso.get().load( volume.image_url).into(itemView.findViewById<ImageView>(R.id.item_shop_volume_image))
+            }
             with(itemView){
                 findViewById<TextView>(R.id.item_shop_volume_title).text = volume.title
-                findViewById<ImageView>(R.id.item_shop_volume_image).setImageResource(R.drawable.magi_manga_vol1)
                 with(findViewById<TextView>(R.id.item_shop_volume_rtl_price)){
-                    text = "$" + volume.rtl_price.toString()
+                    text = "$" + volume.price_rtl.toString()
                     paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 }
                 findViewById<TextView>(R.id.item_shop_volume_price).text = "$" + volume.price.toString()
