@@ -72,7 +72,7 @@ class CalendarAnimeAdapter(private val context: Context) :
                 val intent =  Intent(context, DashboardFullScreen::class.java).apply {
                     this.putExtra( "FULL_SCREEN_TO_LOAD", 1122 )
                     this.putExtra("ANIME_DETAILS", cal.day.mal_id)
-
+                    this.putExtra("PREVIOUS_FRAGMENT", "calendar" )
                 }
                 context.startActivity(intent)
             }

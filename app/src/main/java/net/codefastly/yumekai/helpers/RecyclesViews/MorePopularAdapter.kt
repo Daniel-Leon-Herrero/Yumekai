@@ -64,7 +64,7 @@ class MorePopularAdapter(private val context: Context) : RecyclerView.Adapter<Mo
                 val intent =  Intent(context, DashboardFullScreen::class.java).apply {
                     this.putExtra( "FULL_SCREEN_TO_LOAD", 1122 )
                     this.putExtra("ANIME_DETAILS", item.mal_id)
-
+                    this.putExtra("PREVIOUS_FRAGMENT", "recent" )
                 }
                 context.startActivity(intent)
             }

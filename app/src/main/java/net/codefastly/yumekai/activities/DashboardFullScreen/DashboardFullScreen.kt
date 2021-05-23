@@ -2,8 +2,11 @@ package net.codefastly.yumekai.activities.DashboardFullScreen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
+import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
 import net.codefastly.yumekai.fragments.History.HistoryFragment
 import net.codefastly.yumekai.fragments.Search.SearchFragment
 import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
@@ -18,10 +21,12 @@ class DashboardFullScreen : AppCompatActivity() {
 
         val FULL_SCREEN_TO_LOAD = intent.getIntExtra("FULL_SCREEN_TO_LOAD", 0)
         val ANIME_DETAIL = intent.getIntExtra("ANIME_DETAILS", 0)
-        loadOnFullScreen(FULL_SCREEN_TO_LOAD, ANIME_DETAIL)
+        val PREVIOUS_FRAGMENT = intent.getStringExtra("PREVIOUS_FRAGMENT")
+
+        loadOnFullScreen(FULL_SCREEN_TO_LOAD, ANIME_DETAIL, if( PREVIOUS_FRAGMENT.isNullOrEmpty()) "" else PREVIOUS_FRAGMENT )
     }
 
-    private fun loadOnFullScreen(btnId: Int, Anime: Int) {
+    private fun loadOnFullScreen(btnId: Int, Anime: Int, previousFragmentTag: String ) {
         val transaction = supportFragmentManager.beginTransaction()
         when (btnId) {
             R.id.btnSearch -> transaction.replace(
@@ -36,7 +41,7 @@ class DashboardFullScreen : AppCompatActivity() {
             )
             1122 -> transaction.replace(
                 R.id.nav_host_fullscreen_fragment,
-                AnimeDetailsFragment(Anime, SearchFragment()),
+                AnimeDetailsFragment(Anime, getPreviousFragment( previousFragmentTag ) ),
                 "AnimeDetailsFragment"
             )
             R.id.btnCategoryFilter -> transaction.replace(
@@ -52,6 +57,15 @@ class DashboardFullScreen : AppCompatActivity() {
             else -> finish()
         }
         transaction.commit()
+    }
+
+    private fun getPreviousFragment( tag: String ): Fragment? {
+        Log.d("TAG", tag)
+        return when(tag){
+            "calendar" -> null
+            "recent" -> null
+            else -> SearchFragment()
+        }
     }
 
 }

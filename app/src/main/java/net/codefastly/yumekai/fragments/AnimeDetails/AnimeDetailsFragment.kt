@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentAnimeDetailsBinding
+import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
 import net.codefastly.yumekai.helpers.RecyclesViews.CategoryAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.CharacterAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.StaffAnimeAdapter
@@ -43,9 +44,11 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
             DataBindingUtil.inflate(inflater, R.layout.fragment_anime_details, container, false)
 
         binding.animeBtnBack.setOnClickListener {
-            if(previousFragment == null){
+            Log.d("TAG_FRAGMENT", previousFragment.toString())
+            Log.d("TAG_FRAGMENT", CalendarFragment().toString())
+            if(previousFragment == null ){
                 requireActivity().finish()
-            }else{
+            } else{
                 val mContext = context as FragmentActivity
                 val transaction = mContext.supportFragmentManager.beginTransaction()
                 transaction.remove(this).show(previousFragment)
