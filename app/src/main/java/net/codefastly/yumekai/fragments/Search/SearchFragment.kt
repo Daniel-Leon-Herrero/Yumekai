@@ -37,13 +37,25 @@ class SearchFragment : Fragment() {
         binding.searchScreenSearchView.setOnQueryTextListener( object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 var queryCategory: String = ""
+                var result: String = ""
                 if( !viewModel.fetchingData && !query.isNullOrEmpty()){
                     if( query!!.startsWith("@")){
-                        queryCategory = query!!.substring(1, query!!.indexOf(":")).toLowerCase()
+                        try {
+                            queryCategory = query!!.substring(1, query!!.indexOf(":")).toLowerCase()
+                            result = query!!.substring( (query!!.indexOf(":") + 1) , query.length)
+                        } catch ( e: StringIndexOutOfBoundsException ){
+                            val regex = Regex("[^A-Za-z0-9 ]")
+                            val resultQuery = regex.replace(query, "")
+                            result = resultQuery
+                            Log.d("QUERY", e.toString() )
+                        }
+                    }else{
+                        result = query
                     }
+
                     when(queryCategory){
-                        "manga" -> viewModel.fetchAnimeByQuery(query, queryCategory)
-                        else -> viewModel.fetchAnimeByQuery(query, "anime" )
+                        "manga" -> viewModel.fetchAnimeByQuery(result, queryCategory)
+                        else -> viewModel.fetchAnimeByQuery(result, "anime" )
                     }
                 }
                 return true

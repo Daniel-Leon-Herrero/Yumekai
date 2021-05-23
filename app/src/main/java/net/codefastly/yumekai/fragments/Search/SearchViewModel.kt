@@ -16,6 +16,12 @@ class SearchViewModel: ViewModel() {
     var fetchingData: Boolean = false
 
     fun fetchAnimeByQuery( query: String, queryCategory: String ){
+
+        if ( query.isNullOrEmpty() ) {
+            fetchingData = false;
+            return
+        }
+
         fetchingData = true;
         repo.searchDataByQuery(query, queryCategory).observeForever { dataResponse ->
             fetchingData = false
