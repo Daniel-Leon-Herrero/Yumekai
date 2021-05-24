@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import net.codefastly.yumekai.interfaces.LocalAnimeDao
-import net.codefastly.yumekai.models.room.LocalAnime
+import net.codefastly.yumekai.interfaces.LocalAnimeHistoryDao
+import net.codefastly.yumekai.models.room.LocalAnimeHistory
 
 
-@Database(entities = arrayOf(LocalAnime::class), version = 1)
+@Database(entities = arrayOf(LocalAnimeHistory::class), version = 4)
 abstract class LocalAnimeDB : RoomDatabase() {
-    abstract fun localAnimeDao(): LocalAnimeDao
+    abstract fun localAnimeDao(): LocalAnimeHistoryDao
 
     companion object{
         @Volatile

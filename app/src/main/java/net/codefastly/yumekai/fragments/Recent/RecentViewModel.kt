@@ -99,7 +99,7 @@ class RecentViewModel : ViewModel() {
     }
 
     private fun setHistoryData(){
-            LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().getLocalAnime().observe(_owner,
+            LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().getLocalAnimeHistory().observe(_owner,
                 Observer {
                     var result = mutableListOf<Result>()
                     it.forEach {

@@ -1,7 +1,6 @@
 package net.codefastly.yumekai.fragments.AnimeDetails
 
 import android.content.Context
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -9,7 +8,7 @@ import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.helpers.LocalDatabase.LocalAnimeDB
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
-import net.codefastly.yumekai.models.room.LocalAnime
+import net.codefastly.yumekai.models.room.LocalAnimeHistory
 import net.codefastly.yumekai.repository.online.repositoryAPI
 
 class AnimeDetailsViewModel() : ViewModel() {
@@ -57,21 +56,21 @@ class AnimeDetailsViewModel() : ViewModel() {
         if (animeDetails != null) {
             with(LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao()) {
                 if (_context != null) {
-                    if (!getIfExsists(animeDetails.value!!.mal_id)) {
-                        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().insertLocalAnime(
-                            LocalAnime(
+                    if (!getIfExsistsHistory(animeDetails.value!!.mal_id)) {
+                        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().insertLocalAnimeHistory(
+                            LocalAnimeHistory(
                                 animeDetails.value!!.mal_id,
                                 animeDetails.value!!.title,
-                                animeDetails.value!!.synopsis,
+                                animeDetails.value?.synopsis,
                                 animeDetails.value!!.image_url,
                             )
                         )
                     }else{
-                        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().updateLocalAnime(
-                            LocalAnime(
+                        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().updateLocalAnimeHistory(
+                            LocalAnimeHistory(
                                 animeDetails.value!!.mal_id,
                                 animeDetails.value!!.title,
-                                animeDetails.value!!.synopsis,
+                                animeDetails.value?.synopsis,
                                 animeDetails.value!!.image_url,
                             )
                         )
@@ -85,7 +84,7 @@ class AnimeDetailsViewModel() : ViewModel() {
     }
     private fun deleteLastAnime(){
         with(LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao()) {
-            deleteLocalAnime(getLastAnime())
+            deleteLocalAnimeHistory(getLastAnimeHistory())
         }
     }
 }

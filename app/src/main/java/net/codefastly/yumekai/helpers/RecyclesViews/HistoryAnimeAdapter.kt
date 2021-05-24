@@ -1,7 +1,7 @@
 package net.codefastly.yumekai.helpers.RecyclesViews
 
 import android.content.Context
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
-import net.codefastly.yumekai.models.room.LocalAnime
+import net.codefastly.yumekai.activities.DashboardFullScreen.DashboardFullScreen
+import net.codefastly.yumekai.models.room.LocalAnimeHistory
 
 class HistoryAnimeAdapter( private val context: Context ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -21,9 +22,9 @@ class HistoryAnimeAdapter( private val context: Context ): RecyclerView.Adapter<
         private val VIEW_TYPE_HISTORY: Int = 1
     }
 
-    private var dataList: List<LocalAnime> = emptyList()
+    private var dataList: List<LocalAnimeHistory> = emptyList()
 
-    fun setData( data: List<LocalAnime> ){
+    fun setData( data: List<LocalAnimeHistory> ){
         this.dataList = data
     }
 
@@ -45,7 +46,7 @@ class HistoryAnimeAdapter( private val context: Context ): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder , position: Int) {
         when( getItemViewType(position) ){
             VIEW_TYPE_HISTORY -> {
-                val historyItem: LocalAnime = this.dataList[position]
+                val historyItem: LocalAnimeHistory = this.dataList[position]
                 HistoryViewHolder( holder.itemView ).render( historyItem )
             }
             else -> NoContentViewHolder( holder.itemView ).render( context.getString(R.string.history_screen_no_content_title), context.getString(R.string.history_screen_no_content_desc )  )
@@ -55,10 +56,17 @@ class HistoryAnimeAdapter( private val context: Context ): RecyclerView.Adapter<
     override fun getItemCount(): Int = if( this.dataList.size === 0 ) 1 else this.dataList.size
 
     inner class HistoryViewHolder( itemView: View ): RecyclerView.ViewHolder( itemView ){
-        fun render( historyItem: LocalAnime ){
+        fun render( historyItem: LocalAnimeHistory ){
             Picasso.get().load(historyItem.imageUrl).into(itemView.findViewById<ImageView>(R.id.history_screen_img))
             itemView.findViewById<TextView>(R.id.history_screen_title).text = historyItem.title
             itemView.findViewById<TextView>(R.id.history_screen_desc).text = historyItem.synopsis
+            itemView.setOnClickListener {
+                val intent =  Intent(context, DashboardFullScreen::class.java).apply {
+                    this.putExtra( "FULL_SCREEN_TO_LOAD", 1122 )
+                    this.putExtra("ANIME_DETAILS", historyItem.mal_id)
+                }
+                context.startActivity(intent)
+            }
             itemView.findViewById<Button>(R.id.history_screen_btn_finalized).setOnClickListener {
                 Snackbar.make(itemView,"Finalized",Snackbar.LENGTH_SHORT).show()
             }
