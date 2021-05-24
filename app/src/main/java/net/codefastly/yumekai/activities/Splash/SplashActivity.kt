@@ -10,6 +10,7 @@ import net.codefastly.yumekai.activities.OnBoarding.OnBoardingActivity
 import net.codefastly.yumekai.fragments.Calendar.CalendarViewModel
 import net.codefastly.yumekai.fragments.News.NewsViewModel
 import net.codefastly.yumekai.fragments.Recent.RecentViewModel
+import net.codefastly.yumekai.utilities.getRecentsViewModel
 import net.codefastly.yumekai.utilities.setCalendarViewModel
 import net.codefastly.yumekai.utilities.setNewsViewModel
 import net.codefastly.yumekai.utilities.setRecentsViewModel
