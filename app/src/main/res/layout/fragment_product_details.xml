@@ -191,10 +191,7 @@
                         android:textAllCaps="false"
                         android:textSize="16sp"
                         android:layout_marginStart="5dp"/>
-
-
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -245,7 +242,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text=""
-                                tools:text="As of writing, the raw scans and spoilers for chapter 84 have not been leaked yet. Such raw scans usually starts appearing 2-3 days prior to their official release and can be found online on forums like Reddit and 4chan. So you can expect this month’s to be available by on <strong>23rd May</strong>. we will add the spoilers as soon as they are available and notify you."
+                                tools:text="Descripcion de prueba"
                                 android:textSize="10sp"
                                 android:fontFamily="@font/nunito"
                                 />

@@ -2,12 +2,14 @@ package net.codefastly.yumekai.helpers.RecyclesViews
 
 import android.content.Context
 import android.graphics.Paint
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.models.shop.VolumeShop
@@ -51,6 +53,11 @@ class VolumesMangaAdapter( private val context: Context):RecyclerView.Adapter<Vo
                 }
                 findViewById<TextView>(R.id.item_shop_volume_price).text = "$" + volume.price.toString()
                 findViewById<TextView>(R.id.item_shop_volume_vol).text = "Volume ${volume.volume}"
+
+                setOnClickListener {
+                    Snackbar.make( it , "Volumen seleccionado: ${volume.title} ( ${volume.volume} )", Snackbar.LENGTH_SHORT).show()
+
+                }
             }
         }
     }
