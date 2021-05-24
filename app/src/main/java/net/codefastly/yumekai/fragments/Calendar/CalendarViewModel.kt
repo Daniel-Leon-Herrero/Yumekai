@@ -75,7 +75,8 @@ class CalendarViewModel : ViewModel() {
     fun previusDay(day: String):String{
         var actual: Int = dayOfWeek.indexOf(day)
         if(actual == 0){
-            actual = 7
+            actual = 6
+            return dayOfWeek.get(actual)
         }
         return dayOfWeek.get(actual - 1)
     }
@@ -84,6 +85,7 @@ class CalendarViewModel : ViewModel() {
         var actual: Int = dayOfWeek.indexOf(day)
         if(actual == 6){
             actual = 0
+            return dayOfWeek.get(actual)
         }
         return dayOfWeek.get(actual + 1)
     }
