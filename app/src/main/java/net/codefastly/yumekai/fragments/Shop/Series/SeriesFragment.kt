@@ -55,7 +55,7 @@ class SeriesFragment : Fragment() {
     }
 
     private fun initRecyclersView(){
-        seriesAdapter = SeriesMangaAdapter( requireContext() )
+        seriesAdapter = SeriesMangaAdapter( requireContext(), viewModel )
         volumesAdapter = VolumesMangaAdapter( requireContext() )
         with(binding.seriesScreenVolumesRv){
             setHasFixedSize(true)
