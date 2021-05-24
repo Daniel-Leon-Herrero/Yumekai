@@ -5,12 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import net.codefastly.yumekai.interfaces.LocalAnimeDao
+import net.codefastly.yumekai.interfaces.LocalAnimeHistoryDao
 import net.codefastly.yumekai.models.room.LocalAnime
+import net.codefastly.yumekai.models.room.LocalAnimeHistory
 
 
-@Database(entities = arrayOf(LocalAnime::class), version = 1)
+@Database(entities = [LocalAnimeHistory::class, LocalAnime::class], version = 5)
 abstract class LocalAnimeDB : RoomDatabase() {
-    abstract fun localAnimeDao(): LocalAnimeDao
+    abstract fun localAnimeHistoryDao(): LocalAnimeHistoryDao
+    abstract fun localAnime(): LocalAnimeDao
 
     companion object{
         @Volatile
