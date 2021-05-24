@@ -28,11 +28,24 @@ class CategoriesShopFragment : Fragment() {
         binding.shopCategoryBtnBack.setOnClickListener {
             requireActivity().finish()
         }
+
         inicializeBanner()
         inicializeCategories()
 
+        initViewModel()
+
+        viewModel.categories.observe(viewLifecycleOwner, { categoriesList ->
+            adapterCategories.setData( categoriesList )
+            adapterCategories.notifyDataSetChanged()
+        })
+
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun initViewModel(){
+        viewModel.attach( this )
+        viewModel.fetchShopCategories()
     }
 
     fun inicializeBanner(){
@@ -45,8 +58,5 @@ class CategoriesShopFragment : Fragment() {
     fun inicializeCategories(){
         adapterCategories = ShopCategoriesAdapter(requireContext(), this)
         binding.shopCategoryRVCategories.adapter = adapterCategories
-        adapterCategories.setData(viewModel.categoriesItem)
-        adapterCategories.notifyDataSetChanged()
-
     }
 }

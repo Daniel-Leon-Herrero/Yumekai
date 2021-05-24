@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import net.codefastly.yumekai.models.shop.CategoriesShop
 import net.codefastly.yumekai.models.shop.SerieShop
 import net.codefastly.yumekai.models.shop.VolumeDetailsShop
 import net.codefastly.yumekai.models.shop.VolumeShop
@@ -86,6 +87,32 @@ class RepositoryFirebase{
                 }
             }
             .addOnFailureListener {  e -> Log.e(TAG, "Error writing document", e) }
+
+        return mutableData
+    }
+
+    fun getAllShopCategories(): LiveData<MutableList<CategoriesShop>>{
+        val mutableData = MutableLiveData<MutableList<CategoriesShop>>()
+
+        db
+            .collection("categories")
+            .get()
+            .addOnSuccessListener { documents ->
+                if( documents != null){
+                    var dataList = mutableListOf<CategoriesShop>()
+                    for( document in documents ){
+                        dataList.add( CategoriesShop(
+                            document.data["title"] as String,
+                            document.data["icon"] as String,
+                            document.data["available"] as Boolean,
+                            document.data["order"] as Long
+                        )
+                        )
+                    }
+                    dataList.sortBy { it.order }
+                    mutableData.value = dataList
+                }
+            }
 
         return mutableData
     }
@@ -583,9 +610,94 @@ class RepositoryFirebase{
             "order" to 1
         )
 
+        val cat2 = hashMapOf(
+            "title" to "Figures",
+            "icon" to "toys",
+            "available" to false,
+            "order" to 2
+        )
+
+        val cat3 = hashMapOf(
+            "title" to "Clothing",
+            "icon" to "clothe",
+            "available" to false,
+            "order" to 3
+        )
+
+        val cat4 = hashMapOf(
+            "title" to "Audio",
+            "icon" to "audio",
+            "available" to false,
+            "order" to 4
+        )
+
+        val cat5 = hashMapOf(
+            "title" to "Games",
+            "icon" to "game",
+            "available" to false,
+            "order" to 5
+        )
+
+        val cat6 = hashMapOf(
+            "title" to "Anime & Video",
+            "icon" to "video",
+            "available" to false,
+            "order" to 6
+        )
+
         db
             .collection("categories")
             .add(cat1)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.e(TAG, "Success ${document.id}")
+                }
+            }
+            .addOnFailureListener { e -> Log.e(TAG, e.toString() ) }
+
+        db
+            .collection("categories")
+            .add(cat2)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.e(TAG, "Success ${document.id}")
+                }
+            }
+            .addOnFailureListener { e -> Log.e(TAG, e.toString() ) }
+
+        db
+            .collection("categories")
+            .add(cat3)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.e(TAG, "Success ${document.id}")
+                }
+            }
+            .addOnFailureListener { e -> Log.e(TAG, e.toString() ) }
+
+        db
+            .collection("categories")
+            .add(cat4)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.e(TAG, "Success ${document.id}")
+                }
+            }
+            .addOnFailureListener { e -> Log.e(TAG, e.toString() ) }
+
+        db
+            .collection("categories")
+            .add(cat5)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.e(TAG, "Success ${document.id}")
+                }
+            }
+            .addOnFailureListener { e -> Log.e(TAG, e.toString() ) }
+
+        db
+            .collection("categories")
+            .add(cat6)
             .addOnSuccessListener { document ->
                 if( document != null ){
                     Log.e(TAG, "Success ${document.id}")
