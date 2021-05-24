@@ -1,7 +1,9 @@
 package net.codefastly.yumekai.helpers.RecyclesViews
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -79,6 +81,7 @@ class SeriesMangaAdapter( private val context: Context, private val viewModel: S
         fun render( serie: SerieShop ){
             itemView.findViewById<TextView>(R.id.item_shop_series_active_title).text = serie.title
             if( serie.image_url.isNotEmpty() ){
+                Log.e(TAG, serie.image_url)
                 Picasso.get().load(serie.image_url).into( itemView.findViewById<ImageView>(R.id.item_shop_series_active_img))
             }else {
                 itemView.findViewById<ImageView>(R.id.item_shop_series_active_img).setImageResource(R.drawable.yumekai_failed_portrait)

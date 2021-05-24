@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="240dp"
-    android:layout_width="160dp"
+    android:layout_height="200dp"
+    android:layout_width="130dp"
     card_view:cardCornerRadius="4dp"
-    tools:cardBackgroundColor="@color/alt_black"
+    card_view:cardBackgroundColor="@color/red_primary"
     android:layout_margin="10dp">
 
     <ImageView
@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        tools:src="@drawable/yumekai_unknown_portrait"/>
+        tools:src="@drawable/yumekai_unknown_portrait"
+        android:paddingBottom="4dp"/>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_height="36dp"

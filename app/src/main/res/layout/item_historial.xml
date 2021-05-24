@@ -7,7 +7,9 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     card_view:cardBackgroundColor="@color/alt_black"
-    card_view:cardCornerRadius="4dp">
+    card_view:cardCornerRadius="4dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="wrap_content"
