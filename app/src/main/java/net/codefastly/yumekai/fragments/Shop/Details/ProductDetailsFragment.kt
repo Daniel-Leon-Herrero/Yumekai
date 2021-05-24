@@ -9,9 +9,11 @@ import androidx.databinding.DataBindingUtil
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentProductDetailsBinding
+import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
+import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
 import net.codefastly.yumekai.models.shop.VolumeShop
 
-class ProductDetailsFragment( val volumeItem: VolumeShop ) : Fragment() {
+class ProductDetailsFragment( val volumeItem: VolumeShop, val seriesFragment: SeriesFragment ) : Fragment() {
 
     private lateinit var binding: FragmentProductDetailsBinding
 
@@ -26,6 +28,16 @@ class ProductDetailsFragment( val volumeItem: VolumeShop ) : Fragment() {
 
         binding.productDetailsScreenBtnClose.setOnClickListener {
             requireActivity().finish()
+        }
+
+        binding.productDetailsScreenBtnBack.setOnClickListener {
+
+            if( seriesFragment.isAdded ){
+                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                transaction.remove(this).show( seriesFragment )
+                transaction.commit()
+            }
+
         }
 
         return binding.root
