@@ -1,5 +1,6 @@
 package net.codefastly.yumekai.fragments.AnimeDetails
 
+import android.animation.Animator
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentAnimeDetailsBinding
@@ -23,6 +25,7 @@ import net.codefastly.yumekai.helpers.RecyclesViews.StaffAnimeAdapter
 import net.codefastly.yumekai.models.anime.Genre
 import net.codefastly.yumekai.models.calendar.AnimeDTO
 import java.io.Serializable
+import java.lang.Exception
 
 class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fragment() {
     private lateinit var binding: FragmentAnimeDetailsBinding
@@ -59,6 +62,31 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
         viewModel.anime.value = anime
 
         bindData()
+
+        viewModel.fetching.observe(viewLifecycleOwner, { fetchCount ->
+            if( fetchCount == 2 ){
+                /* binding.animeDetailsScreenLoadingLayout.visibility = View.GONE */
+                binding.animeDetailsScreenLoadingLayout.animate()
+                    .alpha(0.0f)
+                    .setDuration(300)
+                    .setListener( object: Animator.AnimatorListener {
+                        override fun onAnimationStart(animation: Animator?) {
+                        }
+
+                        override fun onAnimationEnd(animation: Animator?) {
+                            binding.animeDetailsScreenLoadingLayout.visibility = View.GONE
+                        }
+
+                        override fun onAnimationCancel(animation: Animator?) {
+                        }
+
+                        override fun onAnimationRepeat(animation: Animator?) {
+                        }
+
+                    });
+            }
+        })
+
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -73,6 +101,8 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
                         with(this?.value) {
                             if (this?.image_url!!.isNotEmpty()) {
                                 Picasso.get().load(this?.image_url).into(animeDetailsImg)
+                            }else{
+                                animeDetailsImg.setImageResource(R.drawable.yumekai_failed_portrait)
                             }
                             animeDetailsTitle.text = this?.title
                             animeDetailsSynopsis.text = this?.synopsis
@@ -129,6 +159,7 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
                 }
 
         }
+
     }
 
     private fun inicializeCategoryAdapter(genre: List<Genre>) {

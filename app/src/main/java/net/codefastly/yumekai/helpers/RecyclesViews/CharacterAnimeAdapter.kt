@@ -43,7 +43,7 @@ class CharacterAnimeAdapter(private val context: Context) :
 
     inner class StaffAnimeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(char: Character) {
-            if (char.image_url.isNotEmpty()) {
+            if (char.image_url.isNotEmpty() && !char.image_url.contains("questionmark")) {
                 Picasso.get().load(char.image_url)
                     .into(itemView.findViewById<ImageView>(R.id.animeDetail_item_image),
                         object : Callback {
@@ -52,13 +52,13 @@ class CharacterAnimeAdapter(private val context: Context) :
 
                             override fun onError(e: Exception?) {
                                 itemView.findViewById<ImageView>(R.id.animeDetail_item_image)
-                                    .setImageResource(R.drawable.yumekai_failed_portrait)
+                                    .setImageResource(R.drawable.yumekai_unknown_portrait)
                             }
 
                         })
             } else {
                 itemView.findViewById<ImageView>(R.id.animeDetail_item_image)
-                    .setImageResource(R.drawable.yumekai_failed_portrait)
+                    .setImageResource(R.drawable.yumekai_unknown_portrait)
             }
             itemView.findViewById<TextView>(R.id.animeDetail_item_name).text = char.name
 

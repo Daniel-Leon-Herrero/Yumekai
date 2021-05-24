@@ -11,6 +11,8 @@ class AnimeDetailsViewModel : ViewModel() {
     var animeDetails: MutableLiveData<AnimeResponse> = MutableLiveData()
     var animeCharacter: MutableLiveData<CharacterAnimeResponse> = MutableLiveData()
 
+    private val _fetching = MutableLiveData<Int>()
+    val fetching : LiveData<Int> get() = _fetching
 
     init {
         anime.observeForever(Observer {
@@ -19,11 +21,13 @@ class AnimeDetailsViewModel : ViewModel() {
     }
 
     fun getAnime(anime: Int) {
-
+        _fetching.value = 0
         repo.getAnime(anime).observeForever { animes ->
+            _fetching.value = _fetching.value!! + 1
             animeDetails.value = animes
         }
         repo.getAnimeCharacter(anime).observeForever{ staff ->
+            _fetching.value = _fetching.value!! + 1
             animeCharacter.value = staff
         }
 
