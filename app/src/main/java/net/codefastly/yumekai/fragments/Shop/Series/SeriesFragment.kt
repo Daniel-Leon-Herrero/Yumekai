@@ -10,17 +10,19 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentSeriesBinding
+import net.codefastly.yumekai.fragments.Shop.Categories.CategoriesShopFragment
 import net.codefastly.yumekai.helpers.RecyclesViews.SeriesMangaAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.VolumesMangaAdapter
 
 
-class SeriesFragment : Fragment() {
+class SeriesFragment( private val previousFragment: CategoriesShopFragment ) : Fragment() {
 
     private lateinit var binding: FragmentSeriesBinding
 
@@ -57,6 +59,15 @@ class SeriesFragment : Fragment() {
 
         binding.seriesScreenBtnClose.setOnClickListener {
             requireActivity().finish()
+        }
+
+        binding.seriesScreenBtnBack.setOnClickListener {
+            if( previousFragment.isAdded ){
+                val mContext = context as FragmentActivity
+                val transaction = mContext.supportFragmentManager.beginTransaction()
+                transaction.remove(this).show( previousFragment )
+                transaction.commit()
+            }
         }
 
         return binding.root

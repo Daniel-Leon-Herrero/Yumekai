@@ -3,7 +3,9 @@ package net.codefastly.yumekai.activities.DashboardFullScreen
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
@@ -46,11 +48,6 @@ class DashboardFullScreen : AppCompatActivity() {
                 AnimeDetailsFragment(Anime, null ),
                 "AnimeDetailsFragment"
             )
-            R.id.btnCategoryFilter -> transaction.replace(
-                R.id.nav_host_fullscreen_fragment,
-                SeriesFragment(),
-                "seriesFragment"
-            )
             R.id.bottom_menu_sheet_btn_shops -> transaction.replace(
                 R.id.nav_host_fullscreen_fragment,
                 CategoriesShopFragment(),
@@ -61,15 +58,5 @@ class DashboardFullScreen : AppCompatActivity() {
         transaction.commit()
     }
 
-    /*
-    * private fun getPreviousFragment( tag: String ): Fragment? {
-        Log.d("TAG", tag)
-        return when(tag){
-            "calendar" -> null
-            "recent" -> null
-            else -> null
-        }
-    }
-    * */
 
 }

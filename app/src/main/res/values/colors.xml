@@ -10,7 +10,7 @@
 
     <!-- YUMEKAI GLOBAL COLORS -->
     <color name="red_primary">#b81d24</color>
-    <color name="red_primary_op">#600408</color>  <!-- #9C681216-->
+    <color name="red_primary_op">#4E1F1F</color>  <!-- #9C681216-->
     <color name="transparent">#00000000</color>
         <!-- Dark Mode Colors -->
         <color name="dark_black">#221f1f</color>

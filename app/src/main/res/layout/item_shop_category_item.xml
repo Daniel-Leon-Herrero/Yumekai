@@ -32,7 +32,8 @@
                  android:layout_marginTop="16dp"
                  android:src="@drawable/ic_baseline_menu_book_36"
                  android:layout_gravity="center_horizontal"
-                 android:background="@color/transparent"/>
+                 android:background="@color/transparent"
+                 app:tint="@color/soft_white" />
 
              <TextView
                  android:id="@+id/txtBuy"

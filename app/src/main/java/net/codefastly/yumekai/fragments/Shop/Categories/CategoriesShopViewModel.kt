@@ -12,8 +12,8 @@ class CategoriesShopViewModel: ViewModel() {
 
     init {
         bannerData = listOf(R.drawable.yumekai_shop_banner)
-        categoriesItem = listOf(CategoriesShop(R.drawable.ic_baseline_menu_book_36,"MANGA",false),
-            CategoriesShop(R.drawable.ic_baseline_menu_book_36, "FIGURES",true))
+        categoriesItem = listOf(CategoriesShop("Manga","book",true, 1),
+            CategoriesShop("Figures", "toy",false, 2))
     }
 
 

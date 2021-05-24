@@ -2,6 +2,7 @@ package net.codefastly.yumekai.helpers.RecyclesViews
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.fragments.Search.SearchFragment
+import net.codefastly.yumekai.fragments.Shop.Categories.CategoriesShopFragment
+import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
 import net.codefastly.yumekai.models.shop.CategoriesShop
 
-class ShopCategoriesAdapter(val context: Context):RecyclerView.Adapter<ShopCategoriesAdapter.categoriesViewHolder>() {
+class ShopCategoriesAdapter(val context: Context, private val currentFragment: CategoriesShopFragment ):RecyclerView.Adapter<ShopCategoriesAdapter.categoriesViewHolder>() {
 
     private var dataList = listOf<CategoriesShop>()
 
@@ -46,33 +49,41 @@ class ShopCategoriesAdapter(val context: Context):RecyclerView.Adapter<ShopCateg
     inner class categoriesViewHolder(itemview: View): RecyclerView.ViewHolder(itemview){
         fun bind(cat: CategoriesShop){
             with(itemView){
-                findViewById<ImageView>(R.id.item_shop_category_image).setImageResource(cat.image)
-                findViewById<TextView>(R.id.item_shop_category_name).text = cat.name
+                findViewById<ImageView>(R.id.item_shop_category_image).setImageResource( getImageResourceFromString( cat.icon ) )
+                findViewById<TextView>(R.id.item_shop_category_name).text = cat.title
                 with(findViewById<CardView>(R.id.item_shop_category_lock)){
-                    if(cat.lock){
-                        visibility = View.VISIBLE
-                    }else{
-                        visibility = View.GONE
-                    }
+
+                    visibility = if(!cat.available) View.VISIBLE else View.GONE
 
                     itemView.setOnClickListener {
-                        if(cat.lock){
+                        if(!cat.available){
                             Snackbar.make(itemView,"This category is not available now",Snackbar.LENGTH_SHORT).show()
                         }else{
-                          /*  val mContext = context as FragmentActivity
-                            val transaction = mContext.supportFragmentManager.beginTransaction()
-                            transaction.replace(
-                                R.id.nav_host_fullscreen_fragment,
-                                SearchFragment(),
-                                "searchFragment"
-                            )
-                            transaction.commit()*/
-                            Snackbar.make(itemView,"Go to "+ cat.name,Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(itemView,"Go to "+ cat.title ,Snackbar.LENGTH_SHORT).show()
+                            chargeOtherFragment( cat.title.toLowerCase() )
                         }
                     }
                 }
 
 
+            }
+        }
+    }
+
+    private fun getImageResourceFromString( iconString: String ): Int {
+        return when( iconString ) {
+            "book" -> R.drawable.ic_baseline_menu_book_36
+            else -> R.drawable.ic_baseline_qr_code_36
+        }
+    }
+
+    private fun chargeOtherFragment( routeLink: String ){
+        when( routeLink ){
+            "manga" -> {
+                val mContext = context as FragmentActivity
+                val transaction = mContext.supportFragmentManager.beginTransaction()
+                transaction.hide( currentFragment ).add(R.id.nav_host_fullscreen_fragment, SeriesFragment( currentFragment ), "seriesFragment")
+                transaction.commit()
             }
         }
     }

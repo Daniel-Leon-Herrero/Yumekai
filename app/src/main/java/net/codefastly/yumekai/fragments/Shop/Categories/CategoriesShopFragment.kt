@@ -43,7 +43,7 @@ class CategoriesShopFragment : Fragment() {
     }
 
     fun inicializeCategories(){
-        adapterCategories = ShopCategoriesAdapter(requireContext())
+        adapterCategories = ShopCategoriesAdapter(requireContext(), this)
         binding.shopCategoryRVCategories.adapter = adapterCategories
         adapterCategories.setData(viewModel.categoriesItem)
         adapterCategories.notifyDataSetChanged()

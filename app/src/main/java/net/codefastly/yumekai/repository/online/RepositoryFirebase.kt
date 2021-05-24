@@ -575,6 +575,25 @@ class RepositoryFirebase{
             }
     }
 
+    fun addCategories(){
+        val cat1 = hashMapOf(
+            "title" to "Manga",
+            "icon" to "book",
+            "available" to true,
+            "order" to 1
+        )
+
+        db
+            .collection("categories")
+            .add(cat1)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.e(TAG, "Success ${document.id}")
+                }
+            }
+            .addOnFailureListener { e -> Log.e(TAG, e.toString() ) }
+    }
+
 
 
 

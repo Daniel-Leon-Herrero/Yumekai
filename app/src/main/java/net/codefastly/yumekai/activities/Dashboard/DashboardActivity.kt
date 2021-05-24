@@ -81,10 +81,7 @@ class DashboardActivity : AppCompatActivity() {
 
         /* TEMPORAL PARA PRUEBAS */
         binding.btnCategoryFilter.setOnClickListener {
-            val intent = Intent(this, DashboardFullScreen::class.java).apply {
-                this.putExtra( "FULL_SCREEN_TO_LOAD", R.id.btnCategoryFilter )
-            }
-            startActivity(intent)
+            Snackbar.make(it, "Not implemented yet", Snackbar.LENGTH_SHORT).show()
         }
 
         bottomSheetBehavior.setBottomSheetCallback(object :
