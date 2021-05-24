@@ -11,10 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentAnimeDetailsBinding
@@ -23,9 +20,6 @@ import net.codefastly.yumekai.helpers.RecyclesViews.CategoryAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.CharacterAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.StaffAnimeAdapter
 import net.codefastly.yumekai.models.anime.Genre
-import net.codefastly.yumekai.models.calendar.AnimeDTO
-import java.io.Serializable
-import java.lang.Exception
 
 class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fragment() {
     private lateinit var binding: FragmentAnimeDetailsBinding
@@ -42,7 +36,7 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(this).get(AnimeDetailsViewModel::class.java)
-
+        viewModel.setAttach(requireContext(), this)
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_anime_details, container, false)
 
