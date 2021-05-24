@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -47,7 +48,7 @@ class ShopCategoriesAdapter(val context: Context):RecyclerView.Adapter<ShopCateg
             with(itemView){
                 findViewById<ImageView>(R.id.item_shop_category_image).setImageResource(cat.image)
                 findViewById<TextView>(R.id.item_shop_category_name).text = cat.name
-                with(findViewById<ImageView>(R.id.item_shop_category_lock)){
+                with(findViewById<CardView>(R.id.item_shop_category_lock)){
                     if(cat.lock){
                         visibility = View.VISIBLE
                     }else{

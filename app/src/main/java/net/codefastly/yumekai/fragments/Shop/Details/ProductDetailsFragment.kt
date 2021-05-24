@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.google.android.gms.tasks.OnSuccessListener
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentProductDetailsBinding
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
 import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
 import net.codefastly.yumekai.models.shop.VolumeShop
+import java.lang.Exception
 
 class ProductDetailsFragment( val volumeItem: VolumeShop, val seriesFragment: SeriesFragment ) : Fragment() {
 
@@ -48,7 +51,15 @@ class ProductDetailsFragment( val volumeItem: VolumeShop, val seriesFragment: Se
 
         with(binding){
 
-            Picasso.get().load(volumeItem.image_url).into( productDetailsScreenProductImg )
+            Picasso.get().load(volumeItem.image_url).into( productDetailsScreenProductImg, object : Callback{
+                override fun onSuccess() {
+                    productDetailsScreenLoadingLayout.visibility = View.GONE
+                }
+
+                override fun onError(e: Exception?) {
+                }
+
+            })
 
             productDetailsScreenTitle.text = "Volume ${volumeItem.volume}"
             productDetailsScreenStock.text = "Available"

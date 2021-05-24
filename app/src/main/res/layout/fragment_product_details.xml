@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:translationZ="1dp"
-            android:visibility="gone" >
+            android:visibility="visible" >
 
             <include layout="@layout/loading_screen" />
 
