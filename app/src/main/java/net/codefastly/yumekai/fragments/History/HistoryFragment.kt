@@ -45,7 +45,7 @@ class HistoryFragment : Fragment() {
             itemAnimator = DefaultItemAnimator()
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            _adapter = HistoryAnimeAdapter(requireContext())
+            _adapter = HistoryAnimeAdapter(requireContext(), this@HistoryFragment)
             this.adapter = _adapter
             observeData()
         }

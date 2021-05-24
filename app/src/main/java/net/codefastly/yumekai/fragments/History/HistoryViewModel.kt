@@ -14,7 +14,7 @@ class HistoryViewModel: ViewModel() {
     fun setFetch(context: Context, fragment: HistoryFragment){
         _context = context
         _owner = fragment
-        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().getLocalAnimeHistory().observe(_owner,
+        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao().getLocalAnimeHistory().observe(_owner,
             Observer {
                 _historyItems.value = it
             })

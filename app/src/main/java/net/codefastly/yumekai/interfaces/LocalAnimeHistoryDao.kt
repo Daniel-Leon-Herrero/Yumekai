@@ -6,7 +6,7 @@ import net.codefastly.yumekai.models.room.LocalAnimeHistory
 
 @Dao
 interface LocalAnimeHistoryDao {
-    // History
+
     @Query("SELECT * FROM LocalAnimeHistory ORDER BY date DESC")
     fun getLocalAnimeHistory(): LiveData<List<LocalAnimeHistory>>
 

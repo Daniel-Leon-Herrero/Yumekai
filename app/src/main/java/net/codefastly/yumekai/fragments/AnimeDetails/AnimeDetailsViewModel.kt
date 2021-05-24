@@ -54,10 +54,10 @@ class AnimeDetailsViewModel() : ViewModel() {
 
     private fun localData() {
         if (animeDetails != null) {
-            with(LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao()) {
+            with(LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao()) {
                 if (_context != null) {
                     if (!getIfExsistsHistory(animeDetails.value!!.mal_id)) {
-                        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().insertLocalAnimeHistory(
+                        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao().insertLocalAnimeHistory(
                             LocalAnimeHistory(
                                 animeDetails.value!!.mal_id,
                                 animeDetails.value!!.title,
@@ -66,7 +66,7 @@ class AnimeDetailsViewModel() : ViewModel() {
                             )
                         )
                     }else{
-                        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().updateLocalAnimeHistory(
+                        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao().updateLocalAnimeHistory(
                             LocalAnimeHistory(
                                 animeDetails.value!!.mal_id,
                                 animeDetails.value!!.title,
@@ -83,7 +83,7 @@ class AnimeDetailsViewModel() : ViewModel() {
         }
     }
     private fun deleteLastAnime(){
-        with(LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao()) {
+        with(LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao()) {
             deleteLocalAnimeHistory(getLastAnimeHistory())
         }
     }
