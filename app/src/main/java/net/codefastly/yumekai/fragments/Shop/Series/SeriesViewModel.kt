@@ -14,8 +14,8 @@ class SeriesViewModel: ViewModel() {
 
     private val repositoryFirebase: RepositoryFirebase = RepositoryFirebase()
 
-
-    var fetching: Boolean = false
+    private val _fetching = MutableLiveData<Boolean>()
+    val fetching : LiveData<Boolean> get() = _fetching
 
     private val _volumes = MutableLiveData<MutableList<VolumeShop>>()
     val volumes : LiveData<MutableList<VolumeShop>> get() = _volumes
@@ -33,9 +33,9 @@ class SeriesViewModel: ViewModel() {
     }
 
     fun getVolumesBySerie( serie: String ){
-        fetching = true
+        this._fetching.value = true
         this.repositoryFirebase.getVolumesBySerie( serie ).observe( _owner, { volumeList ->
-            fetching = false
+            this._fetching.value = false
             this._volumes.value = volumeList
         })
     }

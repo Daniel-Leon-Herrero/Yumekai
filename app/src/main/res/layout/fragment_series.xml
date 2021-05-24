@@ -13,6 +13,21 @@
         tools:context=".fragments.Shop.Series.SeriesFragment"
         android:background="@color/dark_black">
 
+        <RelativeLayout
+            android:id="@+id/series_screen_loading_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:translationZ="1dp"
+            android:visibility="visible" >
+
+            <include layout="@layout/loading_screen" />
+
+        </RelativeLayout>
+
         <ImageButton
             android:id="@+id/series_screen_btn_back"
             android:layout_width="wrap_content"

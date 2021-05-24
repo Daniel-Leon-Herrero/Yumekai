@@ -1,5 +1,6 @@
 package net.codefastly.yumekai.fragments.Shop.Series
 
+import android.animation.Animator
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -37,14 +38,20 @@ class SeriesFragment : Fragment() {
         initViewModel()
         initRecyclersView()
 
-        viewModel.series.observe( requireActivity(), { dataList ->
+        viewModel.series.observe(viewLifecycleOwner, { dataList ->
             seriesAdapter.setData( dataList )
             seriesAdapter.notifyDataSetChanged()
         })
 
-        viewModel.volumes.observe(requireActivity(), { dataList ->
+        viewModel.volumes.observe(viewLifecycleOwner, { dataList ->
             volumesAdapter.setData( dataList )
             volumesAdapter.notifyDataSetChanged()
+        })
+
+        viewModel.fetching.observe(viewLifecycleOwner, { visible ->
+            with(binding.seriesScreenLoadingLayout){
+                if( visible ) visibility = View.VISIBLE else visibility = View.GONE
+            }
         })
 
         binding.seriesScreenBtnClose.setOnClickListener {

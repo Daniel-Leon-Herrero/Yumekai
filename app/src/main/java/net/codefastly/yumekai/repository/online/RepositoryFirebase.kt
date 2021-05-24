@@ -20,7 +20,51 @@ class RepositoryFirebase{
     }
 
 
-    fun addTestVolume(){
+
+
+    fun getVolumesBySerie( serie: String ): LiveData<MutableList<VolumeShop>> {
+
+        val mutableData = MutableLiveData<MutableList<VolumeShop>>()
+
+        db
+            .collection("volumes")
+            .whereEqualTo("serie", serie)
+            .get()
+            .addOnSuccessListener { documents ->
+                try {
+                    if( documents != null ){
+                        var dataList = mutableListOf<VolumeShop>()
+                        for (document in documents){
+                            val details = document.data["details"] as Map<String, Any>
+                            val volume = VolumeShop(
+                                document.data["description"] as String,
+                                VolumeDetailsShop(details["age_rating"] as String, details["dimensional_weight"] as Double, details["genre"] as List<String>, details["language"] as String, details["page_count"] as Long, details["publisher"] as String, details["release_date"] as String, details["themes"] as List<String>),
+                                document.data["image_url"] as String,
+                                document.data["price"] as Double,
+                                document.data["price_rtl"] as Double,
+                                document.data["serie"] as String,
+                                document.data["start_description"] as String,
+                                document.data["title"] as String,
+                                document.data["volume"] as Long,
+                            )
+                            dataList.add(volume)
+                        }
+                        mutableData.value = dataList
+                    }
+                }catch ( ex: Exception ){
+                    Log.e(TAG, ex.message.toString() )
+                }
+            }
+            .addOnFailureListener {  e -> Log.e(TAG, "Error writing document", e) }
+
+        return mutableData
+    }
+
+
+    /*
+    * Only for test
+    * */
+    private fun addMagiVolumes(){
 
         val volume1 = hashMapOf(
             "serie" to "Magi",
@@ -225,43 +269,148 @@ class RepositoryFirebase{
             }
 
     }
+    private fun addKimetsuVolumes(){
 
-    fun getVolumesBySerie( serie: String ): LiveData<MutableList<VolumeShop>> {
+        val volume1 = hashMapOf(
+            "serie" to "Demon Slayer",
+            "title" to "Demon Slayer Kimetsu no Yaiba Manga",
+            "volume" to 1,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/manga%2FDemon%20Slayer%2Fdemon_slayer_manga_vol1.png?alt=media&token=0b44cbf5-5b99-4ce0-bd04-0aa72742ccd1",
+            "price_rtl" to 11.99,
+            "price" to 9.99,
+            "start_description" to "Demon Slayer: Kimetsu no Yaiba manga volume 1 features story and art by Koyoharu Gotouge.",
+            "description" to "In Taisho-era Japan, Tanjiro Kamado is a kindhearted boy who makes a living selling charcoal. But his peaceful life is shattered when a demon slaughters his entire family. His little sister Nezuko is the only survivor, but she has been transformed into a demon herself! Tanjiro sets out on a dangerous journey to find a way to return his sister to normal and destroy the demon who ruined his life.\n" +
+                    "\n" +
+                    "Learning to slay demons won’t be easy, and Tanjiro barely knows where to start. The surprise appearance of another boy named Giyu, who seems to know what’s going on, might provide some answers…but only if Tanjiro can stop Giyu from killing his sister first!",
+            "details" to hashMapOf(
+                "publisher" to "VIZ BOOKS",
+                "media" to "Manga",
+                "genre" to listOf<String>("Action"),
+                "themes" to listOf<String>("Battles","Historical","Supernatural"),
+                "age_rating" to "13+",
+                "release_date" to "03-07-2018",
+                "page_count" to 192,
+                "dimensional_weight" to 1.00,
+                "language" to "English"
+            )
+        )
 
-        val mutableData = MutableLiveData<MutableList<VolumeShop>>()
+        val volume2 = hashMapOf(
+            "serie" to "Demon Slayer",
+            "title" to "Demon Slayer Kimetsu no Yaiba Manga",
+            "volume" to 2,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/manga%2FDemon%20Slayer%2Fdemon_slayer_manga_vol2.png?alt=media&token=f61a5ad4-b374-4902-9bf6-3225cac074e3",
+            "price_rtl" to 11.99,
+            "price" to 9.99,
+            "start_description" to "Demon Slayer: Kimetsu no Yaiba manga volume 2 features story and art by Koyoharu Gotouge.",
+            "description" to "During final selection for the Demon Slayer Corps, Tanjiro faces a disfigured demon and uses the techniques taught by his master, Urokodaki! As Tanjiro begins to walk the path of the Demon Slayer, his search for the demon who murdered his family leads him to investigate the disappearances of young girls in a nearby town.",
+            "details" to hashMapOf(
+                "publisher" to "VIZ BOOKS",
+                "media" to "Manga",
+                "genre" to listOf<String>("Action"),
+                "themes" to listOf<String>("Battles","Historical","Supernatural"),
+                "age_rating" to "13+",
+                "release_date" to "04-09-2018",
+                "page_count" to 192,
+                "dimensional_weight" to 1.00,
+                "language" to "English"
+            )
+        )
 
-        db
-            .collection("volumes")
-            .whereEqualTo("serie", serie)
-            .get()
-            .addOnSuccessListener { documents ->
-                try {
-                    if( documents != null ){
-                        var dataList = mutableListOf<VolumeShop>()
-                        for (document in documents){
-                            val details = document.data["details"] as Map<String, Any>
-                            val volume = VolumeShop(
-                                document.data["description"] as String,
-                                VolumeDetailsShop(details["age_rating"] as String, details["dimensional_weight"] as Double, details["genre"] as List<String>, details["language"] as String, details["page_count"] as Long, details["publisher"] as String, details["release_date"] as String, details["themes"] as List<String>),
-                                document.data["image_url"] as String,
-                                document.data["price"] as Double,
-                                document.data["price_rtl"] as Double,
-                                document.data["serie"] as String,
-                                document.data["start_description"] as String,
-                                document.data["title"] as String,
-                                document.data["volume"] as Long,
-                            )
-                            dataList.add(volume)
-                        }
-                        mutableData.value = dataList
-                    }
-                }catch ( ex: Exception ){
-                    Log.e(TAG, ex.message.toString() )
+        val volume3 = hashMapOf(
+            "serie" to "Demon Slayer",
+            "title" to "Demon Slayer Kimetsu no Yaiba Manga",
+            "volume" to 3,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/manga%2FDemon%20Slayer%2Fdemon_slayer_manga_vol3.png?alt=media&token=42826fbf-91a3-47e5-b0a7-e4acf0c10fa1",
+            "price_rtl" to 11.99,
+            "price" to 9.99,
+            "start_description" to "Demon Slayer: Kimetsu no Yaiba manga volume 3 features story and art by Koyoharu Gotouge.",
+            "description" to "Tanjiro and Nezuko cross paths with two powerful demons who fight with magical weapons. Even help from Tamayo and Yushiro may not be enough to defeat these demons who claim to belong to the Twelve Kizuki that directly serve Kibutsuji, the demon responsible for all of Tanjiro’s woes! But if these demons can be defeated, what secrets can they reveal about Kibutsuji?",
+            "details" to hashMapOf(
+                "publisher" to "VIZ BOOKS",
+                "media" to "Manga",
+                "genre" to listOf<String>("Action"),
+                "themes" to listOf<String>("Battles","Historical","Supernatural"),
+                "age_rating" to "13+",
+                "release_date" to "06-11-2018",
+                "page_count" to 192,
+                "dimensional_weight" to 1.00,
+                "language" to "English"
+            )
+        )
+
+        val volume4 = hashMapOf(
+            "serie" to "Demon Slayer",
+            "title" to "Demon Slayer Kimetsu no Yaiba Manga",
+            "volume" to 4,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/manga%2FDemon%20Slayer%2Fdemon_slayer_manga_vol4.png?alt=media&token=769a4aa3-fd4a-48be-940d-504898c05ee5",
+            "price_rtl" to 11.99,
+            "price" to 9.99,
+            "start_description" to "Demon Slayer: Kimetsu no Yaiba manga volume 4 features story and art by Koyoharu Gotouge.",
+            "description" to "After a fierce battle with a demon inside a maddening house of ever-changing rooms, Tanjiro has a chance to find out about the fighter in the boar-head mask. Who is this passionate swordsman and what does he want? Later, a new mission has Tanjiro and his compatriots heading for Mt. Natagumo and a confrontation with a mysterious and horrifying threat…",
+            "details" to hashMapOf(
+                "publisher" to "VIZ BOOKS",
+                "media" to "Manga",
+                "genre" to listOf<String>("Action"),
+                "themes" to listOf<String>("Battles","Historical","Supernatural"),
+                "age_rating" to "13+",
+                "release_date" to "01-01-2019",
+                "page_count" to 192,
+                "dimensional_weight" to 1.00,
+                "language" to "English"
+            )
+        )
+
+
+
+        db.collection("volumes")
+            .add(volume1)
+            .addOnSuccessListener { documentReference ->
+                if(documentReference != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with ID: ${documentReference.id}")
                 }
             }
-            .addOnFailureListener {  e -> Log.e(TAG, "Error writing document", e) }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
 
-        return mutableData
+        db.collection("volumes")
+            .add(volume2)
+            .addOnSuccessListener { documentReference ->
+                if(documentReference != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with ID: ${documentReference.id}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
+
+        db.collection("volumes")
+            .add(volume3)
+            .addOnSuccessListener { documentReference ->
+                if(documentReference != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with ID: ${documentReference.id}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
+
+        db.collection("volumes")
+            .add(volume4)
+            .addOnSuccessListener { documentReference ->
+                if(documentReference != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with ID: ${documentReference.id}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
+
+
     }
+
+
+
 
 }
