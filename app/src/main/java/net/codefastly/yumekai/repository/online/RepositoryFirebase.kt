@@ -37,7 +37,7 @@ class RepositoryFirebase{
                             val details = document.data["details"] as Map<String, Any>
                             val volume = VolumeShop(
                                 document.data["description"] as String,
-                                VolumeDetailsShop(details["age_rating"] as String, details["dimensional_weight"] as Double, details["genre"] as List<String>, details["language"] as String, details["page_count"] as Long, details["publisher"] as String, details["release_date"] as String, details["themes"] as List<String>),
+                                VolumeDetailsShop(details["age_rating"] as String, details["dimensional_weight"] as Double, details["genre"] as List<String>, details["language"] as String, details["page_count"] as Long, details["publisher"] as String, details["release_date"] as String, details["themes"] as List<String>, details["media"] as String),
                                 document.data["image_url"] as String,
                                 document.data["price"] as Double,
                                 document.data["price_rtl"] as Double,

@@ -8,6 +8,7 @@ data class VolumeDetailsShop(
     val page_count: Long,
     val publisher: String,
     val release_date: String,
-    val themes: List<String>
+    val themes: List<String>,
+    val media: String
 ) {
 }
