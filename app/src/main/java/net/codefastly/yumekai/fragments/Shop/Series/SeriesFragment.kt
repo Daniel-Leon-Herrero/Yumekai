@@ -50,7 +50,7 @@ class SeriesFragment : Fragment() {
 
         viewModel.fetching.observe(viewLifecycleOwner, { visible ->
             with(binding.seriesScreenLoadingLayout){
-                if( visible ) visibility = View.VISIBLE else visibility = View.GONE
+                 visibility = if( visible ) View.VISIBLE else View.GONE
             }
         })
 
