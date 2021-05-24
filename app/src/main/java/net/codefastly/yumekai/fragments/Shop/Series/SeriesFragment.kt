@@ -41,6 +41,7 @@ class SeriesFragment : Fragment() {
         viewModel.series.observe(viewLifecycleOwner, { dataList ->
             seriesAdapter.setData( dataList )
             seriesAdapter.notifyDataSetChanged()
+            viewModel.getVolumesBySerie( dataList[0].title )
         })
 
         viewModel.volumes.observe(viewLifecycleOwner, { dataList ->
@@ -63,7 +64,7 @@ class SeriesFragment : Fragment() {
 
     private fun initRecyclersView(){
         seriesAdapter = SeriesMangaAdapter( requireContext(), viewModel )
-        volumesAdapter = VolumesMangaAdapter( requireContext() )
+        volumesAdapter = VolumesMangaAdapter( requireContext(), this )
         with(binding.seriesScreenVolumesRv){
             setHasFixedSize(true)
             layoutManager = GridLayoutManager( requireContext(), 2, GridLayoutManager.VERTICAL, false)
@@ -80,8 +81,7 @@ class SeriesFragment : Fragment() {
 
     private fun initViewModel(){
         viewModel.attach( this )
-        viewModel.getAllSeries()
-        viewModel.getVolumesBySerie("Magi")
+        viewModel.getAllAvailableSeries()
     }
 
 

@@ -8,13 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.fragments.Shop.Details.ProductDetailsFragment
+import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
 import net.codefastly.yumekai.models.shop.VolumeShop
 
-class VolumesMangaAdapter( private val context: Context):RecyclerView.Adapter<VolumesMangaAdapter.VolumesMangaViewHolder>() {
+class VolumesMangaAdapter( private val context: Context, private val currentFragment: SeriesFragment ):RecyclerView.Adapter<VolumesMangaAdapter.VolumesMangaViewHolder>() {
 
     private var dataList= mutableListOf<VolumeShop>()
 
@@ -56,7 +60,10 @@ class VolumesMangaAdapter( private val context: Context):RecyclerView.Adapter<Vo
 
                 setOnClickListener {
                     Snackbar.make( it , "Volumen seleccionado: ${volume.title} ( ${volume.volume} )", Snackbar.LENGTH_SHORT).show()
-
+                    val mContext = context as FragmentActivity
+                    val transaction = mContext.supportFragmentManager.beginTransaction()
+                    transaction.hide( currentFragment ).add( R.id.nav_host_fullscreen_fragment, ProductDetailsFragment( volume ) )
+                    transaction.commit()
                 }
             }
         }

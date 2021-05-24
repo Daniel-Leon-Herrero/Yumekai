@@ -28,8 +28,10 @@ class SeriesViewModel: ViewModel() {
         this._owner = fragment
     }
 
-    fun getAllSeries(){
-        this._series.value = this.generateSeriesList()
+    fun getAllAvailableSeries(){
+        this.repositoryFirebase.getAvailableSeries().observe( _owner, { serieList ->
+            this._series.value = serieList
+        })
     }
 
     fun getVolumesBySerie( serie: String ){
@@ -40,17 +42,5 @@ class SeriesViewModel: ViewModel() {
         })
     }
 
-
-    private fun generateSeriesList(): List<SerieShop> {
-        val pr1: SerieShop = SerieShop("My Hero Academia", "https://static.posters.cz/image/750/posters/my-hero-academia-cobalt-blast-group-i63331.jpg", listOf("manga","anime","movie","ova"))
-        val pr2: SerieShop = SerieShop("Demon Slayer", "https://allgamersin.com/wp-content/uploads/2020/03/Demon-Slayer.jpg", listOf("manga","anime","movie"))
-        val pr3: SerieShop = SerieShop("Jujutsu Kaisen", "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/02/jujutsu-kaisen-2240475.jpg", listOf("manga"))
-        val pr4: SerieShop = SerieShop("Promised Neverland", "https://images-na.ssl-images-amazon.com/images/I/91YiYAMX-ZL.jpg", listOf("manga", "anime"))
-        val pr5: SerieShop = SerieShop("Toilet-Bound Hanako-Kun", "https://static.posters.cz/image/750/posters/my-hero-academia-cobalt-blast-group-i63331.jpg", listOf("manga"))
-        val pr6: SerieShop = SerieShop("Naruto Shippuden", "https://static.posters.cz/image/750/posters/my-hero-academia-cobalt-blast-group-i63331.jpg", listOf("manga"))
-        val pr7: SerieShop = SerieShop("Death Note", "https://static.posters.cz/image/750/posters/my-hero-academia-cobalt-blast-group-i63331.jpg", listOf("manga"))
-
-        return listOf<SerieShop>(pr1, pr2, pr3, pr4, pr5, pr6, pr7)
-    }
 
 }

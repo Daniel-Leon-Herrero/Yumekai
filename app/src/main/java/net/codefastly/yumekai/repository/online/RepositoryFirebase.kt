@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import net.codefastly.yumekai.models.shop.SerieShop
 import net.codefastly.yumekai.models.shop.VolumeDetailsShop
 import net.codefastly.yumekai.models.shop.VolumeShop
 import java.lang.Exception
@@ -18,8 +19,6 @@ class RepositoryFirebase{
     init {
         db.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
     }
-
-
 
 
     fun getVolumesBySerie( serie: String ): LiveData<MutableList<VolumeShop>> {
@@ -49,6 +48,37 @@ class RepositoryFirebase{
                             )
                             dataList.add(volume)
                         }
+                        mutableData.value = dataList
+                    }
+                }catch ( ex: Exception ){
+                    Log.e(TAG, ex.message.toString() )
+                }
+            }
+            .addOnFailureListener {  e -> Log.e(TAG, "Error writing document", e) }
+
+        return mutableData
+    }
+
+    fun getAvailableSeries(): LiveData<MutableList<SerieShop>> {
+        val mutableData = MutableLiveData<MutableList<SerieShop>>()
+
+        db
+            .collection("series")
+            .whereEqualTo("available", true)
+            .get()
+            .addOnSuccessListener { documents ->
+                try{
+                    if( documents != null ){
+                        var dataList = mutableListOf<SerieShop>()
+                        for( document in documents ){
+                            dataList.add( SerieShop(
+                                document.data["order"] as Long,
+                                document.data["title"] as String,
+                                document.data["available"] as Boolean,
+                                document.data["image_url"] as String
+                            ))
+                        }
+                        dataList.sortBy { it.order }
                         mutableData.value = dataList
                     }
                 }catch ( ex: Exception ){
@@ -408,6 +438,141 @@ class RepositoryFirebase{
             }
 
 
+    }
+    fun addSeries(){
+        val serie1 = hashMapOf(
+            "order" to 1,
+            "title" to "Magi",
+            "available" to true,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/series%2Fmagi%2Fserie_magi.png?alt=media&token=070222d2-c831-467c-b08d-2963b6f8ea98"
+        )
+
+        val serie2 = hashMapOf(
+            "order" to 2,
+            "title" to "Demon Slayer",
+            "available" to true,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/series%2Fdemon_slayer%2Fserie_demon_slayer.png?alt=media&token=715a71e1-7de4-4081-bd03-87c671047838"
+        )
+
+        val serie3 = hashMapOf(
+            "order" to 3,
+            "title" to "Re:Zero",
+            "available" to true,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/series%2Fre_zero%2Fserie_re_zero.png?alt=media&token=33d6f27b-800c-4461-bcf4-7d7bc15ad7b5"
+        )
+
+        val serie4 = hashMapOf(
+            "order" to 4,
+            "title" to "Black Clover",
+            "available" to true,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/series%2Fblack_clover%2Fserie_black_clover.png?alt=media&token=e284f251-f455-470a-a1f2-1b9724c34ee0"
+        )
+
+        val serie5 = hashMapOf(
+            "order" to 5,
+            "title" to "Darling in the Franxx",
+            "available" to true,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/manga%2Fmagi_manga_vol2.png?alt=media&token=e917f187-4d50-43d1-ab41-c2a12b44939d"
+        )
+
+        val serie6 = hashMapOf(
+            "order" to 6,
+            "title" to "My Hero Academia",
+            "available" to true,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/series%2Fdarling_in_the_franxx%2Fserie_darling_in_the_franxx.png?alt=media&token=93256fec-db72-4277-b79b-995463c81795"
+        )
+
+        val serie7 = hashMapOf(
+            "order" to 7,
+            "title" to "Attack on Titan",
+            "available" to false,
+            "image_url" to "https://firebasestorage.googleapis.com/v0/b/yumekai-app.appspot.com/o/series%2Fattack_on_titan%2Fserie_attack_on_titan.png?alt=media&token=43288a14-a1fc-4ac7-ab5b-f08ef857e010"
+        )
+
+        db
+            .collection("series")
+            .add(serie1)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with id: ${document.toString()}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
+
+        db
+            .collection("series")
+            .add(serie2)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with id: ${document.toString()}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
+
+        db
+            .collection("series")
+            .add(serie3)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with id: ${document.toString()}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
+
+        db
+            .collection("series")
+            .add(serie4)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with id: ${document.toString()}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
+
+        db
+            .collection("series")
+            .add(serie5)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with id: ${document.toString()}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
+
+        db
+            .collection("series")
+            .add(serie6)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with id: ${document.toString()}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
+
+
+        db
+            .collection("series")
+            .add(serie7)
+            .addOnSuccessListener { document ->
+                if( document != null ){
+                    Log.d("FIREBASE_SUCCESS", "DocumentSnapshot written with id: ${document.toString()}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE_WARNING", e)
+            }
     }
 
 

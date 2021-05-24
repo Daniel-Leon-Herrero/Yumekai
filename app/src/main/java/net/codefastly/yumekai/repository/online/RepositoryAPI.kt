@@ -270,7 +270,7 @@ class repositoryAPI {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val call = getRecentsRetrofit().create(APIService::class.java)
-                    .getRecents("anime?status=airing&order_by=members&type=TV&order_by=start_date")
+                    .getRecents("anime?status=airing&type=TV&order_by=start_date")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
@@ -289,7 +289,7 @@ class repositoryAPI {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val call = getRecentsRetrofit().create(APIService::class.java)
-                    .getRecents("anime?q=&order_by=members&type=movie&page=1")
+                    .getRecents("anime?type=movie&order_by=start_date&page=1")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
@@ -308,7 +308,7 @@ class repositoryAPI {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val call = getRecentsRetrofit().create(APIService::class.java)
-                    .getRecents("anime?status=airing&order_by=members&type=ova&order_by=start_date")
+                    .getRecents("anime?status=airing&type=ova&order_by=start_date&page=1")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
@@ -327,7 +327,7 @@ class repositoryAPI {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val call = getRecentsRetrofit().create(APIService::class.java)
-                    .getRecents("anime?status=airing&order_by=score&type=ona&order_by=start_date")
+                    .getRecents("anime?status=airing&type=ona&order_by=start_date&page=1")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {
@@ -346,7 +346,7 @@ class repositoryAPI {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val call = getRecentsRetrofit().create(APIService::class.java)
-                    .getRecents("anime?q=&order_by=members&type=special&page=1")
+                    .getRecents("anime?status=airing&type=special&order_by=start_date&page=1")
                 val datos = call.body()
                 withContext(Dispatchers.Main) {
                     if (call.isSuccessful) {

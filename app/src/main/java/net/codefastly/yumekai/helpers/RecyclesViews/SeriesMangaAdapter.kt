@@ -17,10 +17,8 @@ import net.codefastly.yumekai.models.shop.SerieShop
 class SeriesMangaAdapter( private val context: Context, private val viewModel: SeriesViewModel): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var dataList: List<SerieShop> = emptyList()
+    private var SELECTED_ITEM: Int = 0
 
-    companion object {
-        private var SELECTED_ITEM: Int = 0
-    }
 
     fun setData( data: List<SerieShop> ){
         this.dataList = data
@@ -69,10 +67,7 @@ class SeriesMangaAdapter( private val context: Context, private val viewModel: S
             itemView.setOnClickListener { view ->
                 Snackbar.make(view, "Serie seleccionada: ${ serie.title }", Snackbar.LENGTH_SHORT).show()
                 setSelectedSerie(position)
-
-                if ( serie.title.contains("Hero") ){
-                    viewModel.getVolumesBySerie("Magi")
-                }else{
+                if( serie.title.isNotEmpty() ){
                     viewModel.getVolumesBySerie(serie.title)
                 }
             }
