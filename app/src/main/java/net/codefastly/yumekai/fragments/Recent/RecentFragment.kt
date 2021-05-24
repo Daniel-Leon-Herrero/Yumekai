@@ -32,6 +32,7 @@ class RecentFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recent, container, false)
 
         viewmodel = getRecentsViewModel()
+        viewmodel.setContext(requireContext(),this)
         inicializePopularRecyclerView()
         inicializeRecyclerView()
 

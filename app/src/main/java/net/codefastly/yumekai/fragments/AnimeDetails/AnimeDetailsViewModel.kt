@@ -66,6 +66,15 @@ class AnimeDetailsViewModel() : ViewModel() {
                                 animeDetails.value!!.image_url,
                             )
                         )
+                    }else{
+                        LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().updateLocalAnime(
+                            LocalAnime(
+                                animeDetails.value!!.mal_id,
+                                animeDetails.value!!.title,
+                                animeDetails.value!!.synopsis,
+                                animeDetails.value!!.image_url,
+                            )
+                        )
                     }
                     if(getSize() > 20){
                         deleteLastAnime()

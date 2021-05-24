@@ -7,7 +7,7 @@ import net.codefastly.yumekai.models.room.LocalAnime
 
 @Dao
 interface LocalAnimeDao {
-    @Query("SELECT * FROM LocalAnime ORDER BY date")
+    @Query("SELECT * FROM LocalAnime ORDER BY date DESC")
     fun getLocalAnime(): LiveData<List<LocalAnime>>
 
     @Query("SELECT * FROM LocalAnime WHERE title = :title")

@@ -1,11 +1,13 @@
 package net.codefastly.yumekai.fragments.Recent
 
+import android.content.Context
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.helpers.LocalDatabase.LocalAnimeDB
 import net.codefastly.yumekai.models.recents.ModelDTO
 import net.codefastly.yumekai.models.recents.RecentsResponse
 import net.codefastly.yumekai.models.recents.Result
@@ -14,6 +16,8 @@ import net.codefastly.yumekai.repository.online.repositoryAPI
 class RecentViewModel : ViewModel() {
     var recentsData = MutableLiveData<RecentsResponse>()
     private val repo = repositoryAPI()
+    private lateinit var _context: Context
+    private lateinit var _owner: LifecycleOwner
 
 
     var result = listOf<Result>(
@@ -46,6 +50,12 @@ class RecentViewModel : ViewModel() {
     init {
         getRecentsData()
         getAllData()
+    }
+
+    fun setContext(context: Context, owner: LifecycleOwner) {
+        _context = context
+        _owner = owner
+        setHistoryData()
     }
 
 
@@ -87,6 +97,34 @@ class RecentViewModel : ViewModel() {
             }
         }
     }
+
+    private fun setHistoryData(){
+            LocalAnimeDB.getLocalAnimeDB(_context).localAnimeDao().getLocalAnime().observe(_owner,
+                Observer {
+                    var result = mutableListOf<Result>()
+                    it.forEach {
+                        result.add( Result(
+                            true,
+                            "",
+                            300,
+                            it.imageUrl,
+                            it.mal_id,
+                            500,
+                            "",
+                            50.6,
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""
+                        ))
+                    }
+                    var his = RecentsResponse(0,0,true,"",result)
+                    history.value = his
+                    refreshData()
+                })
+        }
+
     fun refreshData(){
         list.value = listOf( ModelDTO(
             1,
