@@ -17,7 +17,6 @@ class CalendarViewModel : ViewModel() {
         day.observeForever(androidx.lifecycle.Observer {
             searchByDay()
         })
-
     }
 
     fun obtainDayOfWeek() {

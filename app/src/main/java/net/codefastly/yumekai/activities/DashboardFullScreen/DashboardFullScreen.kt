@@ -14,6 +14,7 @@ import net.codefastly.yumekai.fragments.History.HistoryFragment
 import net.codefastly.yumekai.fragments.Search.SearchFragment
 import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
 import net.codefastly.yumekai.fragments.Shop.Categories.CategoriesShopFragment
+import net.codefastly.yumekai.fragments.ranking.RankingFragment
 
 
 class DashboardFullScreen : AppCompatActivity() {
@@ -56,6 +57,11 @@ class DashboardFullScreen : AppCompatActivity() {
                 R.id.nav_host_fullscreen_fragment,
                 DrawerFragment(),
                 "DrawerFragment"
+            )
+            R.id.bottom_menu_sheet_btn_ranking -> transaction.replace(
+                R.id.nav_host_fullscreen_fragment,
+                RankingFragment(),
+                "RankingFragment"
             )
             else -> finish()
         }
