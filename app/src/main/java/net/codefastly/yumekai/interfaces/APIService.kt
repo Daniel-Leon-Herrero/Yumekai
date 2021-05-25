@@ -3,6 +3,7 @@ package net.codefastly.yumekai.interfaces
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.*
+import net.codefastly.yumekai.models.ranking.TopResponse
 import net.codefastly.yumekai.models.recents.RecentsResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -44,4 +45,7 @@ interface APIService {
 
     @GET
     suspend fun searchAnimeByQuery(@Url url:String): Response<RecentsResponse>
+
+    @GET
+    suspend fun topData(@Url url:String): Response<TopResponse>
 }

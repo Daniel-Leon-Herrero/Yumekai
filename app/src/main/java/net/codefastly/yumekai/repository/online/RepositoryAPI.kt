@@ -10,6 +10,7 @@ import net.codefastly.yumekai.interfaces.APIService
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.AnimeDTO
+import net.codefastly.yumekai.models.ranking.TopResponse
 import net.codefastly.yumekai.models.recents.RecentsResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,6 +29,11 @@ class repositoryAPI {
 
     private fun getRecentsRetrofit(): Retrofit {
         return Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/search/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+    }
+
+    private fun getTopRetrofit(): Retrofit {
+        return Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/top/")
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
@@ -366,6 +372,23 @@ class repositoryAPI {
             withContext(Dispatchers.IO) {
                 val call = getRecentsRetrofit().create(APIService::class.java)
                     .searchAnimeByQuery("${queryCategory}?q=${query}&page=1")
+                val datos = call.body()
+                withContext(Dispatchers.Main){
+                    if ( call.isSuccessful ){
+                        mutableData.value = datos!!
+                    }
+                }
+            }
+        }
+        return mutableData
+    }
+
+    fun GettopData(tag: String ): LiveData<TopResponse> {
+        var mutableData = MutableLiveData<TopResponse>()
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getTopRetrofit().create(APIService::class.java)
+                    .topData("${tag}")
                 val datos = call.body()
                 withContext(Dispatchers.Main){
                     if ( call.isSuccessful ){

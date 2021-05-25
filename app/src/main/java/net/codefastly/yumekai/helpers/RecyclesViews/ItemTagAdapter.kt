@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.models.ranking.RankingTag
@@ -39,7 +40,7 @@ class ItemTagAdapter(private val context: Context) : RecyclerView.Adapter<ItemTa
 
     inner class ItemTagViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         fun bind(tag: RankingTag){
-
+            itemView.findViewById<TextView>(R.id.animeDetail_category_item_text).text = tag.tagName
         }
     }
 }
