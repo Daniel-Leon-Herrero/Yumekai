@@ -86,6 +86,13 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.bottomMenuSheetBtnRanking.setOnClickListener {
+            val intent = Intent(this,DashboardFullScreen::class.java).apply {
+                this.putExtra("FULL_SCREEN_TO_LOAD", R.id.bottom_menu_sheet_btn_ranking)
+            }
+            startActivity(intent)
+        }
+
         /* TEMPORAL PARA PRUEBAS */
         binding.btnCategoryFilter.setOnClickListener {
             Snackbar.make(it, "Not implemented yet", Snackbar.LENGTH_SHORT).show()

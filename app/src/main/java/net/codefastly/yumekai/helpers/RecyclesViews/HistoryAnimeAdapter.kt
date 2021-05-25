@@ -2,6 +2,7 @@ package net.codefastly.yumekai.helpers.RecyclesViews
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -101,7 +102,6 @@ class HistoryAnimeAdapter(private val context: Context, private val owner: Lifec
                             historyItem.synopsis,
                             historyItem.imageUrl
                         )
-                        exsist = true
                     }
                 }
                 itemView.findViewById<Button>(R.id.history_screen_btn_finalized)
