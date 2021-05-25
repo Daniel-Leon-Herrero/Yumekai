@@ -30,6 +30,8 @@ class DrawerFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate( inflater ,R.layout.fragment_drawer, container, false )
 
+
+        initViewModel()
         initViewPager()
 
         binding.drawerScreenBtnBack.setOnClickListener {
@@ -53,6 +55,11 @@ class DrawerFragment : Fragment() {
             tab.text = viewModel.tabList[position]
             /*tab.icon = ContextCompat.getDrawable(requireContext(), viewModel.icons[position])*/
         }.attach()
+    }
+
+    private fun initViewModel(){
+        viewModel.attach( this , requireContext() )
+        viewModel.fetchMagicDrawerData()
     }
 
 
