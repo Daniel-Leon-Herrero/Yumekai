@@ -14,8 +14,8 @@ import net.codefastly.yumekai.helpers.RecyclesViews.LocalAnimeAdapter
 import net.codefastly.yumekai.models.room.LocalAnime
 
 class DrawerViewPager(
-    private val itemList: List< List<LocalAnime> >,
-    private val context: Context
+    private val context: Context,
+    private val itemList: List< List<LocalAnime>>
 ): RecyclerView.Adapter<DrawerViewPager.ItemViewHolder>() {
 
     private lateinit var localAnimeAdapter : LocalAnimeAdapter

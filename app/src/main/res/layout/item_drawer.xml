@@ -23,7 +23,7 @@
             <!-- IMAGE -->
             <ImageView
                 android:id="@+id/item_drawer_img"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:src="@drawable/yumekai_failed_portrait"
                 android:scaleType="centerCrop"
@@ -54,7 +54,8 @@
             <!-- SYNOPSIS -->
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:scrollbars="vertical">
 
                 <TextView
                     android:id="@+id/item_drawer_synopsis"

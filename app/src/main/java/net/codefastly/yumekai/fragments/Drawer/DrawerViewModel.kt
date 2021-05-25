@@ -4,6 +4,8 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.helpers.LocalDatabase.LocalAnimeDB
@@ -21,19 +23,10 @@ class DrawerViewModel: ViewModel() {
         "Favorites"
     )
 
-    val anime = LocalAnime(
-        1,
-        "Prueba",
-        "Desc",
-        ""
-    )
+    private val _animes = MutableLiveData<List<List<LocalAnime>>>()
+    val animes : LiveData<List<List<LocalAnime>>> get() = _animes
 
-    val list = listOf(
-        listOf<LocalAnime>(anime, anime, anime, anime, anime, anime),
-        listOf<LocalAnime>(anime, anime, anime),
-        listOf<LocalAnime>(anime,  anime),
-        listOf<LocalAnime>(anime, anime, anime, anime)
-    )
+
 
     fun attach( fragment: DrawerFragment, context: Context ){
         this._owner = fragment
@@ -42,7 +35,22 @@ class DrawerViewModel: ViewModel() {
 
     fun fetchMagicDrawerData(){
         LocalAnimeDB.getLocalAnimeDB(_context).localAnime().getLocalAnime().observe( _owner, { animeList ->
-            Log.e(TAG, animeList.toString() )
+            var listFinalized = mutableListOf<LocalAnime>()
+            var listRecommended = mutableListOf<LocalAnime>()
+            var listFollowing = mutableListOf<LocalAnime>()
+            var listFavorites = mutableListOf<LocalAnime>()
+
+            animeList.sortedBy { it.date }
+
+            animeList.forEach { anime ->
+                if( anime.finalized ) listFinalized.add( anime )
+                if( anime.recommended ) listRecommended.add( anime )
+                if( anime.following ) listFollowing.add( anime )
+                if( anime.favorite ) listFavorites.add( anime )
+            }
+
+            this._animes.value = listOf( listFinalized, listRecommended, listFollowing, listFavorites)
+
         })
     }
 

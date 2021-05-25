@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentDrawerBinding
 import net.codefastly.yumekai.helpers.ViewPagers.DrawerViewPager
+import net.codefastly.yumekai.models.room.LocalAnime
 
 class DrawerFragment : Fragment() {
 
@@ -32,7 +33,10 @@ class DrawerFragment : Fragment() {
 
 
         initViewModel()
-        initViewPager()
+
+        viewModel.animes.observe(viewLifecycleOwner, { animeList ->
+            initViewPager( animeList )
+        })
 
         binding.drawerScreenBtnBack.setOnClickListener {
             requireActivity().finish()
@@ -41,9 +45,9 @@ class DrawerFragment : Fragment() {
         return binding.root
     }
 
-    private fun initViewPager(){
+    private fun initViewPager( animeList: List<List<LocalAnime>> ){
 
-        viewPagerAdapter = DrawerViewPager(viewModel.list, requireContext())
+        viewPagerAdapter = DrawerViewPager( requireContext(), animeList )
         with(binding.drawerScreenViewpager){
             adapter = viewPagerAdapter
         }
