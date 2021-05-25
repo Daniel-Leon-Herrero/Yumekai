@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
+import net.codefastly.yumekai.fragments.Drawer.DrawerFragment
 import net.codefastly.yumekai.fragments.History.HistoryFragment
 import net.codefastly.yumekai.fragments.Search.SearchFragment
 import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
@@ -23,9 +24,7 @@ class DashboardFullScreen : AppCompatActivity() {
 
         val FULL_SCREEN_TO_LOAD = intent.getIntExtra("FULL_SCREEN_TO_LOAD", 0)
         val ANIME_DETAIL = intent.getIntExtra("ANIME_DETAILS", 0)
-        /* val PREVIOUS_FRAGMENT = intent.getStringExtra("PREVIOUS_FRAGMENT")
-        * loadOnFullScreen(FULL_SCREEN_TO_LOAD, ANIME_DETAIL, if( PREVIOUS_FRAGMENT.isNullOrEmpty()) "" else PREVIOUS_FRAGMENT )
-        * */
+
 
         loadOnFullScreen(FULL_SCREEN_TO_LOAD, ANIME_DETAIL)
     }
@@ -52,6 +51,11 @@ class DashboardFullScreen : AppCompatActivity() {
                 R.id.nav_host_fullscreen_fragment,
                 CategoriesShopFragment(),
                 "CategoriesShopFragment"
+            )
+            R.id.bottom_menu_sheet_btn_box -> transaction.replace(
+                R.id.nav_host_fullscreen_fragment,
+                DrawerFragment(),
+                "DrawerFragment"
             )
             else -> finish()
         }

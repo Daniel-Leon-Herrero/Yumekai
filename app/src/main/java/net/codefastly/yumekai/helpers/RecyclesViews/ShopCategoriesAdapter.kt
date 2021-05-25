@@ -72,7 +72,12 @@ class ShopCategoriesAdapter(val context: Context, private val currentFragment: C
     private fun getImageResourceFromString( iconString: String ): Int {
         return when( iconString ) {
             "book" -> R.drawable.ic_baseline_menu_book_36
-            else -> R.drawable.ic_baseline_qr_code_36
+            "toys" -> R.drawable.ic_baseline_toys_36
+            "audio" -> R.drawable.ic_outline_music_note_36
+            "video" -> R.drawable.ic_outline_video_library_36
+            "clothes" -> R.drawable.ic_baseline_shopping_bag_36
+            "game" -> R.drawable.ic_baseline_sports_esports_36
+            else -> R.drawable.ic_baseline_category_36
         }
     }
 
