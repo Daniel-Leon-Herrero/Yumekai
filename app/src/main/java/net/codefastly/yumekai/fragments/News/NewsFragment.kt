@@ -12,6 +12,7 @@ import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentNewsBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.NewsAnimeAdapter
 import net.codefastly.yumekai.utilities.getNewsViewModel
+import net.codefastly.yumekai.utilities.getRecentsViewModel
 
 class NewsFragment : Fragment() {
 
@@ -45,6 +46,20 @@ class NewsFragment : Fragment() {
             recyclerAdapter.setArticles( articles )
             recyclerAdapter.notifyDataSetChanged()
         })
+
+
+        with(binding){
+            newsBtnToCard.setOnClickListener {
+                recyclerAdapter.setSelectedView( R.layout.item_news_card )
+            }
+            newsBtnToText.setOnClickListener {
+                recyclerAdapter.setSelectedView( R.layout.item_news_text )
+            }
+            newsBtnToMagazine.setOnClickListener {
+                recyclerAdapter.setSelectedView( R.layout.item_news_magazine )
+            }
+        }
+
 
 
         return binding.root
