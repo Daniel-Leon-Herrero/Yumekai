@@ -12,7 +12,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="6dp"
-        android:layout_margin="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         app:cardBackgroundColor="@color/red_primary_op"
         app:cardPreventCornerOverlap="true"
         android:background="@color/transparent">

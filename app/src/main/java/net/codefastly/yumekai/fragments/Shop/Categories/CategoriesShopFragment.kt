@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentShopCategoriesBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.ShopBannerAdapter
@@ -37,6 +40,7 @@ class CategoriesShopFragment : Fragment() {
         viewModel.categories.observe(viewLifecycleOwner, { categoriesList ->
             adapterCategories.setData( categoriesList )
             adapterCategories.notifyDataSetChanged()
+            binding.shopCategoryScreenLoading.visibility = View.GONE
         })
 
         // Inflate the layout for this fragment
@@ -50,13 +54,21 @@ class CategoriesShopFragment : Fragment() {
 
     fun inicializeBanner(){
         adapterBanner = ShopBannerAdapter(requireContext())
-        binding.shopCategoryRVBanner.adapter = adapterBanner
+        with(binding.shopCategoryRVBanner){
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            itemAnimator = DefaultItemAnimator()
+            adapter = adapterBanner
+        }
         adapterBanner.setData(viewModel.bannerData)
         adapterBanner.notifyDataSetChanged()
     }
 
     fun inicializeCategories(){
         adapterCategories = ShopCategoriesAdapter(requireContext(), this)
-        binding.shopCategoryRVCategories.adapter = adapterCategories
+        with(binding.shopCategoryRVCategories){
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+            itemAnimator = DefaultItemAnimator()
+            adapter = adapterCategories
+        }
     }
 }

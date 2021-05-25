@@ -59,7 +59,6 @@ class ShopCategoriesAdapter(val context: Context, private val currentFragment: C
                         if(!cat.available){
                             Snackbar.make(itemView,"This category is not available now",Snackbar.LENGTH_SHORT).show()
                         }else{
-                            Snackbar.make(itemView,"Go to "+ cat.title ,Snackbar.LENGTH_SHORT).show()
                             chargeOtherFragment( cat.title.toLowerCase() )
                         }
                     }

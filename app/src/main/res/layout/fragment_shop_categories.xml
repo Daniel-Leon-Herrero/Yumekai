@@ -11,50 +11,70 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.Shop.Categories.CategoriesShopFragment"
-        android:background="@color/alt_black">
+        android:background="@color/dark_black">
+
+        <RelativeLayout
+            android:id="@+id/shop_category_screen_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:translationZ="3dp"
+            android:visibility="visible">
+
+            <include layout="@layout/loading_screen" />
+
+        </RelativeLayout>
 
         <Button
             android:id="@+id/shop_category_btn_back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/alt_black"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/right_corners"
             android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_left_36"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/dark_black"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shop_category_RVBanner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="SHOP CATEGORIES"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shop_category_RVBanner" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/shop_category_RVCategories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             android:orientation="vertical"
-            app:spanCount="2"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_category_RVBanner"
+            android:layout_marginTop="20dp" >
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="SHOP CATEGORIES"
+                android:fontFamily="@font/nunito_black"
+                android:textSize="18sp"
+                android:textColor="@color/soft_white"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/shop_category_RVCategories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
