@@ -24,4 +24,6 @@ class WebViewFragment( private val web_link: String ) : Fragment() {
         return binding.root
     }
 
+
+
 }

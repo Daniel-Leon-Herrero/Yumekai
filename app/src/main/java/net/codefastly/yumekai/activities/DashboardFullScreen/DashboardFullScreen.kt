@@ -11,6 +11,7 @@ import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
 import net.codefastly.yumekai.fragments.Drawer.DrawerFragment
 import net.codefastly.yumekai.fragments.History.HistoryFragment
+import net.codefastly.yumekai.fragments.OurTeam.OurTeamFragment
 import net.codefastly.yumekai.fragments.Search.SearchFragment
 import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
 import net.codefastly.yumekai.fragments.Shop.Categories.CategoriesShopFragment
@@ -69,10 +70,18 @@ class DashboardFullScreen : AppCompatActivity() {
                 WebViewFragment( webLink ),
                 "WebViewFragment"
             )
+            R.id.bottom_menu_sheet_btn_settings -> transaction.replace(
+                R.id.nav_host_fullscreen_fragment,
+                OurTeamFragment(),
+                "OurTeamFragment"
+            )
             else -> finish()
         }
         transaction.commit()
     }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }
