@@ -41,17 +41,16 @@ class DrawerFragment : Fragment() {
 
     private fun initViewPager(){
 
-        viewPagerAdapter = DrawerViewPager(viewModel.list)
+        viewPagerAdapter = DrawerViewPager(viewModel.list, requireContext())
         with(binding.drawerScreenViewpager){
             adapter = viewPagerAdapter
         }
         synchronizeTabLayout()
-
     }
 
     private fun synchronizeTabLayout(){
         TabLayoutMediator(binding.drawerScreenTabs, binding.drawerScreenViewpager){ tab, position ->
-            tab.text = viewModel.list[position]
+            tab.text = viewModel.tabList[position]
             /*tab.icon = ContextCompat.getDrawable(requireContext(), viewModel.icons[position])*/
         }.attach()
     }

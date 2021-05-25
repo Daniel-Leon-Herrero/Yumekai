@@ -2,22 +2,29 @@ package net.codefastly.yumekai.fragments.Drawer
 
 import androidx.lifecycle.ViewModel
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.models.room.LocalAnime
 
 class DrawerViewModel: ViewModel() {
 
+    val tabList = listOf<String>(
+        "Finalized",
+        "Recommended",
+        "Following",
+        "Favorites"
+    )
+
+    val anime = LocalAnime(
+        1,
+        "Prueba",
+        "Desc",
+        ""
+    )
+
     val list = listOf(
-        "Favoritos",
-        "Recomendados",
-        "Siguiendo",
-        "Finalizados"
+        listOf<LocalAnime>(anime, anime, anime, anime, anime, anime),
+        listOf<LocalAnime>(anime, anime, anime),
+        listOf<LocalAnime>(anime,  anime),
+        listOf<LocalAnime>(anime, anime, anime, anime)
     )
-
-    val icons = listOf(
-        R.drawable.ic_baseline_local_fire_department_36,
-        R.drawable.ic_baseline_playlist_add_check_36,
-        R.drawable.ic_baseline_category_36,
-        R.drawable.ic_baseline_menu_book_36,
-    )
-
 
 }

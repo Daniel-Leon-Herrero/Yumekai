@@ -1,23 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/dark_black">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    app:cardBackgroundColor="@color/alt_black">
 
-    <TextView
-        android:id="@+id/item_drawer_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text=""
-        tools:text="DRAWER ITEM"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="30dp"
-        android:fontFamily="@font/nunito_black"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/item_drawer_card_view"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="10dp">
+
+            <!-- IMAGE -->
+            <ImageView
+                android:id="@+id/item_drawer_img"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                tools:src="@drawable/yumekai_failed_portrait"
+                android:scaleType="centerCrop"
+                />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toEndOf="@id/item_drawer_card_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+
+            <!-- TITLE -->
+            <TextView
+                android:id="@+id/item_drawer_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                tools:text="Mushoku Tensei: Jobless Reincarnation"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="14sp"/>
+
+            <!-- SYNOPSIS -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/item_drawer_synopsis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    tools:text="This is a tests synopsis for Mushoku Tensei anime card"
+                    android:fontFamily="@font/nunito"
+                    android:textSize="12sp"/>
+
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</com.google.android.material.card.MaterialCardView>
+
