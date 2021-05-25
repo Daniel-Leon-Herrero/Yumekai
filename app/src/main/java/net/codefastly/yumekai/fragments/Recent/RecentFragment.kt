@@ -1,15 +1,19 @@
 package net.codefastly.yumekai.fragments.Recent
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.activities.DashboardFullScreen.DashboardFullScreen
 import net.codefastly.yumekai.databinding.FragmentRecentBinding
+import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
 import net.codefastly.yumekai.helpers.RecyclesViews.MorePopularAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.RecentAdapter
 import net.codefastly.yumekai.utilities.getRecentsViewModel
@@ -35,6 +39,15 @@ class RecentFragment : Fragment() {
         viewmodel.setContext(requireContext(),this)
         inicializePopularRecyclerView()
         inicializeRecyclerView()
+
+        binding.recentScreenBtnRandom.setOnClickListener {
+            val randomAnime: Int = (99..299).random()
+            val intent = Intent( context, DashboardFullScreen::class.java ).apply {
+                this.putExtra("FULL_SCREEN_TO_LOAD", 1122 )
+                this.putExtra("ANIME_DETAIL", randomAnime)
+            }
+            startActivity( intent )
+        }
 
         // Inflate the layout for this fragment
         return binding.root
