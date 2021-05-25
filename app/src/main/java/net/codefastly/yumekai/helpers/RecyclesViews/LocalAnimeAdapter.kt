@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
+import net.codefastly.yumekai.fragments.Drawer.DrawerFragment
 import net.codefastly.yumekai.models.room.LocalAnime
 
-class LocalAnimeAdapter( private  val context: Context ): RecyclerView.Adapter<LocalAnimeAdapter.LocalAnimeViewHolder>() {
+class LocalAnimeAdapter( private  val context: Context, private val currentFragment: DrawerFragment ): RecyclerView.Adapter<LocalAnimeAdapter.LocalAnimeViewHolder>() {
 
     private var dataList = emptyList<LocalAnime>()
 
@@ -41,6 +44,13 @@ class LocalAnimeAdapter( private  val context: Context ): RecyclerView.Adapter<L
                     Picasso.get().load( animeItem.imageUrl ).into( findViewById<ImageView>(R.id.item_drawer_img) )
                 }else{
                     findViewById<ImageView>(R.id.item_drawer_img).setImageResource(R.drawable.yumekai_failed_portrait)
+                }
+
+                setOnClickListener {
+                    val mContext = context as FragmentActivity
+                    val transaction = mContext.supportFragmentManager.beginTransaction()
+                    transaction.hide( currentFragment ).add( R.id.nav_host_fullscreen_fragment, AnimeDetailsFragment(animeItem.mal_id, currentFragment ) )
+                    transaction.commit()
                 }
             }
         }

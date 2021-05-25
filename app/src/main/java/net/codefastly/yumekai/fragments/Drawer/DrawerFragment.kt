@@ -47,7 +47,7 @@ class DrawerFragment : Fragment() {
 
     private fun initViewPager( animeList: List<List<LocalAnime>> ){
 
-        viewPagerAdapter = DrawerViewPager( requireContext(), animeList )
+        viewPagerAdapter = DrawerViewPager( requireContext(), animeList, this )
         with(binding.drawerScreenViewpager){
             adapter = viewPagerAdapter
         }

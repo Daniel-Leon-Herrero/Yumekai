@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.fragments.Drawer.DrawerFragment
 import net.codefastly.yumekai.helpers.RecyclesViews.LocalAnimeAdapter
 import net.codefastly.yumekai.models.room.LocalAnime
 
 class DrawerViewPager(
     private val context: Context,
-    private val itemList: List< List<LocalAnime>>
+    private val itemList: List< List<LocalAnime>>,
+    private val currentFragment: DrawerFragment
 ): RecyclerView.Adapter<DrawerViewPager.ItemViewHolder>() {
 
     private lateinit var localAnimeAdapter : LocalAnimeAdapter
@@ -33,7 +35,7 @@ class DrawerViewPager(
     inner class ItemViewHolder( itemView: View):RecyclerView.ViewHolder( itemView ){ }
 
     private fun initRecyclerView( recyclerView: RecyclerView, animeList: List<LocalAnime> ){
-        localAnimeAdapter = LocalAnimeAdapter(context)
+        localAnimeAdapter = LocalAnimeAdapter(context, currentFragment)
         with(recyclerView){
             itemAnimator = DefaultItemAnimator()
             adapter = localAnimeAdapter
