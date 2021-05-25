@@ -14,6 +14,7 @@ import net.codefastly.yumekai.fragments.History.HistoryFragment
 import net.codefastly.yumekai.fragments.Search.SearchFragment
 import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
 import net.codefastly.yumekai.fragments.Shop.Categories.CategoriesShopFragment
+import net.codefastly.yumekai.fragments.WebView.WebViewFragment
 import net.codefastly.yumekai.fragments.ranking.RankingFragment
 
 
@@ -25,12 +26,12 @@ class DashboardFullScreen : AppCompatActivity() {
 
         val FULL_SCREEN_TO_LOAD = intent.getIntExtra("FULL_SCREEN_TO_LOAD", 0)
         val ANIME_DETAIL = intent.getIntExtra("ANIME_DETAILS", 0)
+        val WEB_LINK = intent.getStringExtra("WEB_LINK")
 
-
-        loadOnFullScreen(FULL_SCREEN_TO_LOAD, ANIME_DETAIL)
+        loadOnFullScreen(FULL_SCREEN_TO_LOAD, ANIME_DETAIL, WEB_LINK.toString() )
     }
 
-    private fun loadOnFullScreen(btnId: Int, Anime: Int ) {
+    private fun loadOnFullScreen(btnId: Int, Anime: Int, webLink: String ) {
         val transaction = supportFragmentManager.beginTransaction()
         when (btnId) {
             R.id.btnSearch -> transaction.replace(
@@ -62,6 +63,11 @@ class DashboardFullScreen : AppCompatActivity() {
                 R.id.nav_host_fullscreen_fragment,
                 RankingFragment(),
                 "RankingFragment"
+            )
+            R.id.news_btn_to_card -> transaction.replace(
+                R.id.nav_host_fullscreen_fragment,
+                WebViewFragment( webLink ),
+                "WebViewFragment"
             )
             else -> finish()
         }

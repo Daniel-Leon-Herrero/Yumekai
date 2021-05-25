@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.activities.DashboardFullScreen.DashboardFullScreen
 import net.codefastly.yumekai.models.news.Item
 
 class NewsAnimeAdapter( private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -65,6 +66,14 @@ class NewsAnimeAdapter( private val context: Context): RecyclerView.Adapter<Recy
                 Picasso.get().load( article.thumbnail ).into( itemView.findViewById<ImageView>(R.id.feed_cardView_img) )
             }
 
+            itemView.setOnClickListener {
+                val intent= Intent(context, DashboardFullScreen::class.java).apply {
+                    this.putExtra("FULL_SCREEN_TO_LOAD", R.id.news_btn_to_card)
+                    this.putExtra("WEB_LINK", article.link )
+                }
+                context.startActivity( intent )
+            }
+
         }
     }
 
@@ -73,6 +82,14 @@ class NewsAnimeAdapter( private val context: Context): RecyclerView.Adapter<Recy
             itemView.findViewById<TextView>(R.id.feed_cardView_title).text = article.title
             itemView.findViewById<TextView>(R.id.feed_cardView_description).text = article.description
             itemView.findViewById<TextView>(R.id.feed_cardView_publisher).text = "${article.author} - ${article.pubDate}"
+
+            itemView.setOnClickListener {
+                val intent= Intent(context, DashboardFullScreen::class.java).apply {
+                    this.putExtra("FULL_SCREEN_TO_LOAD", R.id.news_btn_to_card)
+                    this.putExtra("WEB_LINK", article.link )
+                }
+                context.startActivity( intent )
+            }
         }
     }
 }
