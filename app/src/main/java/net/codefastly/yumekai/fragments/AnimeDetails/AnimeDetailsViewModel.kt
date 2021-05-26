@@ -1,6 +1,8 @@
 package net.codefastly.yumekai.fragments.AnimeDetails
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +15,6 @@ import net.codefastly.yumekai.repository.online.repositoryAPI
 
 class AnimeDetailsViewModel() : ViewModel() {
     private val repo = repositoryAPI()
-    var anime: MutableLiveData<Int> = MutableLiveData()
     var animeDetails: MutableLiveData<AnimeResponse> = MutableLiveData()
     var animeCharacter: MutableLiveData<CharacterAnimeResponse> = MutableLiveData()
     private lateinit var _context: Context
@@ -23,33 +24,28 @@ class AnimeDetailsViewModel() : ViewModel() {
     private val _fetching = MutableLiveData<Int>()
     val fetching: LiveData<Int> get() = _fetching
 
-    init {
-        anime.observeForever(Observer {
-            getAnime(it)
-        })
-    }
 
     fun setAttach(context: Context, fragment: AnimeDetailsFragment) {
         _context = context
         _owner = fragment
     }
 
-    fun getAnime(anime: Int) {
+
+    fun fetchAnimeDetails( animeId: Int ){
         _fetching.value = 0
-        repo.getAnime(anime).observeForever { animes ->
+        repo.getAnime(animeId).observe( _owner, { animeResp ->
             _fetching.value = _fetching.value!! + 1
-            animeDetails.value = animes
+            animeDetails.value = animeResp
             viewModelScope.launch {
-                withContext(Dispatchers.IO) {
+                withContext(Dispatchers.IO){
                     localData()
                 }
             }
-        }
-        repo.getAnimeCharacter(anime).observeForever { staff ->
+        })
+        repo.getAnimeCharacter(animeId).observe(_owner, { characterResp ->
             _fetching.value = _fetching.value!! + 1
-            animeCharacter.value = staff
-        }
-
+            animeCharacter.value = characterResp
+        })
     }
 
     private fun localData() {

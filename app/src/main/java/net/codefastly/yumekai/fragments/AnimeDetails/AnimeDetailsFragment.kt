@@ -1,6 +1,7 @@
 package net.codefastly.yumekai.fragments.AnimeDetails
 
 import android.animation.Animator
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -40,6 +41,10 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_anime_details, container, false)
 
+        Log.e( TAG, "ID a buscar --> ${anime}" )
+
+        viewModel.fetchAnimeDetails( anime )
+
         binding.animeBtnBack.setOnClickListener {
             Log.d("TAG_FRAGMENT", previousFragment.toString())
             Log.d("TAG_FRAGMENT", CalendarFragment().toString())
@@ -53,7 +58,6 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
             }
 
         }
-        viewModel.anime.value = anime
 
         bindData()
 
