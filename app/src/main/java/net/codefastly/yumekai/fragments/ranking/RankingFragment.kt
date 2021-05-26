@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentRankingBinding
 import net.codefastly.yumekai.helpers.RecyclesViews.ItemTagAdapter
+import net.codefastly.yumekai.helpers.RecyclesViews.TopAnimeAdapter
 
 class RankingFragment : Fragment() {
 
     private lateinit var viewmodel: RankingViewModel
     private lateinit var binding: FragmentRankingBinding
     private lateinit var _adapterTag: ItemTagAdapter
+    private lateinit var _topAdapter: TopAnimeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,13 +32,14 @@ class RankingFragment : Fragment() {
         binding.rankingScreenBtnBack.setOnClickListener {
             requireActivity().finish()
         }
+        inicializeTopAdapter()
         inicialzeTagAdapter()
         // Inflate the layout for this fragment
         return binding.root
     }
 
     private fun inicialzeTagAdapter() {
-        _adapterTag = ItemTagAdapter(requireContext())
+        _adapterTag = ItemTagAdapter(requireContext(),_topAdapter,viewmodel,this)
         with(binding.rankingRecyclerViewTag) {
             setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
@@ -45,5 +48,18 @@ class RankingFragment : Fragment() {
         _adapterTag.setData(viewmodel.itemTag)
         _adapterTag.notifyDataSetChanged()
 
+    }
+
+    private fun inicializeTopAdapter(){
+        _topAdapter = TopAnimeAdapter(requireContext())
+        with(binding.rankingRecyclerViewRanking){
+            setHasFixedSize(true)
+            itemAnimator = DefaultItemAnimator()
+            adapter = _topAdapter
+        }
+        viewmodel.getData(0).observe(viewLifecycleOwner, Observer {
+            _topAdapter.setData(it.top)
+            _topAdapter.notifyDataSetChanged()
+        })
     }
 }
