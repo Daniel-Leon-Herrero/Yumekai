@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
@@ -23,6 +24,7 @@ import net.codefastly.yumekai.helpers.RecyclesViews.CharacterAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.StaffAnimeAdapter
 import net.codefastly.yumekai.helpers.ViewPagers.AnimeDetailsViewPager
 import net.codefastly.yumekai.helpers.ViewPagers.DrawerViewPager
+import net.codefastly.yumekai.models.AnimeCharacters.Character
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.anime.Genre
@@ -33,7 +35,11 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
     private lateinit var binding: FragmentAnimeDetailsBinding
 
     /* JOSE UGAL */
+    private var initilizeFlag: Int = 0
+
     private lateinit var animeDetailsAdapter: AnimeDetailsViewPager
+    private lateinit var animeCharactersAdapter: CharacterAnimeAdapter
+    private lateinit var animeStaffAdapter: StaffAnimeAdapter
 
     private val viewModel by lazy { ViewModelProvider(this).get( AnimeDetailsViewModel::class.java ) }
 
@@ -55,14 +61,14 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
                 Picasso.get().load( animeData.image_url ).into( binding.animeDetailsScreenImgPortrait )
             }
             viewModel.characterAndStaff.observe( viewLifecycleOwner, { dataResp ->
-                initViewPager( animeData, dataResp )
+                if( initilizeFlag === 0 ) {
+                    initViewPager( animeData, dataResp )
+                    initilizeFlag++
+                }
+                animeCharactersAdapter.setListCharacter( dataResp.characters )
+                animeStaffAdapter.setDataStaff( dataResp.staff )
             })
         })
-
-        /*
-        COMPROBAR SI PODEMOS PASAR LOS ADAPTADORES AL RECYCLER Y CONTROLARLOS DESDE AQUI
-         */
-
 
         viewModel.fetching.observe(viewLifecycleOwner, { fetchCount ->
             if( fetchCount == 2 ){
@@ -107,10 +113,10 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
     }
 
 
-
     private fun initViewPager( animeData: AnimeResponse, dataCharStaff: CharacterAnimeResponse ){
-
-        animeDetailsAdapter = AnimeDetailsViewPager( requireContext(), viewModel.tabList, animeData, dataCharStaff )
+        animeCharactersAdapter = CharacterAnimeAdapter(requireContext())
+        animeStaffAdapter = StaffAnimeAdapter(requireContext())
+        animeDetailsAdapter = AnimeDetailsViewPager( requireContext(), viewModel.tabList, animeData, animeCharactersAdapter, animeStaffAdapter )
         with(binding.animeDetailsScreenViewpager){
             adapter = animeDetailsAdapter
         }
@@ -122,6 +128,7 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
             tab.text = viewModel.tabList[position]
         }.attach()
     }
+
 
 
 }

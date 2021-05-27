@@ -1,23 +1,31 @@
 package net.codefastly.yumekai.helpers.ViewPagers
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.helpers.RecyclesViews.CategoryAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.CharacterAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.StaffAnimeAdapter
-import net.codefastly.yumekai.models.AnimeCharacters.Character
-import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
-import net.codefastly.yumekai.models.AnimeCharacters.Staff
 import net.codefastly.yumekai.models.anime.AnimeResponse
 
-class AnimeDetailsViewPager( private val context: Context, private val tabList: Map<Int, String>, private val animeResponse: AnimeResponse, private val characterAndStaffResponse: CharacterAnimeResponse):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AnimeDetailsViewPager(
+    private val context: Context,
+    private val tabList: Map<Int, String>,
+    private val animeResponse: AnimeResponse,
+    private val charactersAdapter: CharacterAnimeAdapter,
+    private val staffAnimeAdapter: StaffAnimeAdapter ):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private val GENERAL_VIEW = 0
@@ -26,8 +34,6 @@ class AnimeDetailsViewPager( private val context: Context, private val tabList: 
         private val COMMENTS_VIEW = 3
     }
 
-    private lateinit var animeCharactersAdapter: CharacterAnimeAdapter
-    private lateinit var animeStaffAdapter: StaffAnimeAdapter
     private lateinit var animeCategoriesAdapter: CategoryAnimeAdapter
 
     override fun onCreateViewHolder(
@@ -37,7 +43,7 @@ class AnimeDetailsViewPager( private val context: Context, private val tabList: 
 
         return when( viewType ){
             GENERAL_VIEW -> GeneralAnimeDetailsViewHolder( LayoutInflater.from(context).inflate(R.layout.item_anime_details_general, parent, false))
-            else -> GeneralAnimeDetailsViewHolder( LayoutInflater.from(context).inflate(R.layout.item_no_content, parent, false))
+            else -> MediaAnimeDetailsViewHolder( LayoutInflater.from(context).inflate(R.layout.item_anime_details_media, parent, false))
         }
     }
 
@@ -48,10 +54,14 @@ class AnimeDetailsViewPager( private val context: Context, private val tabList: 
         when( getItemViewType(position) ){
             GENERAL_VIEW -> {
                 GeneralAnimeDetailsViewHolder(holder.itemView).render()
+
                 initGeneralRecyclersView(
                     holder.itemView.findViewById(R.id.item_anime_details_rv_character),
                     holder.itemView.findViewById(R.id.item_anime_details_rv_staff)
                 )
+            }
+            MEDIA_VIEW -> {
+                MediaAnimeDetailsViewHolder(holder.itemView).render()
             }
         }
     }
@@ -60,18 +70,6 @@ class AnimeDetailsViewPager( private val context: Context, private val tabList: 
 
 
     override fun getItemCount(): Int = tabList.size
-
-    /*
-    fun setAnimeCharactersData( charactersList: List<Character> ){
-        animeCharactersAdapter.setListCharacter( charactersList )
-        animeCharactersAdapter.notifyDataSetChanged()
-    }
-
-    fun setAnimeStaffData( staffList: List<Staff> ){
-        animeStaffAdapter.setDataStaff( staffList )
-        animeStaffAdapter.notifyDataSetChanged()
-    }
-     */
 
     inner class GeneralAnimeDetailsViewHolder( itemView: View ): RecyclerView.ViewHolder( itemView ){
         fun render(){
@@ -129,18 +127,32 @@ class AnimeDetailsViewPager( private val context: Context, private val tabList: 
         }
     }
 
+    inner class MediaAnimeDetailsViewHolder( itemView: View ): RecyclerView.ViewHolder( itemView ){
+        fun render(){
+            if( !animeResponse.trailer_url.isNullOrEmpty() ){
+                val videoId = animeResponse.trailer_url.split("/")[4].split("?")[0]
+                Log.e( TAG, "$videoId --> ${animeResponse.trailer_url}")
+                with(itemView.findViewById<YouTubePlayerView>(R.id.item_anime_details_media_video)){
+                    addYouTubePlayerListener( object: AbstractYouTubePlayerListener() {
+                        override fun onReady(youTubePlayer: YouTubePlayer) {
+                            super.onReady(youTubePlayer)
+                            youTubePlayer.loadVideo( videoId, 0f )
+                        }
+                    })
+                }
+            }
+
+        }
+    }
+
     private fun initGeneralRecyclersView( characterRecyclerView: RecyclerView ,staffRecyclerView: RecyclerView ){
-        animeCharactersAdapter = CharacterAnimeAdapter(context)
-        animeCharactersAdapter.setListCharacter( characterAndStaffResponse.characters )
         with(characterRecyclerView){
             itemAnimator = DefaultItemAnimator()
-            adapter = animeCharactersAdapter
+            adapter = charactersAdapter
         }
-        animeStaffAdapter = StaffAnimeAdapter(context)
-        animeStaffAdapter.setDataStaff( characterAndStaffResponse.staff )
         with(staffRecyclerView){
             itemAnimator = DefaultItemAnimator()
-            adapter = animeStaffAdapter
+            adapter = staffAnimeAdapter
         }
     }
 

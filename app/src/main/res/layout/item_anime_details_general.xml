@@ -355,6 +355,7 @@
                         android:text="PG-13 - 13 year or more"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
+
                 </LinearLayout>
 
 
@@ -484,6 +485,7 @@
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    android:nestedScrollingEnabled="false"
                     app:spanCount="1" />
 
                 <!-- STAFF -->
@@ -508,6 +510,7 @@
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    android:nestedScrollingEnabled="false"
                     app:spanCount="1" />
 
 
