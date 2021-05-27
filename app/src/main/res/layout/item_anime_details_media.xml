@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Video"
+                android:text="@string/item_anime_details_media_video"
                 android:textSize="18sp"
                 android:layout_gravity="center_vertical"
                 />
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Chapters"
+                android:text="@string/item_anime_details_media_chapters"
                 android:textSize="18sp"
                 android:layout_gravity="center_vertical"
                 />

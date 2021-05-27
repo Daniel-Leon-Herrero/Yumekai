@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
                 android:fontFamily="@font/nunito_bold"
-                android:text="View more"
+                android:text="@string/recent_screen_btn_more_popular"
                 android:textAllCaps="false"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,14 +75,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito"
-                        android:text="More populars"
+                        android:text="@string/more_populars"
                         android:textSize="18sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito"
-                        android:text="The news that more like"
+                        android:text="@string/descriptionRecents"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -139,7 +139,7 @@
                         android:gravity="center_horizontal"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
-                        android:text="Random"
+                        android:text="@string/recent_screen_btn_random"
                         android:textAllCaps="true"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
@@ -172,7 +172,7 @@
                         android:gravity="center_horizontal"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
-                        android:text="For me"
+                        android:text="@string/recent_screen_btn_for_me"
                         android:textAllCaps="true"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
@@ -205,7 +205,7 @@
                         android:gravity="center_horizontal"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
-                        android:text="Directory"
+                        android:text="@string/recent_screen_btn_directory"
                         android:textAllCaps="true"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />

@@ -11,6 +11,10 @@
     <string name="menu_calendar">Calendar</string>
     <string name="menu_recents">Recents</string>
     <string name="menu_news">News</string>
+    <!-- MENU MORE BUTTONS -->
+    <string name="bottom_menu_sheet_btn_shops">View shops</string>
+    <string name="bottom_menu_sheet_btn_manga">Read manga</string>
+    <string name="bottom_menu_sheet_btn_community">Community</string>
 
     <!--***** SPLASH-SCREEN STRINGS *****-->
     <string name="splash_screen_slogan">The Japanese culture in your hands!</string>
@@ -78,6 +82,74 @@
     <!-- (( NO CONTENT ITEM )) -->
     <string name="search_screen_no_content_title">You have not searched yet!</string>
     <string name="search_screen_no_content_desc">Find your favorite anime, manga with the tags @anime: and @manga:</string>
+
+
+
+    <!-- ANIME CALENDAR -->
+    <string name="calender_btn_Previus">Previus</string>
+    <string name="calendar_btnNext">Next</string>
+
+    <!-- NO INTERNET -->
+    <string name="item_no_internet_retry">RETRY</string>
+
+    <!-- SHOP DETAIL-->
+    <string name="product_details_screen_btn_cart">Add to Cart</string>
+    <string name="product_details_screen_btn_buy">¡Buy Now!</string>
+    <string name="description">Description</string>
+
+    <!-- Recents -->
+    <string name="recent_screen_btn_more_popular">View more</string>
+    <string name="more_populars">More populars</string>
+    <string name="descriptionRecents">The news that more like</string>
+    <string name="recent_screen_btn_random">Random</string>
+    <string name="recent_screen_btn_for_me">For me</string>
+    <string name="recent_screen_btn_directory">Directory</string>
+
+    <!-- SERIES SCREEN -->
+    <string name="available_series">Available series</string>
+    <string name="volumes">Volumes</string>
+
+    <!-- SHOP CATEGORIES -->
+    <string name="shop_categories">SHOP CATEGORIES</string>
+
+    <!-- item_anime_details_gallery -->
+    <string name="item_anime_details_gallery_text">Gallery</string>
+
+    <!-- item_anime_details_general -->
+    <string name="item_anime_details_general_synopsis">Synopsis</string>
+    <string name="item_anime_details_general_categories">Categories</string>
+    <string name="item_anime_details_general_alternative_titles">Alternative Titles</string>
+    <string name="item_anime_details_general_english">English:</string>
+    <string name="item_anime_details_general_japanese">Japanese:</string>
+    <string name="item_anime_details_general_information">Information</string>
+    <string name="item_anime_details_general_airing">Airing:</string>
+    <string name="item_anime_details_general_released">Released:</string>
+    <string name="item_anime_details_general_producers">Producers:</string>
+    <string name="item_anime_details_general_licenses">Licenses:</string>
+    <string name="item_anime_details_general_studios">Studios:</string>
+    <string name="item_anime_details_general_source">Source:</string>
+    <string name="item_anime_details_general_clasification">Clasification:</string>
+    <string name="item_anime_details_general_puntuation">Puntuation:</string>
+    <string name="item_anime_details_general_popuarity">Popuarity:</string>
+    <string name="item_anime_details_general_membres">Membres:</string>
+    <string name="item_anime_details_general_favourites">Favourites:</string>
+    <string name="item_anime_details_general_relations">Relations</string>
+    <string name="item_anime_details_general_characters">Characters</string>
+    <string name="item_anime_details_general_staff">Staff</string>
+    <!-- item_anime_details_media -->
+    <string name="item_anime_details_media_video">Video</string>
+    <string name="item_anime_details_media_chapters">Chapters</string>
+    <!-- item_historial -->
+    <string name="history_screen_btn_finalized">Add to finalized</string>
+    <string name="history_screen_btn_recommended">Add to recommended</string>
+    <string name="history_screen_btn_following">Add to following</string>
+    <string name="history_screen_btn_favourites">Add to favourites</string>
+    <!-- item_shop_volume -->
+    <string name="txtBuy">BUY</string>
+    <string name="item_shop_volume_btn_buy">¡Buy Now!</string>
+    <!-- on_boarding_slide -->
+    <string name="titleSlide">Disfruta de todo el anime...</string>
+    <string name="descriptionSlide">Comprueba el calendario, estrenos y gestiona tu cajón de recuerdos.</string>
 
 
 </resources>

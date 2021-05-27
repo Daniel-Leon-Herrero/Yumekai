@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imgSlide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Disfruta de todo el anime..."
+        android:text="@string/titleSlide"
         android:background="@color/transparent"
         />
 
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/titleSlide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Comprueba el calendario, estrenos y gestiona tu cajón de recuerdos."
+        android:text="@string/descriptionSlide"
         android:background="@color/transparent"
         />
 

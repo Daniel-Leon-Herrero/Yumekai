@@ -38,7 +38,7 @@
                 android:id="@+id/calender_btn_Previus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Previus"
+                android:text="@string/calender_btn_Previus"
                 android:textColor="@color/soft_white"
                 android:backgroundTint="@color/alt_black"
                 />
@@ -47,7 +47,7 @@
                 android:id="@+id/calendar_btnDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Monday"
+                android:text=""
                 android:enabled="false"
                 android:textColor="@color/soft_white"
                 android:backgroundTint="@color/red_primary"
@@ -57,7 +57,7 @@
                 android:id="@+id/calendar_btnNext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next"
+                android:text="@string/calendar_btnNext"
                 android:textColor="@color/soft_white"
                 android:backgroundTint="@color/alt_black"
                 />

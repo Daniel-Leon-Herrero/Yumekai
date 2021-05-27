@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:text="SHOP CATEGORIES"
+                android:text="@string/shop_categories"
                 android:fontFamily="@font/nunito_black"
                 android:textSize="18sp"
                 android:textColor="@color/soft_white"/>

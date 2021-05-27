@@ -119,7 +119,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Synopsis"
+                    android:text="@string/item_anime_details_general_synopsis"
                     android:textSize="18sp" />
 
                 <TextView
@@ -143,7 +143,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Categories"
+                    android:text="@string/item_anime_details_general_categories"
                     android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -167,7 +167,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Alternative Titles"
+                    android:text="@string/item_anime_details_general_alternative_titles"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -181,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="English:"
+                        android:text="@string/item_anime_details_general_english"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -199,7 +199,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Japanese:"
+                        android:text="@string/item_anime_details_general_japanese"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -221,7 +221,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Information"
+                    android:text="@string/item_anime_details_general_information"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -235,7 +235,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Airing:"
+                        android:text="@string/item_anime_details_general_airing"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -253,7 +253,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Released:"
+                        android:text="@string/item_anime_details_general_released"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -271,7 +271,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Producers:"
+                        android:text="@string/item_anime_details_general_producers"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -289,7 +289,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Licenses:"
+                        android:text="@string/item_anime_details_general_licenses"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -307,7 +307,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Studios:"
+                        android:text="@string/item_anime_details_general_studios"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -325,7 +325,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Source:"
+                        android:text="@string/item_anime_details_general_source"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -343,7 +343,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Clasification:"
+                        android:text="@string/item_anime_details_general_clasification"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -380,7 +380,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Puntuation:"
+                        android:text="@string/item_anime_details_general_puntuation"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -398,7 +398,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Popuarity:"
+                        android:text="@string/item_anime_details_general_popuarity"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -416,7 +416,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Membres:"
+                        android:text="@string/item_anime_details_general_membres"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -434,7 +434,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Favourites:"
+                        android:text="@string/item_anime_details_general_favourites"
                         android:textColor="@color/soft_white"
                         android:textSize="12sp" />
 
@@ -457,7 +457,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Relations"
+                    android:text="@string/item_anime_details_general_relations"
                     android:textSize="18sp" />
 
                 <!-- AQUI RECYCLERVIEW DE LAYOUTMANAGER => GRID, 2 COLUMNAS, VERTICAL -->
@@ -470,7 +470,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Characters"
+                    android:text="@string/item_anime_details_general_characters"
                     android:textSize="18sp" />
 
                 <!-- AQUI RECYCLERVIEW DE LAYOUTMANAGER => 1 FILA, HORIZONTAL -->
@@ -495,7 +495,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Staff"
+                    android:text="@string/item_anime_details_general_staff"
                     android:textSize="18sp" />
 
                 <!-- AQUI RECYCLERVIEW DE LAYOUTMANAGER => 1 FILA, HORIZONTAL -->

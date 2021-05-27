@@ -59,7 +59,7 @@
                 android:fontFamily="@font/nunito"
                 android:background="@color/red_primary_op"
                 android:layout_gravity="center"
-                android:text="RETRY" />
+                android:text="@string/item_no_internet_retry" />
 
         </LinearLayout>
 

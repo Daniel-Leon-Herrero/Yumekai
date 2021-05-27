@@ -3,6 +3,7 @@ package net.codefastly.yumekai.interfaces
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.*
+import net.codefastly.yumekai.models.pictures.PicturesResponse
 import net.codefastly.yumekai.models.ranking.TopResponse
 import net.codefastly.yumekai.models.recents.RecentsResponse
 import retrofit2.Response
@@ -48,4 +49,8 @@ interface APIService {
 
     @GET
     suspend fun topData(@Url url:String): Response<TopResponse>
+
+    @GET
+    suspend fun getPicturesByAnime(@Url url:String): Response<PicturesResponse>
+
 }

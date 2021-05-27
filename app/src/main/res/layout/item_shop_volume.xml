@@ -113,7 +113,7 @@
             app:layout_constraintTop_toBottomOf="@id/item_shop_volume_cardView"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="6dp"
-            android:text="¡Buy Now!"
+            android:text="@string/item_shop_volume_btn_buy"
             android:textSize="12sp"
             android:textAllCaps="false"
             android:textAlignment="center"

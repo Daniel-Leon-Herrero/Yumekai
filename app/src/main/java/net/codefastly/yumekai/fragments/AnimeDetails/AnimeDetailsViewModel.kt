@@ -1,6 +1,8 @@
 package net.codefastly.yumekai.fragments.AnimeDetails
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -8,71 +10,88 @@ import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.helpers.LocalDatabase.LocalAnimeDB
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
+import net.codefastly.yumekai.models.pictures.Picture
 import net.codefastly.yumekai.models.room.LocalAnimeHistory
 import net.codefastly.yumekai.repository.online.repositoryAPI
-import net.codefastly.yumekai.utilities.getRepoAPI
 
 class AnimeDetailsViewModel() : ViewModel() {
-    private val repo = getRepoAPI()
-    var anime: MutableLiveData<Int> = MutableLiveData()
-    var animeDetails: MutableLiveData<AnimeResponse> = MutableLiveData()
-    var animeCharacter: MutableLiveData<CharacterAnimeResponse> = MutableLiveData()
+    private val repo = repositoryAPI()
+
+    private val _anime = MutableLiveData<AnimeResponse>()
+    val anime: LiveData<AnimeResponse> get() = _anime
+
+    private val _characterAndStaff = MutableLiveData<CharacterAnimeResponse>()
+    val characterAndStaff: LiveData<CharacterAnimeResponse> get() = _characterAndStaff
+
+    private val _pictures = MutableLiveData<List<Picture>>()
+    val pictures : LiveData<List<Picture>> get() = _pictures
+
+
     private lateinit var _context: Context
     private lateinit var _owner: LifecycleOwner
+
+    var tabList = mapOf<Int, String>(
+        0 to "General",
+        1 to "Media",
+        2 to "Galery",
+        3 to "Comments"
+    )
 
 
     private val _fetching = MutableLiveData<Int>()
     val fetching: LiveData<Int> get() = _fetching
 
-    init {
-        anime.observeForever(Observer {
-            getAnime(it)
-        })
-    }
 
     fun setAttach(context: Context, fragment: AnimeDetailsFragment) {
         _context = context
         _owner = fragment
     }
 
-    fun getAnime(anime: Int) {
+
+    fun fetchAnimeDetails( animeId: Int ){
         _fetching.value = 0
-        repo.getAnime(anime).observeForever { animes ->
+        repo.getAnime(animeId).observe( _owner, { animeResp ->
             _fetching.value = _fetching.value!! + 1
-            animeDetails.value = animes
+            _anime.value = animeResp
             viewModelScope.launch {
-                withContext(Dispatchers.IO) {
+                withContext(Dispatchers.IO){
                     localData()
                 }
             }
-        }
-        repo.getAnimeCharacter(anime).observeForever { staff ->
+        })
+        repo.getAnimeCharacter(animeId).observe(_owner, { characterResp ->
             _fetching.value = _fetching.value!! + 1
-            animeCharacter.value = staff
-        }
+            _characterAndStaff.value = characterResp
+        })
+    }
 
+    fun fetchAnimePictures( animeId: Int ){
+        repo.getAnimePictures( animeId ).observe( _owner, { picturesResponse ->
+            Log.e(TAG, picturesResponse.pictures.toString() )
+            _pictures.value = picturesResponse.pictures
+        })
     }
 
     private fun localData() {
-        if (animeDetails != null) {
+        if (_anime != null) {
             with(LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao()) {
                 if (_context != null) {
-                    if (!getIfExsistsHistory(animeDetails.value!!.mal_id)) {
+                    if (!getIfExsistsHistory(_anime.value!!.mal_id)) {
                         LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao().insertLocalAnimeHistory(
                             LocalAnimeHistory(
-                                animeDetails.value!!.mal_id,
-                                animeDetails.value!!.title,
-                                animeDetails.value?.synopsis,
-                                animeDetails.value!!.image_url,
+                                _anime.value!!.mal_id,
+                                _anime.value!!.title,
+                                _anime.value?.synopsis,
+                                _anime.value!!.image_url,
                             )
                         )
                     }else{
                         LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao().updateLocalAnimeHistory(
                             LocalAnimeHistory(
-                                animeDetails.value!!.mal_id,
-                                animeDetails.value!!.title,
-                                animeDetails.value?.synopsis,
-                                animeDetails.value!!.image_url,
+                                _anime.value!!.mal_id,
+                                _anime.value!!.title,
+                                _anime.value?.synopsis,
+                                _anime.value!!.image_url,
                             )
                         )
                     }
@@ -89,5 +108,3 @@ class AnimeDetailsViewModel() : ViewModel() {
         }
     }
 }
-
-

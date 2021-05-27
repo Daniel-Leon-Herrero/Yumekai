@@ -45,7 +45,7 @@
                  android:textSize="14sp"
                  android:layout_height="wrap_content"
                  android:layout_gravity="center_horizontal"
-                 android:text="BUY"
+                 android:text="@string/txtBuy"
                  android:background="@color/transparent"/>
 
             <TextView

@@ -14,6 +14,7 @@ import net.codefastly.yumekai.interfaces.APIService
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.*
+import net.codefastly.yumekai.models.pictures.PicturesResponse
 import net.codefastly.yumekai.models.ranking.TopResponse
 import net.codefastly.yumekai.models.recents.RecentsResponse
 import retrofit2.Response
@@ -545,5 +546,26 @@ class repositoryAPI() {
         return mutableData
     }
 
+    fun getAnimePictures(animeId: Int): LiveData<PicturesResponse> {
+        val mutableData = MutableLiveData<PicturesResponse>()
+        lateinit var call: Response<PicturesResponse>
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    call = getAnimeRetrofit().create(APIService::class.java)
+                        .getPicturesByAnime("${animeId}/pictures")
+                    val data = call.body()
+                    withContext(Dispatchers.Main) {
+                        if (call.isSuccessful) {
+                            mutableData.value = data!!
+                        }
+                    }
+                } catch (e: Exception) {
+                }
+            }
+        }
+
+        return mutableData
+    }
 
 }
