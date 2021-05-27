@@ -15,10 +15,24 @@ import net.codefastly.yumekai.repository.online.repositoryAPI
 
 class AnimeDetailsViewModel() : ViewModel() {
     private val repo = repositoryAPI()
-    var animeDetails: MutableLiveData<AnimeResponse> = MutableLiveData()
-    var animeCharacter: MutableLiveData<CharacterAnimeResponse> = MutableLiveData()
+
+    private val _anime = MutableLiveData<AnimeResponse>()
+    val anime: LiveData<AnimeResponse> get() = _anime
+
+    private val _characterAndStaff = MutableLiveData<CharacterAnimeResponse>()
+    val characterAndStaff: LiveData<CharacterAnimeResponse> get() = _characterAndStaff
+
+
+
     private lateinit var _context: Context
     private lateinit var _owner: LifecycleOwner
+
+    var tabList = mapOf<Int, String>(
+        0 to "General",
+        1 to "Media",
+        2 to "Galery",
+        3 to "Comments"
+    )
 
 
     private val _fetching = MutableLiveData<Int>()
@@ -35,7 +49,7 @@ class AnimeDetailsViewModel() : ViewModel() {
         _fetching.value = 0
         repo.getAnime(animeId).observe( _owner, { animeResp ->
             _fetching.value = _fetching.value!! + 1
-            animeDetails.value = animeResp
+            _anime.value = animeResp
             viewModelScope.launch {
                 withContext(Dispatchers.IO){
                     localData()
@@ -44,30 +58,30 @@ class AnimeDetailsViewModel() : ViewModel() {
         })
         repo.getAnimeCharacter(animeId).observe(_owner, { characterResp ->
             _fetching.value = _fetching.value!! + 1
-            animeCharacter.value = characterResp
+            _characterAndStaff.value = characterResp
         })
     }
 
     private fun localData() {
-        if (animeDetails != null) {
+        if (_anime != null) {
             with(LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao()) {
                 if (_context != null) {
-                    if (!getIfExsistsHistory(animeDetails.value!!.mal_id)) {
+                    if (!getIfExsistsHistory(_anime.value!!.mal_id)) {
                         LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao().insertLocalAnimeHistory(
                             LocalAnimeHistory(
-                                animeDetails.value!!.mal_id,
-                                animeDetails.value!!.title,
-                                animeDetails.value?.synopsis,
-                                animeDetails.value!!.image_url,
+                                _anime.value!!.mal_id,
+                                _anime.value!!.title,
+                                _anime.value?.synopsis,
+                                _anime.value!!.image_url,
                             )
                         )
                     }else{
                         LocalAnimeDB.getLocalAnimeDB(_context).localAnimeHistoryDao().updateLocalAnimeHistory(
                             LocalAnimeHistory(
-                                animeDetails.value!!.mal_id,
-                                animeDetails.value!!.title,
-                                animeDetails.value?.synopsis,
-                                animeDetails.value!!.image_url,
+                                _anime.value!!.mal_id,
+                                _anime.value!!.title,
+                                _anime.value?.synopsis,
+                                _anime.value!!.image_url,
                             )
                         )
                     }
