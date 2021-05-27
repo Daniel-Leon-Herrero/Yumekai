@@ -34,6 +34,7 @@ class SearchFragment : Fragment() {
 
         initRecylcerView()
 
+
         binding.searchScreenSearchView.setOnQueryTextListener( object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 var queryCategory: String = ""

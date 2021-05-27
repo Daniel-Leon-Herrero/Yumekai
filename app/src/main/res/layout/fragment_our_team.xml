@@ -14,6 +14,7 @@
         android:background="@color/dark_black">
 
         <Button
+            android:id="@+id/our_team_screen_btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
@@ -109,6 +110,7 @@
 
             <!-- VISIT OUR WEB -->
             <Button
+                android:id="@+id/our_team_screen_btn_website"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"

@@ -13,16 +13,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Yumekai">
-        <activity android:name=".activities.DashboardFullScreen.DashboardFullScreen"></activity>
-        <activity android:name=".activities.Splash.SplashActivity">
+        <activity
+            android:name=".activities.DashboardFullScreen.DashboardFullScreen"
+            android:screenOrientation="portrait" ></activity>
+        <activity
+            android:name=".activities.Splash.SplashActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.Dashboard.DashboardActivity" />
-        <activity android:name=".activities.OnBoarding.OnBoardingActivity" />
+        <activity
+            android:name=".activities.Dashboard.DashboardActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.OnBoarding.OnBoardingActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

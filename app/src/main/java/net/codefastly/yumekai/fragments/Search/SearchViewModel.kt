@@ -13,6 +13,8 @@ class SearchViewModel: ViewModel() {
     private val _dataList = MutableLiveData<List<Result>>()
     val dataList : LiveData<List<Result>> get() = _dataList
 
+    
+
     var fetchingData: Boolean = false
 
     fun fetchAnimeByQuery( query: String, queryCategory: String ){

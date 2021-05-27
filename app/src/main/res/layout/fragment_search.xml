@@ -73,7 +73,7 @@
                 android:padding="10dp"
                 android:contextClickable="true"
                 android:layout_marginTop="5dp"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 app:iconifiedByDefault="true"
                 />
 

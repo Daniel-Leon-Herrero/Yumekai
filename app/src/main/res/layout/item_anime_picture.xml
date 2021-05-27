@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="160dp"
+    android:layout_width="110dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardBackgroundColor="@color/red_primary"
+    android:layout_margin="10dp">
+
+    <ImageView
+        android:id="@+id/item_anime_picture_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/yumekai_unknown_portrait"/>
+
+</com.google.android.material.card.MaterialCardView>
+

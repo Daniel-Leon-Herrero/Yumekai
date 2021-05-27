@@ -11,16 +11,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.activities.DashboardFullScreen.DashboardFullScreen
 import net.codefastly.yumekai.models.news.Item
 
-class NewsAnimeAdapter( private val context: Context): RecyclerView.Adapter<NewsAnimeAdapter.NewsAnimeViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): NewsAnimeViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_news_card, parent, false)
-        return NewsAnimeViewHolder( view )
-    }
+class NewsAnimeAdapter( private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var SELECTED_VIEW: Int = R.layout.item_news_text
 
     private var articlesList: List<Item> = mutableListOf()
 
@@ -28,10 +24,34 @@ class NewsAnimeAdapter( private val context: Context): RecyclerView.Adapter<News
         this.articlesList = articles
     }
 
-    override fun onBindViewHolder(holder: NewsAnimeViewHolder, position: Int) {
-        val article = articlesList[position]
-        holder.render(article)
+    fun setSelectedView( selectedItemLayout: Int ){
+        this.SELECTED_VIEW = selectedItemLayout
+        notifyItemRangeChanged(0, articlesList.size )
     }
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): RecyclerView.ViewHolder {
+
+        return when( viewType ){
+            R.layout.item_news_text -> TextNewsAnimeViewHolder(LayoutInflater.from(context).inflate(R.layout.item_news_text, parent, false))
+            R.layout.item_news_card -> NewsAnimeViewHolder(LayoutInflater.from(context).inflate(R.layout.item_news_card, parent, false))
+            else -> NewsAnimeViewHolder(LayoutInflater.from(context).inflate(R.layout.item_news_magazine, parent, false))
+        }
+
+    }
+
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val article = articlesList[position]
+        when( SELECTED_VIEW ){
+            R.layout.item_news_text -> TextNewsAnimeViewHolder( holder.itemView ).render( article )
+            else -> NewsAnimeViewHolder( holder.itemView ).render( article )
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int = SELECTED_VIEW
 
     override fun getItemCount(): Int  = if (articlesList.isNotEmpty()) articlesList.size else 0
 
@@ -46,16 +66,30 @@ class NewsAnimeAdapter( private val context: Context): RecyclerView.Adapter<News
                 Picasso.get().load( article.thumbnail ).into( itemView.findViewById<ImageView>(R.id.feed_cardView_img) )
             }
 
-            /*
-            itemView.findViewById<Button>(R.id.feed_cardView_btn).setOnClickListener {
-                val intent = Intent(context, RssDetailsActivity::class.java).apply {
-                    this.putExtra("WEB_LINK", article.link)
+            itemView.setOnClickListener {
+                val intent= Intent(context, DashboardFullScreen::class.java).apply {
+                    this.putExtra("FULL_SCREEN_TO_LOAD", R.id.news_btn_to_card)
+                    this.putExtra("WEB_LINK", article.link )
                 }
                 context.startActivity( intent )
             }
-             */
 
         }
+    }
 
+    inner class TextNewsAnimeViewHolder( itemView: View): RecyclerView.ViewHolder( itemView ){
+        fun render( article: Item ){
+            itemView.findViewById<TextView>(R.id.feed_cardView_title).text = article.title
+            itemView.findViewById<TextView>(R.id.feed_cardView_description).text = article.description
+            itemView.findViewById<TextView>(R.id.feed_cardView_publisher).text = "${article.author} - ${article.pubDate}"
+
+            itemView.setOnClickListener {
+                val intent= Intent(context, DashboardFullScreen::class.java).apply {
+                    this.putExtra("FULL_SCREEN_TO_LOAD", R.id.news_btn_to_card)
+                    this.putExtra("WEB_LINK", article.link )
+                }
+                context.startActivity( intent )
+            }
+        }
     }
 }

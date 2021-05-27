@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentDrawerBinding
 import net.codefastly.yumekai.helpers.ViewPagers.DrawerViewPager
+import net.codefastly.yumekai.models.room.LocalAnime
 
 class DrawerFragment : Fragment() {
 
@@ -30,7 +31,12 @@ class DrawerFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate( inflater ,R.layout.fragment_drawer, container, false )
 
-        initViewPager()
+
+        initViewModel()
+
+        viewModel.animes.observe(viewLifecycleOwner, { animeList ->
+            initViewPager( animeList )
+        })
 
         binding.drawerScreenBtnBack.setOnClickListener {
             requireActivity().finish()
@@ -39,21 +45,25 @@ class DrawerFragment : Fragment() {
         return binding.root
     }
 
-    private fun initViewPager(){
+    private fun initViewPager( animeList: List<List<LocalAnime>> ){
 
-        viewPagerAdapter = DrawerViewPager(viewModel.list)
+        viewPagerAdapter = DrawerViewPager( requireContext(), animeList, this )
         with(binding.drawerScreenViewpager){
             adapter = viewPagerAdapter
         }
         synchronizeTabLayout()
-
     }
 
     private fun synchronizeTabLayout(){
         TabLayoutMediator(binding.drawerScreenTabs, binding.drawerScreenViewpager){ tab, position ->
-            tab.text = viewModel.list[position]
+            tab.text = viewModel.tabList[position]
             /*tab.icon = ContextCompat.getDrawable(requireContext(), viewModel.icons[position])*/
         }.attach()
+    }
+
+    private fun initViewModel(){
+        viewModel.attach( this , requireContext() )
+        viewModel.fetchMagicDrawerData()
     }
 
 
