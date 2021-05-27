@@ -12,10 +12,11 @@ import net.codefastly.yumekai.models.recents.ModelDTO
 import net.codefastly.yumekai.models.recents.RecentsResponse
 import net.codefastly.yumekai.models.recents.Result
 import net.codefastly.yumekai.repository.online.repositoryAPI
+import net.codefastly.yumekai.utilities.getRepoAPI
 
 class RecentViewModel : ViewModel() {
     var recentsData = MutableLiveData<RecentsResponse>()
-    private val repo = repositoryAPI()
+    private val repo = getRepoAPI()
     private lateinit var _context: Context
     private lateinit var _owner: LifecycleOwner
 

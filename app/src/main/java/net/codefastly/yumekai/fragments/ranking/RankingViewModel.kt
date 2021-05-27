@@ -9,9 +9,10 @@ import androidx.lifecycle.ViewModel
 import net.codefastly.yumekai.models.ranking.RankingTag
 import net.codefastly.yumekai.models.ranking.TopResponse
 import net.codefastly.yumekai.repository.online.repositoryAPI
+import net.codefastly.yumekai.utilities.getRepoAPI
 
 class RankingViewModel : ViewModel() {
-    private val repo = repositoryAPI()
+    private val repo = getRepoAPI()
     var itemTag =
         listOf<RankingTag>(RankingTag(0, "Anime", 1, "anime"), RankingTag(1, "Manga", 1, "manga"))
     private var _topItems = MutableLiveData<TopResponse>()

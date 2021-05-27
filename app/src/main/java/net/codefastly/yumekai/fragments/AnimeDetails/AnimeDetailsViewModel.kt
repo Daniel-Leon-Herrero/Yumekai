@@ -10,9 +10,10 @@ import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.room.LocalAnimeHistory
 import net.codefastly.yumekai.repository.online.repositoryAPI
+import net.codefastly.yumekai.utilities.getRepoAPI
 
 class AnimeDetailsViewModel() : ViewModel() {
-    private val repo = repositoryAPI()
+    private val repo = getRepoAPI()
     var anime: MutableLiveData<Int> = MutableLiveData()
     var animeDetails: MutableLiveData<AnimeResponse> = MutableLiveData()
     var animeCharacter: MutableLiveData<CharacterAnimeResponse> = MutableLiveData()

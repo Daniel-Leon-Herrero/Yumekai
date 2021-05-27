@@ -36,8 +36,8 @@ class SplashActivity : AppCompatActivity() {
 
         if (networkInfo != null && networkInfo.isConnected) {
                 setCalendarViewModel(ViewModelProvider(this).get(CalendarViewModel::class.java))
-              //  setRecentsViewModel(ViewModelProvider(this).get(RecentViewModel::class.java))
-              //  setNewsViewModel(ViewModelProvider(this).get(NewsViewModel::class.java))
+                setRecentsViewModel(ViewModelProvider(this).get(RecentViewModel::class.java))
+                setNewsViewModel(ViewModelProvider(this).get(NewsViewModel::class.java))
 
                 Handler().postDelayed({
                     val intent = Intent(this, OnBoardingActivity::class.java)
