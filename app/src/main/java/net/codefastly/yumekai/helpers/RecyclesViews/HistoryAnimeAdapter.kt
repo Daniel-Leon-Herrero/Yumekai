@@ -93,6 +93,7 @@ class HistoryAnimeAdapter(private val context: Context, private val owner: Lifec
                         var an = getLocalAnimeByMalid(historyItem.mal_id)
                         withContext(Dispatchers.Main) {
                             anime = an
+                            checkStatus()
                         }
                         exsist = true
                     } else {
@@ -123,19 +124,51 @@ class HistoryAnimeAdapter(private val context: Context, private val owner: Lifec
             }
         }
 
-        fun changeStatus(stat: String) {
+        private fun changeStatus(stat: String) {
             with(LocalAnimeDB.getLocalAnimeDB(context).localAnime()) {
-                when(stat){
-                    "Finalized" -> anime.finalized = !anime.finalized
-                    "Recommended" -> anime.recommended = !anime.recommended
-                    "Following" -> anime.following = !anime.following
-                    "Favourites" -> anime.favorite = !anime.favorite
+                when (stat) {
+                    "Finalized" -> {
+                        anime.finalized = !anime.finalized
+                        changeAnimeRoomStatus(anime.finalized, stat)
+                        changeButtonStatus(anime.finalized,R.id.history_screen_btn_finalized, "finalized")
+                    }
+                    "Recommended" -> {
+                        anime.recommended = !anime.recommended
+                        changeAnimeRoomStatus(anime.recommended, stat)
+                        changeButtonStatus(anime.recommended,R.id.history_screen_btn_recommended, "recommended")
+                    }
+                    "Following" -> {
+                        anime.following = !anime.following
+                        changeAnimeRoomStatus(anime.following, stat)
+                        changeButtonStatus(anime.following,R.id.history_screen_btn_following, "following")
+                    }
+                    "Favourites" -> {
+                        anime.favorite = !anime.favorite
+                        changeAnimeRoomStatus(anime.favorite, stat)
+                        changeButtonStatus(anime.favorite,R.id.history_screen_btn_favourites, "favourites")
+                    }
                 }
+            }
+        }
 
+        private fun changeButtonStatus(item: Boolean,buttonId: Int, action: String) {
+            with(itemView.findViewById<Button>(buttonId)) {
+                if (item) {
+                    text = "Remove to ${action}"
+                    background.setTint(resources.getColor(R.color.red_primary_op))
+                } else {
+                    text = "Add to ${action}"
+                    background.setTint(resources.getColor(R.color.alt_black))
+                }
+            }
+        }
+
+        private fun changeAnimeRoomStatus(item: Boolean,stat: String){
+            with(LocalAnimeDB.getLocalAnimeDB(context).localAnime()) {
                 CoroutineScope(Dispatchers.IO).launch {
                     if (exsist) {
                         updateLocalAnime(anime)
-                        if (anime.finalized) {
+                        if (item) {
                             Snackbar.make(
                                 itemView,
                                 "${stat} added",
@@ -160,6 +193,18 @@ class HistoryAnimeAdapter(private val context: Context, private val owner: Lifec
         }
 
         fun checkStatus() {
+            if(anime.finalized){
+                changeButtonStatus(anime.finalized,R.id.history_screen_btn_finalized, "finalized")
+            }
+            if(anime.recommended){
+                changeButtonStatus(anime.recommended,R.id.history_screen_btn_recommended, "recommended")
+            }
+            if(anime.following){
+                changeButtonStatus(anime.following,R.id.history_screen_btn_following, "following")
+            }
+            if(anime.favorite){
+                changeButtonStatus(anime.favorite,R.id.history_screen_btn_favourites, "favourites")
+            }
             if (!anime.finalized && !anime.favorite &&
                 !anime.recommended && !anime.following
             ) {
