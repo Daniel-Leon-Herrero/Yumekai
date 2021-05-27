@@ -10,6 +10,7 @@ import net.codefastly.yumekai.interfaces.APIService
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.AnimeDTO
+import net.codefastly.yumekai.models.pictures.PicturesResponse
 import net.codefastly.yumekai.models.recents.RecentsResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -374,6 +375,24 @@ class repositoryAPI {
                 }
             }
         }
+        return mutableData
+    }
+
+    fun getAnimePictures( animeId: Int ): LiveData<PicturesResponse> {
+        val mutableData = MutableLiveData<PicturesResponse>()
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val call = getAnimeRetrofit().create(APIService::class.java)
+                    .getPicturesByAnime("${animeId}/pictures")
+                val data = call.body()
+                withContext(Dispatchers.Main){
+                    if( call.isSuccessful ){
+                        mutableData.value = data!!
+                    }
+                }
+            }
+        }
+
         return mutableData
     }
 

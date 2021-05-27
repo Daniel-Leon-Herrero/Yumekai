@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -17,6 +18,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.helpers.RecyclesViews.CategoryAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.CharacterAnimeAdapter
+import net.codefastly.yumekai.helpers.RecyclesViews.PictureAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.StaffAnimeAdapter
 import net.codefastly.yumekai.models.anime.AnimeResponse
 
@@ -25,7 +27,9 @@ class AnimeDetailsViewPager(
     private val tabList: Map<Int, String>,
     private val animeResponse: AnimeResponse,
     private val charactersAdapter: CharacterAnimeAdapter,
-    private val staffAnimeAdapter: StaffAnimeAdapter ):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val staffAnimeAdapter: StaffAnimeAdapter,
+    private val pictureAdapter: PictureAnimeAdapter
+):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private val GENERAL_VIEW = 0
@@ -43,7 +47,8 @@ class AnimeDetailsViewPager(
 
         return when( viewType ){
             GENERAL_VIEW -> GeneralAnimeDetailsViewHolder( LayoutInflater.from(context).inflate(R.layout.item_anime_details_general, parent, false))
-            else -> MediaAnimeDetailsViewHolder( LayoutInflater.from(context).inflate(R.layout.item_anime_details_media, parent, false))
+            MEDIA_VIEW -> MediaAnimeDetailsViewHolder( LayoutInflater.from(context).inflate(R.layout.item_anime_details_media, parent, false))
+            else -> GalleryAnimeDetailsViewHolder( LayoutInflater.from(context).inflate(R.layout.item_anime_details_gallery, parent, false))
         }
     }
 
@@ -62,6 +67,13 @@ class AnimeDetailsViewPager(
             }
             MEDIA_VIEW -> {
                 MediaAnimeDetailsViewHolder(holder.itemView).render()
+            }
+            GALERIY_VIEW -> {
+                GalleryAnimeDetailsViewHolder(holder.itemView)
+
+                initGalleryRecylerView(
+                    holder.itemView.findViewById(R.id.item_anime_details_rv_pictures)
+                )
             }
         }
     }
@@ -145,6 +157,8 @@ class AnimeDetailsViewPager(
         }
     }
 
+    inner class GalleryAnimeDetailsViewHolder( itemView: View ): RecyclerView.ViewHolder( itemView ){}
+
     private fun initGeneralRecyclersView( characterRecyclerView: RecyclerView ,staffRecyclerView: RecyclerView ){
         with(characterRecyclerView){
             itemAnimator = DefaultItemAnimator()
@@ -153,6 +167,14 @@ class AnimeDetailsViewPager(
         with(staffRecyclerView){
             itemAnimator = DefaultItemAnimator()
             adapter = staffAnimeAdapter
+        }
+    }
+
+    private fun initGalleryRecylerView( pictureAnimeRecyclerView: RecyclerView ){
+        with( pictureAnimeRecyclerView ){
+            setHasFixedSize(true)
+            itemAnimator = DefaultItemAnimator()
+            adapter = pictureAdapter
         }
     }
 

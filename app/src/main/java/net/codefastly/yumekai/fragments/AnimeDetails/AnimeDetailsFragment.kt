@@ -21,6 +21,7 @@ import net.codefastly.yumekai.databinding.FragmentAnimeDetailsBinding
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
 import net.codefastly.yumekai.helpers.RecyclesViews.CategoryAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.CharacterAnimeAdapter
+import net.codefastly.yumekai.helpers.RecyclesViews.PictureAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.StaffAnimeAdapter
 import net.codefastly.yumekai.helpers.ViewPagers.AnimeDetailsViewPager
 import net.codefastly.yumekai.helpers.ViewPagers.DrawerViewPager
@@ -40,6 +41,7 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
     private lateinit var animeDetailsAdapter: AnimeDetailsViewPager
     private lateinit var animeCharactersAdapter: CharacterAnimeAdapter
     private lateinit var animeStaffAdapter: StaffAnimeAdapter
+    private lateinit var pictureAnimeAdapter: PictureAnimeAdapter
 
     private val viewModel by lazy { ViewModelProvider(this).get( AnimeDetailsViewModel::class.java ) }
 
@@ -70,6 +72,10 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
             })
         })
 
+        viewModel.pictures.observe( viewLifecycleOwner, { pictureList ->
+            pictureAnimeAdapter.setPictureList( pictureList )
+        })
+
         viewModel.fetching.observe(viewLifecycleOwner, { fetchCount ->
             if( fetchCount == 2 ){
                 /* binding.animeDetailsScreenLoadingLayout.visibility = View.GONE */
@@ -92,6 +98,8 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
                     });
             }
         })
+
+
 
         binding.animeBtnBack.setOnClickListener {
             Log.d("TAG_FRAGMENT", previousFragment.toString())
@@ -116,7 +124,11 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
     private fun initViewPager( animeData: AnimeResponse, dataCharStaff: CharacterAnimeResponse ){
         animeCharactersAdapter = CharacterAnimeAdapter(requireContext())
         animeStaffAdapter = StaffAnimeAdapter(requireContext())
-        animeDetailsAdapter = AnimeDetailsViewPager( requireContext(), viewModel.tabList, animeData, animeCharactersAdapter, animeStaffAdapter )
+
+        pictureAnimeAdapter = PictureAnimeAdapter( requireContext() )
+        viewModel.fetchAnimePictures( anime )
+
+        animeDetailsAdapter = AnimeDetailsViewPager( requireContext(), viewModel.tabList, animeData, animeCharactersAdapter, animeStaffAdapter, pictureAnimeAdapter )
         with(binding.animeDetailsScreenViewpager){
             adapter = animeDetailsAdapter
         }

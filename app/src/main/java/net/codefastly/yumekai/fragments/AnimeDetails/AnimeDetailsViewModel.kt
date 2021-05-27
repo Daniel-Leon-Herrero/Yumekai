@@ -10,6 +10,7 @@ import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.helpers.LocalDatabase.LocalAnimeDB
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
+import net.codefastly.yumekai.models.pictures.Picture
 import net.codefastly.yumekai.models.room.LocalAnimeHistory
 import net.codefastly.yumekai.repository.online.repositoryAPI
 
@@ -22,6 +23,8 @@ class AnimeDetailsViewModel() : ViewModel() {
     private val _characterAndStaff = MutableLiveData<CharacterAnimeResponse>()
     val characterAndStaff: LiveData<CharacterAnimeResponse> get() = _characterAndStaff
 
+    private val _pictures = MutableLiveData<List<Picture>>()
+    val pictures : LiveData<List<Picture>> get() = _pictures
 
 
     private lateinit var _context: Context
@@ -59,6 +62,13 @@ class AnimeDetailsViewModel() : ViewModel() {
         repo.getAnimeCharacter(animeId).observe(_owner, { characterResp ->
             _fetching.value = _fetching.value!! + 1
             _characterAndStaff.value = characterResp
+        })
+    }
+
+    fun fetchAnimePictures( animeId: Int ){
+        repo.getAnimePictures( animeId ).observe( _owner, { picturesResponse ->
+            Log.e(TAG, picturesResponse.pictures.toString() )
+            _pictures.value = picturesResponse.pictures
         })
     }
 
