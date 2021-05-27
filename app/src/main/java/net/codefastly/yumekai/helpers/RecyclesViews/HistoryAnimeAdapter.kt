@@ -191,7 +191,7 @@ class HistoryAnimeAdapter(private val context: Context, private val owner: Lifec
                 }
             }
         }
-
+/**/
         fun checkStatus() {
             if(anime.finalized){
                 changeButtonStatus(anime.finalized,R.id.history_screen_btn_finalized, "finalized")
