@@ -108,7 +108,7 @@ class AnimeDetailsViewPager(
                 findViewById<TextView>(R.id.item_anime_details_position).text = "#${animeResponse.rank}"
                 findViewById<TextView>(R.id.item_anime_details_english_title).text = animeResponse.title_english
                 findViewById<TextView>(R.id.item_anime_details_japanese_title).text = animeResponse.title_japanese
-                findViewById<TextView>(R.id.item_anime_details_airing).text = animeResponse.aired.toString()
+                findViewById<TextView>(R.id.item_anime_details_airing).text = animeResponse.aired.string
                 findViewById<TextView>(R.id.item_anime_details_released).text = animeResponse.premiered
 
                 sb = ""

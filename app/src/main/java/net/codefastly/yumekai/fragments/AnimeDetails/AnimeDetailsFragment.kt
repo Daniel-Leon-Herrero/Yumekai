@@ -1,7 +1,6 @@
 package net.codefastly.yumekai.fragments.AnimeDetails
 
 import android.animation.Animator
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,26 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentAnimeDetailsBinding
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
-import net.codefastly.yumekai.helpers.RecyclesViews.CategoryAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.CharacterAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.PictureAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.StaffAnimeAdapter
 import net.codefastly.yumekai.helpers.ViewPagers.AnimeDetailsViewPager
-import net.codefastly.yumekai.helpers.ViewPagers.DrawerViewPager
-import net.codefastly.yumekai.models.AnimeCharacters.Character
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
-import net.codefastly.yumekai.models.anime.Genre
-import net.codefastly.yumekai.models.room.LocalAnime
 
 class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fragment() {
 
