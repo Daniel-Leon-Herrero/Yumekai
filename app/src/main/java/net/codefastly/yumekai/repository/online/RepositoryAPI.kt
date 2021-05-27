@@ -1,21 +1,32 @@
 package net.codefastly.yumekai.repository.online
 
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.codefastly.yumekai.activities.DashboardFullScreen.DashboardFullScreen
 import net.codefastly.yumekai.interfaces.APIService
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
 import net.codefastly.yumekai.models.calendar.AnimeDTO
+import net.codefastly.yumekai.models.calendar.CalendarAnimeThursdayResponse
 import net.codefastly.yumekai.models.ranking.TopResponse
 import net.codefastly.yumekai.models.recents.RecentsResponse
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class repositoryAPI {
+class repositoryAPI() {
+
+    private lateinit var context: Context
+    fun setContext(_context: Context){
+        context = _context
+    }
 
     private fun getCalendarRetrofit(): Retrofit {
         return Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/schedule/")
@@ -117,21 +128,34 @@ class repositoryAPI {
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
-                val call = getCalendarRetrofit().create(APIService::class.java)
-                    .getCalendarAnimesThursday("$day")
-                val datos = call.body()
-                withContext(Dispatchers.Main) {
-                    if (call.isSuccessful) {
-                        val calendar: MutableList<AnimeDTO> = arrayListOf()
-                        datos?.day?.forEach { day ->
-                            var cal = AnimeDTO(day)
-                            calendar.add(cal)
-                        }
+                Log.d("Prueba1", "1")
+                lateinit var call : Response<CalendarAnimeThursdayResponse>
+                try {
+                    call = getCalendarRetrofit().create(APIService::class.java)
+                        .getCalendarAnimesThursday("$day")
+                    Log.d("Prueba1", "2")
+                    val datos = call.body()
+                    Log.d("Prueba1", "3")
+                    withContext(Dispatchers.Main) {
+                        if (call.isSuccessful) {
+                            Log.d("Prueba1", "4")
+                            val calendar: MutableList<AnimeDTO> = arrayListOf()
+                            datos?.day?.forEach { day ->
+                                var cal = AnimeDTO(day)
+                                calendar.add(cal)
+                            }
 
-                        mutableData.value = calendar
+                            mutableData.value = calendar
+                        }
+                    }
+                }catch (e: Exception){
+                    withContext(Dispatchers.Main) {
+                        val intent = Intent(context, DashboardFullScreen::class.java).apply {
+                            this.putExtra( "FULL_SCREEN_TO_LOAD", 1150 )
+                        }
+                        context.startActivity(intent)
                     }
                 }
-
             }
         }
         return mutableData

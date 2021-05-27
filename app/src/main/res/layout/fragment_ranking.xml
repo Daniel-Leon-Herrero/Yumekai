@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.ranking.RankingFragment"
-        android:background="@color/alt_black">
+        android:background="@color/dark_black">
 
         <Button
             android:id="@+id/ranking_screen_btn_back"

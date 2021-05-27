@@ -4,10 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import net.codefastly.yumekai.models.calendar.AnimeDTO
 import net.codefastly.yumekai.repository.online.repositoryAPI
+import net.codefastly.yumekai.utilities.getRepoAPI
 import java.util.*
 
 class CalendarViewModel : ViewModel() {
-    private val repo = repositoryAPI()
+    private val repo = getRepoAPI()
     var day: MutableLiveData<String> = MutableLiveData("")
     val dayOfWeek = arrayOf("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
     var anime: MutableLiveData<MutableList<AnimeDTO>> = MutableLiveData()

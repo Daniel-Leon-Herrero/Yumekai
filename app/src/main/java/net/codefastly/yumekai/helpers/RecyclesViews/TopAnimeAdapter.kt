@@ -1,6 +1,7 @@
 package net.codefastly.yumekai.helpers.RecyclesViews
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import net.codefastly.yumekai.R
+import net.codefastly.yumekai.activities.DashboardFullScreen.DashboardFullScreen
 import net.codefastly.yumekai.models.ranking.Top
 import java.lang.Exception
 
@@ -61,6 +63,13 @@ class TopAnimeAdapter(private val context: Context) : RecyclerView.Adapter<TopAn
                     }
 
                 })
+            }
+            itemView.setOnClickListener {
+                val intent = Intent(context, DashboardFullScreen::class.java).apply {
+                    putExtra("FULL_SCREEN_TO_LOAD", 1122)
+                    this.putExtra("ANIME_DETAILS", item.mal_id)
+                }
+                context.startActivity(intent)
             }
         }
     }

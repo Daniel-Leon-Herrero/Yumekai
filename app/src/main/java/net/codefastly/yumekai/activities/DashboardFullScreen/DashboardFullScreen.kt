@@ -2,17 +2,12 @@ package net.codefastly.yumekai.activities.DashboardFullScreen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
-import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
 import net.codefastly.yumekai.fragments.Drawer.DrawerFragment
 import net.codefastly.yumekai.fragments.History.HistoryFragment
+import net.codefastly.yumekai.fragments.NoInternet.NoInternetFragment
 import net.codefastly.yumekai.fragments.Search.SearchFragment
-import net.codefastly.yumekai.fragments.Shop.Series.SeriesFragment
 import net.codefastly.yumekai.fragments.Shop.Categories.CategoriesShopFragment
 import net.codefastly.yumekai.fragments.ranking.RankingFragment
 
@@ -30,7 +25,7 @@ class DashboardFullScreen : AppCompatActivity() {
         loadOnFullScreen(FULL_SCREEN_TO_LOAD, ANIME_DETAIL)
     }
 
-    private fun loadOnFullScreen(btnId: Int, Anime: Int ) {
+    private fun loadOnFullScreen(btnId: Int, Anime: Int) {
         val transaction = supportFragmentManager.beginTransaction()
         when (btnId) {
             R.id.btnSearch -> transaction.replace(
@@ -63,6 +58,13 @@ class DashboardFullScreen : AppCompatActivity() {
                 RankingFragment(),
                 "RankingFragment"
             )
+            1150 -> transaction.replace(
+                R.id.nav_host_fullscreen_fragment,
+                NoInternetFragment(),
+                "NoInternetFragment"
+            )
+
+
             else -> finish()
         }
         transaction.commit()
