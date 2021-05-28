@@ -151,5 +151,10 @@
     <string name="titleSlide">Disfruta de todo el anime...</string>
     <string name="descriptionSlide">Comprueba el calendario, estrenos y gestiona tu cajón de recuerdos.</string>
 
+    <!-- item_anime_details_comments-->
+    <string name="item_anime_details_comments_title">Comments</string>
+    <string name="item_anime_details_comments_write_a_comment">Write a public comment...</string>
+    <!-- item_comment -->
+    <string name="item_comment_supporter">Supporter</string>
 
 </resources>

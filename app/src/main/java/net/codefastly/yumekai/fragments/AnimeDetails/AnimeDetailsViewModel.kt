@@ -10,12 +10,15 @@ import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.helpers.LocalDatabase.LocalAnimeDB
 import net.codefastly.yumekai.models.AnimeCharacters.CharacterAnimeResponse
 import net.codefastly.yumekai.models.anime.AnimeResponse
+import net.codefastly.yumekai.models.comments.AnimeComment
 import net.codefastly.yumekai.models.pictures.Picture
 import net.codefastly.yumekai.models.room.LocalAnimeHistory
+import net.codefastly.yumekai.repository.online.RepositoryFirebase
 import net.codefastly.yumekai.repository.online.repositoryAPI
 
 class AnimeDetailsViewModel() : ViewModel() {
     private val repo = repositoryAPI()
+    private val repoFirebase = RepositoryFirebase()
 
     private val _anime = MutableLiveData<AnimeResponse>()
     val anime: LiveData<AnimeResponse> get() = _anime
@@ -25,6 +28,9 @@ class AnimeDetailsViewModel() : ViewModel() {
 
     private val _pictures = MutableLiveData<List<Picture>>()
     val pictures : LiveData<List<Picture>> get() = _pictures
+
+    private val _comments = MutableLiveData<List<AnimeComment>>()
+    val comments : LiveData<List<AnimeComment>> get() = _comments
 
 
     private lateinit var _context: Context
@@ -67,9 +73,20 @@ class AnimeDetailsViewModel() : ViewModel() {
 
     fun fetchAnimePictures( animeId: Int ){
         repo.getAnimePictures( animeId ).observe( _owner, { picturesResponse ->
-            Log.e(TAG, picturesResponse.pictures.toString() )
             _pictures.value = picturesResponse.pictures
         })
+    }
+
+    fun fetchCommentsByAnimeId( animeId: Int ){
+        viewModelScope.launch {
+            repoFirebase.getAllCommentsByAnimeId( animeId ).observe( _owner, { messageList ->
+                _comments.value = messageList
+            })
+        }
+    }
+
+    fun loadFirebaseComment( message: HashMap<String, Any> ){
+        repoFirebase.addComments(message)
     }
 
     private fun localData() {

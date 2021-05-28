@@ -51,7 +51,7 @@
                 app:showSeekBar="false"
                 app:showFullScreenButton="false"
                 app:showVideoDuration="false"
-                app:autoPlay="true"
+                app:autoPlay="false"
                 app:showYouTubeButton="false"
                 app:useWebUi="false"/>
 

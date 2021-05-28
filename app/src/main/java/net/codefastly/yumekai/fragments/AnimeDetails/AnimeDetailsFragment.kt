@@ -16,6 +16,7 @@ import net.codefastly.yumekai.R
 import net.codefastly.yumekai.databinding.FragmentAnimeDetailsBinding
 import net.codefastly.yumekai.fragments.Calendar.CalendarFragment
 import net.codefastly.yumekai.helpers.RecyclesViews.CharacterAnimeAdapter
+import net.codefastly.yumekai.helpers.RecyclesViews.CommentsAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.PictureAnimeAdapter
 import net.codefastly.yumekai.helpers.RecyclesViews.StaffAnimeAdapter
 import net.codefastly.yumekai.helpers.ViewPagers.AnimeDetailsViewPager
@@ -33,6 +34,7 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
     private lateinit var animeCharactersAdapter: CharacterAnimeAdapter
     private lateinit var animeStaffAdapter: StaffAnimeAdapter
     private lateinit var pictureAnimeAdapter: PictureAnimeAdapter
+    private lateinit var commentsAdapter: CommentsAnimeAdapter
 
     private val viewModel by lazy { ViewModelProvider(this).get( AnimeDetailsViewModel::class.java ) }
 
@@ -119,7 +121,10 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
         pictureAnimeAdapter = PictureAnimeAdapter( requireContext() )
         viewModel.fetchAnimePictures( anime )
 
-        animeDetailsAdapter = AnimeDetailsViewPager( requireContext(), viewModel.tabList, animeData, animeCharactersAdapter, animeStaffAdapter, pictureAnimeAdapter )
+        commentsAdapter = CommentsAnimeAdapter( requireContext() )
+        viewModel.fetchCommentsByAnimeId( anime )
+
+        animeDetailsAdapter = AnimeDetailsViewPager( requireContext(), viewModel.tabList, animeData, animeCharactersAdapter, animeStaffAdapter, pictureAnimeAdapter, viewModel )
         with(binding.animeDetailsScreenViewpager){
             adapter = animeDetailsAdapter
         }
