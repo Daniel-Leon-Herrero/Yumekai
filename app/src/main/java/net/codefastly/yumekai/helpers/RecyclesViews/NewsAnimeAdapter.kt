@@ -67,11 +67,7 @@ class NewsAnimeAdapter( private val context: Context): RecyclerView.Adapter<Recy
             }
 
             itemView.setOnClickListener {
-                val intent= Intent(context, DashboardFullScreen::class.java).apply {
-                    this.putExtra("FULL_SCREEN_TO_LOAD", R.id.news_btn_to_card)
-                    this.putExtra("WEB_LINK", article.link )
-                }
-                context.startActivity( intent )
+                readArticleOnWeb( article.link )
             }
 
         }
@@ -84,12 +80,17 @@ class NewsAnimeAdapter( private val context: Context): RecyclerView.Adapter<Recy
             itemView.findViewById<TextView>(R.id.feed_cardView_publisher).text = "${article.author} - ${article.pubDate}"
 
             itemView.setOnClickListener {
-                val intent= Intent(context, DashboardFullScreen::class.java).apply {
-                    this.putExtra("FULL_SCREEN_TO_LOAD", R.id.news_btn_to_card)
-                    this.putExtra("WEB_LINK", article.link )
-                }
-                context.startActivity( intent )
+                readArticleOnWeb( article.link )
             }
         }
     }
+
+    private fun readArticleOnWeb(webLink: String){
+        val intent= Intent(context, DashboardFullScreen::class.java).apply {
+            this.putExtra("FULL_SCREEN_TO_LOAD", R.id.news_btn_to_card)
+            this.putExtra("WEB_LINK", webLink )
+        }
+        context.startActivity( intent )
+    }
+
 }
