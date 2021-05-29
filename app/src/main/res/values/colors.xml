@@ -13,6 +13,7 @@
     <color name="red_primary_op">#4E1F1F</color>  <!-- #9C681216-->
     <color name="transparent">#00000000</color>
     <color name="success">#1C8C21</color>
+    <color name="warning">#ECB204</color>
         <!-- Dark Mode Colors -->
         <color name="dark_black">#221f1f</color>
         <color name="dark_black_op">#D7221F1F</color>
