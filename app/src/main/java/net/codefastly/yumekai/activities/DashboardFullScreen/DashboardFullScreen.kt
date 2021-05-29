@@ -2,11 +2,14 @@ package net.codefastly.yumekai.activities.DashboardFullScreen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import net.codefastly.yumekai.R
 import net.codefastly.yumekai.fragments.AnimeDetails.AnimeDetailsFragment
 import net.codefastly.yumekai.fragments.Drawer.DrawerFragment
 import net.codefastly.yumekai.fragments.History.HistoryFragment
 import net.codefastly.yumekai.fragments.NoInternet.NoInternetFragment
+import net.codefastly.yumekai.fragments.OurTeam.OurTeamFragment
 import net.codefastly.yumekai.fragments.Search.SearchFragment
 import net.codefastly.yumekai.fragments.Shop.Categories.CategoriesShopFragment
 import net.codefastly.yumekai.fragments.WebView.WebViewFragment
@@ -17,7 +20,16 @@ class DashboardFullScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /**
+         * Full Screen Mode
+         */
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_dashboard_full_screen)
+
 
         val FULL_SCREEN_TO_LOAD = intent.getIntExtra("FULL_SCREEN_TO_LOAD", 0)
         val ANIME_DETAIL = intent.getIntExtra("ANIME_DETAILS", 0)
@@ -69,6 +81,11 @@ class DashboardFullScreen : AppCompatActivity() {
                 R.id.nav_host_fullscreen_fragment,
                 WebViewFragment(webLink),
                 "WebViewFragment"
+            )
+            R.id.bottom_menu_sheet_btn_settings -> transaction.replace(
+                R.id.nav_host_fullscreen_fragment,
+                OurTeamFragment(),
+                "OurTeamFragment"
             )
             else -> finish()
         }

@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +15,7 @@ import net.codefastly.yumekai.models.shop.CategoriesShop
 import net.codefastly.yumekai.models.shop.SerieShop
 import net.codefastly.yumekai.models.shop.VolumeDetailsShop
 import net.codefastly.yumekai.models.shop.VolumeShop
+import org.w3c.dom.Document
 import java.lang.Exception
 
 class RepositoryFirebase{
@@ -143,9 +145,44 @@ class RepositoryFirebase{
                                     document.data["username"] as String,
                                 )
                             )
-                            mutableData.value = dataList
+                        }
+                        mutableData.value = dataList
+                    }
+                }
+        }
+
+        return mutableData
+    }
+
+    suspend fun getRealTimeCommentsByAnimeId(animeId: Int ): LiveData<MutableList<AnimeComment>>{
+        val mutableData = MutableLiveData<MutableList<AnimeComment>>()
+
+        withContext(Dispatchers.IO){
+            db
+                .collection("comments")
+                .whereEqualTo("anime_id", animeId)
+                .addSnapshotListener { snapchots, e ->
+                    if (e != null){
+                        Log.w( TAG, "Listen:error", e)
+                        return@addSnapshotListener
+                    }
+                    var dataList = mutableListOf<AnimeComment>()
+                    for ( snap in snapchots!!.documentChanges ) {
+                        when( snap.type ){
+                            DocumentChange.Type.ADDED -> {
+                                dataList.add(AnimeComment(
+                                    snap.document.data["anime_id"] as Long,
+                                    snap.document.data["commented_on"] as String,
+                                    snap.document.data["message"] as String,
+                                    snap.document.data["reactions"] as Long,
+                                    snap.document.data["supporter"] as Boolean,
+                                    snap.document.data["user_image"] as String,
+                                    snap.document.data["username"] as String,
+                                ))
+                            }
                         }
                     }
+                    mutableData.value = dataList
                 }
         }
 

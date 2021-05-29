@@ -6,6 +6,8 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import net.codefastly.yumekai.R
@@ -24,9 +26,20 @@ import java.net.SocketTimeoutException
 
 
 class SplashActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /**
+         * Full Screen Mode
+         */
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_splash)
+
+
         val repo = repositoryAPI()
         repo.setContext(this)
         setRepoAPI(repo)
@@ -60,4 +73,5 @@ class SplashActivity : AppCompatActivity() {
             finish()
         }, 1000)
     }
+
 }

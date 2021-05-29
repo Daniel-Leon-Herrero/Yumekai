@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.LinearLayout
@@ -36,14 +37,22 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var newsFragment: NewsFragment
     private lateinit var currentFragment: Fragment
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         this.binding = ActivityDashboardBinding.inflate(layoutInflater)
+
+        /**
+         * Full Screen Mode
+         */
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(this.binding.root)
 
         bottomSheetBehavior = BottomSheetBehavior.from(binding.dashboardScreenBottomSheetMenu)
+
+
         if (savedInstanceState == null) {
             calendarFragment = CalendarFragment()
             recentFragment = RecentFragment()
@@ -192,4 +201,7 @@ class DashboardActivity : AppCompatActivity() {
             bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }
+
+
+
 }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.codefastly.yumekai.helpers.LocalDatabase.LocalAnimeDB
@@ -28,6 +29,7 @@ class AnimeDetailsViewModel() : ViewModel() {
 
     private val _pictures = MutableLiveData<List<Picture>>()
     val pictures : LiveData<List<Picture>> get() = _pictures
+
 
     private val _comments = MutableLiveData<List<AnimeComment>>()
     val comments : LiveData<List<AnimeComment>> get() = _comments
@@ -79,8 +81,15 @@ class AnimeDetailsViewModel() : ViewModel() {
 
     fun fetchCommentsByAnimeId( animeId: Int ){
         viewModelScope.launch {
-            repoFirebase.getAllCommentsByAnimeId( animeId ).observe( _owner, { messageList ->
-                _comments.value = messageList
+            repoFirebase.getRealTimeCommentsByAnimeId( animeId ).observe( _owner, { messageList ->
+                if ( _comments.value === null ){
+                    _comments.value = messageList
+                }else{
+                    val newList = mutableListOf<AnimeComment>()
+                    newList.addAll( comments.value!! )
+                    newList.addAll( messageList )
+                    _comments.postValue( newList )
+                }
             })
         }
     }

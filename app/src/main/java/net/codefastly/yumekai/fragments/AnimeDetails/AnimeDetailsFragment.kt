@@ -1,6 +1,7 @@
 package net.codefastly.yumekai.fragments.AnimeDetails
 
 import android.animation.Animator
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -69,6 +70,10 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
             pictureAnimeAdapter.setPictureList( pictureList )
         })
 
+        viewModel.comments.observe( viewLifecycleOwner, { commentList ->
+            commentsAdapter.setComments( commentList )
+        })
+
         viewModel.fetching.observe(viewLifecycleOwner, { fetchCount ->
             if( fetchCount == 2 ){
                 /* binding.animeDetailsScreenLoadingLayout.visibility = View.GONE */
@@ -95,8 +100,6 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
 
 
         binding.animeBtnBack.setOnClickListener {
-            Log.d("TAG_FRAGMENT", previousFragment.toString())
-            Log.d("TAG_FRAGMENT", CalendarFragment().toString())
             if(previousFragment == null ){
                 requireActivity().finish()
             } else{
@@ -124,7 +127,7 @@ class AnimeDetailsFragment(val anime: Int, val previousFragment: Fragment?) : Fr
         commentsAdapter = CommentsAnimeAdapter( requireContext() )
         viewModel.fetchCommentsByAnimeId( anime )
 
-        animeDetailsAdapter = AnimeDetailsViewPager( requireContext(), viewModel.tabList, animeData, animeCharactersAdapter, animeStaffAdapter, pictureAnimeAdapter, viewModel )
+        animeDetailsAdapter = AnimeDetailsViewPager( requireContext(), viewModel.tabList, animeData, animeCharactersAdapter, animeStaffAdapter, pictureAnimeAdapter, commentsAdapter, viewModel )
         with(binding.animeDetailsScreenViewpager){
             adapter = animeDetailsAdapter
         }

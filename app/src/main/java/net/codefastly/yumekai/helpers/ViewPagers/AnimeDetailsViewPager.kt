@@ -41,6 +41,7 @@ class AnimeDetailsViewPager(
     private val charactersAdapter: CharacterAnimeAdapter,
     private val staffAnimeAdapter: StaffAnimeAdapter,
     private val pictureAdapter: PictureAnimeAdapter,
+    private val commentsAdapter: CommentsAnimeAdapter,
     private val viewModel: AnimeDetailsViewModel
 ):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -52,7 +53,6 @@ class AnimeDetailsViewPager(
     }
 
     private lateinit var animeCategoriesAdapter: CategoryAnimeAdapter
-    private var commentsAdapter = CommentsAnimeAdapter(context)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -198,12 +198,6 @@ class AnimeDetailsViewPager(
     inner class CommentsAnimeDetailsViewHolder( itemView: View ):RecyclerView.ViewHolder( itemView ){
         fun render(){
 
-            if ( !viewModel.comments.value.isNullOrEmpty() ){
-                if ( commentsAdapter.itemCount == 0){
-                    commentsAdapter.setComments( viewModel.comments.value!! )
-                }
-            }
-
             with(itemView){
 
                 Picasso.get().load("https://static-cdn.jtvnw.net/jtv_user_pictures/d0b8ba63-ec93-4e71-b343-b28656e85764-profile_image-300x300.png").into( findViewById<ImageView>(R.id.item_anime_details_comments_user_img) )
@@ -246,7 +240,6 @@ class AnimeDetailsViewPager(
 
     private fun initGalleryRecylerView( pictureAnimeRecyclerView: RecyclerView ){
         with( pictureAnimeRecyclerView ){
-            setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
             adapter = pictureAdapter
         }
@@ -254,7 +247,6 @@ class AnimeDetailsViewPager(
 
     private fun initCommentsRecyclerView( commentsRecyclerView: RecyclerView ){
         with( commentsRecyclerView ){
-            setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
             adapter = commentsAdapter
         }
@@ -265,15 +257,16 @@ class AnimeDetailsViewPager(
         val currentDateTime = "28/05/2021"
 
         val isSupporter = (0..1).random()
+        val reaction = (0..21).random()
 
         val message = hashMapOf<String, Any>(
             "anime_id" to animeResponse.mal_id,
             "message" to message,
-            "username" to "KaiiTo01",
-            "user_image" to "https://static-cdn.jtvnw.net/jtv_user_pictures/d0b8ba63-ec93-4e71-b343-b28656e85764-profile_image-300x300.png",
+            "username" to if( isSupporter === 1 ) "KaiiTo01" else "Gogetachan",
+            "user_image" to if( isSupporter === 1 ) "https://static-cdn.jtvnw.net/jtv_user_pictures/d0b8ba63-ec93-4e71-b343-b28656e85764-profile_image-300x300.png" else "https://areajugones.sport.es/wp-content/uploads/2020/03/Gogeta-min.jpg",
             "commented_on" to currentDateTime,
             "supporter" to (isSupporter === 1),
-            "reactions" to 0
+            "reactions" to if( reaction > 10 ) reaction else 0
         )
 
         viewModel.loadFirebaseComment( message )

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import androidx.viewpager2.widget.ViewPager2
 import me.relex.circleindicator.CircleIndicator3
@@ -20,9 +21,19 @@ class OnBoardingActivity : AppCompatActivity() {
     private lateinit var slider: ViewPager2
     private val adapter = OnBoardingViewPager(this._titles, this._descriptions, this._images)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /**
+         * Full Screen Mode
+         */
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_on_boarding)
+
 
         this.postToList()
 
@@ -74,6 +85,8 @@ class OnBoardingActivity : AppCompatActivity() {
         this.addToList( getString(R.string.third_slide_title), getString(R.string.third_slide_desc), R.drawable.on_boarding_3 )
         this.addToList( getString(R.string.fourth_slide_title), getString(R.string.fourth_slide_desc), R.drawable.on_boarding_1 )
     }
+
+
 
 }
 
