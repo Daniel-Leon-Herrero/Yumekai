@@ -61,7 +61,11 @@ class StaffAnimeAdapter(private val context: Context) :
                 itemView.findViewById<ImageView>(R.id.animeDetail_item_image)
                     .setImageResource(R.drawable.yumekai_unknown_portrait)
             }
-            itemView.findViewById<TextView>(R.id.animeDetail_item_name).text = staff.name
+            with(itemView.findViewById<TextView>(R.id.animeDetail_item_name)){
+                text = staff.name
+                isSelected = true
+            }
+
 
         }
     }

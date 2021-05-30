@@ -2,9 +2,11 @@ package net.codefastly.yumekai.helpers.RecyclesViews
 
 import android.content.Context
 import android.content.Intent
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -50,7 +52,11 @@ class MorePopularAdapter(private val context: Context) : RecyclerView.Adapter<Mo
                         Picasso.get().load(image_url).into(findViewById<ImageView>(R.id.item_popular_cover))
                     }
 
-                    findViewById<TextView>(R.id.item_popular_title).text = title
+                    with(findViewById<TextView>(R.id.item_popular_title)){
+                        text = title
+                        isSelected = true
+                    }
+
                     if(synopsis.isNotEmpty()){
                         findViewById<TextView>(R.id.item_popular_description).text = synopsis
                     }else{

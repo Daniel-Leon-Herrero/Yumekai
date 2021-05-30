@@ -159,7 +159,7 @@
                         android:background="@drawable/rounded_corners"
                         android:gravity="center"
                         app:backgroundTint="@color/soft_white"
-                        app:icon="@drawable/ic_outline_history_36"
+                        app:icon="@drawable/ic_baseline_star_border_36"
                         app:iconGravity="textTop"
                         app:iconPadding="0dp"
                         app:iconTint="@color/dark_black" />
@@ -192,7 +192,7 @@
                         android:background="@drawable/rounded_corners"
                         android:gravity="center"
                         app:backgroundTint="@color/soft_white"
-                        app:icon="@drawable/ic_outline_history_36"
+                        app:icon="@drawable/ic_baseline_inbox_36"
                         app:iconGravity="textTop"
                         app:iconPadding="0dp"
                         app:iconTint="@color/dark_black" />

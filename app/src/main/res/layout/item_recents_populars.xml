@@ -90,7 +90,12 @@
                 android:text=""
                 android:fontFamily="@font/nunito_bold"
                 android:textSize="14sp"
-                tools:text="Mushoku Tensei: Jobless Reicarnation" />
+                tools:text="Mushoku Tensei: Jobless Reicarnation"
+
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"/>
 
             <!-- DESCRIPTION -->
             <ScrollView
